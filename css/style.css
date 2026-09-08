@@ -1,9 +1,10 @@
 :root {
-    --black: #050505;
-    --white: #ffffff;
-    --gray-light: #f4f4f5;
-    --gray-border: #e4e4e7;
-    --gray-text: #71717a;
+    --bg-color: #09090b;
+    --card-bg: #18181b;
+    --text-main: #fafafa;
+    --text-muted: #a1a1aa;
+    --border-color: #3f3f46;
+    --accent: #ffffff;
     --font-main: 'Inter', sans-serif;
 }
 
@@ -11,11 +12,13 @@
 
 body {
     font-family: var(--font-main);
-    background-color: var(--gray-light);
-    color: var(--black);
+    background-color: var(--bg-color);
+    color: var(--text-main);
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    background-image: radial-gradient(#27272a 1px, transparent 1px);
+    background-size: 20px 20px;
 }
 
 .navbar {
@@ -23,8 +26,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 2rem;
-    background-color: var(--white);
-    border-bottom: 1px solid var(--gray-border);
+    background-color: var(--bg-color);
+    border-bottom: 3px solid var(--accent);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -32,45 +35,46 @@ body {
 
 .logo {
     font-weight: 800;
-    font-size: 1.5rem;
-    letter-spacing: -0.5px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    font-size: 2rem;
+    letter-spacing: -1px;
+    font-style: italic;
+    color: var(--accent);
 }
 
 .back-link {
     text-decoration: none;
-    color: var(--black);
-    font-weight: 600;
+    color: var(--bg-color);
+    background-color: var(--accent);
+    padding: 0.5rem 1.5rem;
+    font-weight: 800;
     font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color 0.3s;
+    transition: transform 0.2s;
 }
-.back-link:hover { color: var(--gray-text); }
+.back-link:hover { transform: scale(1.05); }
 
 .hero, .page-header {
     text-align: center;
-    padding: 4rem 1rem;
-    background-color: var(--white);
-    border-bottom: 1px solid var(--gray-border);
+    padding: 5rem 1rem;
+    background-color: var(--bg-color);
+    border-bottom: 3px solid var(--border-color);
 }
 .hero h1, .page-header h1 {
     font-weight: 800;
-    font-size: 3rem;
+    font-size: 4rem;
     margin: 0;
-    letter-spacing: -1px;
+    letter-spacing: -2px;
     text-transform: uppercase;
+    font-style: italic;
+    text-shadow: 4px 4px 0px var(--border-color);
 }
-.hero p, .page-header p {
-    color: var(--gray-text);
-    font-size: 1.1rem;
-    margin-top: 1rem;
+.hero p {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 main {
@@ -82,152 +86,127 @@ main {
 
 .selection-container, .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 
 .card {
-    background-color: var(--white);
+    background-color: var(--card-bg);
     padding: 3rem 2rem;
-    border: 1px solid var(--gray-border);
+    border: 3px solid var(--border-color);
     text-align: left;
     text-decoration: none;
-    color: var(--black);
+    color: var(--text-main);
     display: flex;
     flex-direction: column;
-    transition: all 0.3s ease;
     position: relative;
-    box-shadow: 4px 4px 0px var(--gray-border);
+    box-shadow: 8px 8px 0px var(--border-color);
+    transition: all 0.2s ease-out;
     cursor: pointer;
 }
 .card:hover {
     transform: translate(-4px, -4px);
-    box-shadow: 8px 8px 0px var(--black);
-    border-color: var(--black);
+    box-shadow: 12px 12px 0px var(--accent);
+    border-color: var(--accent);
 }
 
-.card-icon {
-    font-size: 2.5rem;
+.card-icon img {
+    width: 60px;
+    height: 60px;
     margin-bottom: 1.5rem;
+    filter: invert(1);
 }
 
 .card h2 {
     font-weight: 800;
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin: 0 0 0.5rem 0;
     text-transform: uppercase;
+    font-style: italic;
 }
-.card p { color: var(--gray-text); margin: 0; font-size: 0.95rem; }
+.card p { color: var(--text-muted); margin: 0; font-weight: 600; }
 
 .card-arrow {
     position: absolute;
     bottom: 2rem;
     right: 2rem;
-    font-size: 1.5rem;
     opacity: 0;
-    transform: translateX(-10px);
+    transform: translateX(-15px);
     transition: all 0.3s ease;
-    font-weight: bold;
 }
-.card:hover .card-arrow {
-    opacity: 1;
-    transform: translateX(0);
-}
+.card-arrow img { width: 30px; filter: invert(1); }
+.card:hover .card-arrow { opacity: 1; transform: translateX(0); }
 
-.workout-container { display: flex; flex-direction: column; gap: 3rem; }
+.workout-container { display: flex; flex-direction: column; gap: 4rem; }
 
 .workout-card {
-    background-color: var(--white);
-    border: 1px solid var(--black);
+    background-color: var(--card-bg);
+    border: 3px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    box-shadow: 6px 6px 0px var(--black);
-    overflow: hidden;
+    box-shadow: 8px 8px 0px var(--border-color);
 }
 @media(min-width: 850px) { .workout-card { flex-direction: row; } }
 
-/* 2 IMAGES SPLIT LAYOUT */
 .video-container {
     flex: 1;
-    background-color: var(--black);
-    position: relative;
+    background-color: #ffffff; /* Latar putih agar GIF GymVisual terlihat rapi */
+    border-bottom: 3px solid var(--border-color);
     display: flex;
-    flex-direction: row; /* Bersebelahan */
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
 }
-@media(min-width: 850px) { .video-container { border-right: 1px solid var(--black); } }
+@media(min-width: 850px) { .video-container { border-bottom: none; border-right: 3px solid var(--border-color); } }
 
-.img-wrapper {
-    flex: 1;
-    position: relative;
-    overflow: hidden;
-    border-right: 1px solid var(--black);
-}
-.img-wrapper:last-child {
-    border-right: none;
-}
-
-.img-wrapper img {
+.video-container img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    min-height: 250px;
-    filter: grayscale(100%); /* B&W default untuk estetik */
-    transition: filter 0.4s ease, transform 0.4s ease;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+    mix-blend-mode: multiply; /* Menyatukan background GIF dengan kontainer */
 }
 
-/* Interaksi Hover: Berubah jadi warna & zoom */
-.workout-card:hover .img-wrapper img {
-    filter: grayscale(0%);
-    transform: scale(1.05);
+.workout-details { flex: 1.5; padding: 3rem; }
+.workout-details h3 { 
+    font-weight: 800; 
+    font-size: 2.5rem; 
+    margin: 0 0 1.5rem 0; 
+    text-transform: uppercase; 
+    font-style: italic;
+    line-height: 1.1;
 }
-
-.img-label {
-    position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    background-color: var(--white);
-    color: var(--black);
-    padding: 0.3rem 0.6rem;
-    font-size: 0.7rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    border: 1px solid var(--black);
-    box-shadow: 2px 2px 0px var(--black);
-    z-index: 2;
-}
-
-.workout-details { flex: 1; padding: 3rem; }
-.workout-details h3 { font-weight: 800; font-size: 2rem; margin: 0 0 1rem 0; text-transform: uppercase; }
 
 .tags { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
 .tag {
-    background-color: var(--black);
-    color: var(--white);
+    background-color: var(--accent);
+    color: var(--bg-color);
     padding: 0.4rem 1rem;
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 800;
     text-transform: uppercase;
-    display: inline-block;
 }
 
-.workout-details h4 { font-weight: 600; margin-bottom: 1rem; color: var(--gray-text); }
-.steps { padding-left: 1.2rem; margin: 0; }
-.steps li { margin-bottom: 0.8rem; }
-.steps li::marker { font-weight: 800; }
-
-.fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
-    opacity: 0;
-    transform: translateY(20px);
+.workout-details h4 { 
+    font-weight: 800; 
+    margin-bottom: 1rem; 
+    color: var(--text-main); 
+    text-transform: uppercase; 
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
 }
+.steps { padding-left: 1.2rem; margin: 0; color: var(--text-muted); }
+.steps li { margin-bottom: 0.8rem; font-weight: 600; }
+.steps li::marker { color: var(--accent); font-weight: 800; }
+
+.fade-in { animation: fadeIn 0.4s ease-out forwards; opacity: 0; transform: translateY(15px); }
 @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
 
 footer {
     text-align: center;
     padding: 3rem;
-    background-color: var(--white);
-    border-top: 1px solid var(--gray-border);
-    color: var(--gray-text);
-    font-size: 0.9rem;
-    font-weight: 600;
+    border-top: 3px solid var(--border-color);
+    color: var(--text-muted);
+    font-weight: 800;
+    background-color: var(--bg-color);
 }
