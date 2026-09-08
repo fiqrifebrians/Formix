@@ -6,7 +6,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-
     <title>FORMIX | Precision Workouts</title>
 </head>
 <body>
@@ -26,17 +25,26 @@
     <main>
         <section class="selection-container fade-in">
             <a href="muscle.html" class="card">
-                <!-- Ikon diubah menjadi fa-hand-fist untuk merepresentasikan otot/lengan -->
-                <div class="card-icon"><i class="fa-solid fa-hand-fist"></i></div>
+                <!-- Mengambil ikon Biceps dari Flaticon & menyesuaikan ukurannya agar setara dengan FontAwesome -->
+                <div class="card-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2115/2115980.png" alt="Biceps Icon" style="width: 2.5rem; height: 2.5rem; object-fit: contain; filter: grayscale(100%) contrast(200%);">
+                </div>
                 <h2>BY MUSCLE</h2>
                 <p>Target specific muscle groups</p>
                 <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
+            
             <a href="equipment.html" class="card">
-                <!-- Ikon diubah menjadi fa-dumbbell -->
                 <div class="card-icon"><i class="fa-solid fa-dumbbell"></i></div>
                 <h2>BY EQUIPMENT</h2>
                 <p>Filter by available tools</p>
+                <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+            
+            <a href="workouts.html?category=hiit" class="card">
+                <div class="card-icon"><i class="fa-solid fa-person-running"></i></div>
+                <h2>HIIT</h2>
+                <p>High-Intensity Interval Training</p>
                 <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
         </section>
