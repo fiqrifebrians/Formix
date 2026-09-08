@@ -1,15 +1,13 @@
 const muscles = [
     { id: "chest", name: "Chest" },
     { id: "back", name: "Back" },
-    { id: "legs", name: "Legs" }, // Quads & Hamstrings digabung di sini
+    { id: "legs", name: "Legs" }, // Quads, Hamstrings, dan Glutes digabung di sini
     { id: "shoulders", name: "Shoulders" },
     { id: "biceps", name: "Biceps" },
     { id: "triceps", name: "Triceps" },
     { id: "core", name: "Core" },
     { id: "calves", name: "Calves" },
-    { id: "glutes", name: "Glutes" },
-    { id: "forearms", name: "Forearms" },
-    // { id: "cardio", name: "Cardio" }
+    { id: "forearms", name: "Forearms" }
 ];
 
 const equipments = [
@@ -129,7 +127,7 @@ const workoutDB = [
         ] 
     },
 
-    // ================= LEGS (GABUNGAN QUADS & HAMSTRINGS) =================
+    // ================= LEGS (TERMASUK GLUTES SEKARANG) =================
     { 
         id: 11, name: "Barbell Squat", category: "strength", muscle: "legs", equipment: "barbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Squat.gif", 
@@ -178,6 +176,56 @@ const workoutDB = [
             "Grip and Posture: Grip the handles firmly on the sides of the seat to anchor your upper body down. Keep your chest up and your back completely flat against the backrest.", 
             "The Extension: Using strictly your quadriceps, extend your legs smoothly to push the roller pad upward. Continue until your legs are fully extended and entirely straight.", 
             "The Squeeze: Hold the fully extended position for a sharp, one-second count, squeezing your quads intensely. Then, slowly and with high control, lower the weight back down to the starting position."
+        ] 
+    },
+    { 
+        id: 41, name: "Barbell Hip Thrust", category: "strength", muscle: "legs", equipment: "barbell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Hip-Thrust.gif", 
+        steps: [
+            "Setup: Sit flat on the floor with your shoulder blades resting precisely against the edge of a sturdy, flat weight bench. Roll a heavily padded barbell directly over your legs so it rests deep in your hip crease.", 
+            "Foot Placement: Plant your feet firmly on the floor, spaced shoulder-width apart. Position them so that your shins are completely vertical (a 90-degree angle to the floor) when your hips are fully elevated at the top.", 
+            "The Thrust: Take a deep breath into your belly, brace your core hard, and drive aggressively through your heels. Thrust your hips explosively toward the ceiling, lifting the barbell.", 
+            "The Lockout: At the absolute top of the movement, your torso and thighs should form a straight, horizontal line. Look forward, keep your chin tucked, and squeeze your glutes violently for a full second before lowering your hips back to the floor."
+        ] 
+    },
+    { 
+        id: 42, name: "Glute Bridge", category: "strength", muscle: "legs", equipment: "bodyweight", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Glute-Bridge.gif", 
+        steps: [
+            "Starting Position: Lie completely flat on your back on a comfortable yoga mat. Bend your knees to a roughly 90-degree angle and place your feet flat on the floor, bringing your heels relatively close to your glutes.", 
+            "Arm Placement: Rest your arms straight down along your sides on the mat, with your palms pressing firmly into the floor to provide upper body stability.", 
+            "The Lift: Exhale and push firmly into the floor through your heels. Lift your hips high into the air until your back, hips, and upper thighs form a perfectly straight diagonal line.", 
+            "The Hold: Squeeze your gluteal muscles as tightly as you can at the apex of the movement. Hold this maximum contraction for one to two seconds, then slowly lower your hips back down to lightly tap the mat before the next rep."
+        ] 
+    },
+    { 
+        id: 43, name: "Cable Pull Through", category: "strength", muscle: "legs", equipment: "cables", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Pull-Through.gif", 
+        steps: [
+            "Setup: Attach a tricep rope handle to the absolute lowest setting of a cable pulley machine. Stand with your back facing the machine, straddling the cable so it passes between your legs.", 
+            "Grip: Reach down and backward between your legs to firmly grasp the ends of the rope handle with both hands.", 
+            "The Hinge: Take a step forward to create tension. Keeping your back perfectly straight and a slight, fixed bend in your knees, hinge backward deeply at the hips. Let the cable pull your hands backward through your legs until you feel an intense stretch in your hamstrings and glutes.", 
+            "The Extension: Squeeze your glutes and forcefully thrust your hips forward to stand completely upright and erect. Squeeze your glutes at the top. Critically, do not use your arms or lower back to pull the weight; the power must come entirely from a hip hinge."
+        ] 
+    },
+    { 
+        id: 44, name: "Kettlebell Goblet Squat", category: "strength", muscle: "legs", equipment: "kettlebell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Kettlebell-Goblet-Squat.gif", 
+        steps: [
+            "Grip: Pick up a heavy kettlebell with both hands. Hold it vertically by the sides of its handle (the 'horns') or cup the heavy bell portion. Keep it pulled in tight against the center of your upper chest.", 
+            "Stance: Stand with your feet set slightly wider than shoulder-width apart, with your toes pointing gently outwards to open up the hips.", 
+            "The Descent: Squat down deeply by pushing your hips back and down. Keep your chest up proudly; do not let the heavy front weight pull your torso forward. Aim to drop your elbows inside the line of your knees at the bottom of the squat.", 
+            "The Ascent: Drive forcefully through your heels and the mid-foot to stand back up. Actively focus on squeezing your glute muscles together as you reach the standing lockout position."
+        ] 
+    },
+    { 
+        id: 45, name: "Resistance Band Glute Kickback", category: "strength", muscle: "legs", equipment: "resistance band", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Resistance-Band-Glute-Kickback.gif", 
+        steps: [
+            "Positioning: Get down on the floor on all fours in a tabletop position. Loop a small, heavy-duty resistance band securely around the arches of your feet or securely around your lower ankles.", 
+            "Stability: Place your hands flat under your shoulders. Keep your back completely flat, your neck in a neutral alignment, and brace your core tightly to ensure your lower back does not arch or sag during the movement.", 
+            "The Kick: Keeping your working knee bent at a 90-degree angle (or extending it straight out, depending on your preferred variation), aggressively kick one leg backward and upwards toward the ceiling.", 
+            "The Contraction: Push strongly against the band's resistance until your glute muscle is fully and painfully contracted. Hold that peak tension for a split second, and slowly return the knee down to hover just above the floor."
         ] 
     },
 
@@ -437,58 +485,6 @@ const workoutDB = [
             "Release: Push up slightly with your toes to lift the weight block and disengage the safety lever or pin on the side of the machine.", 
             "The Stretch: Slowly and deliberately lower your heels down toward the floor as far as your ankle mobility physically allows. You should feel a significant stretch specifically in the soleus muscle (the lower, wider part of the calf).", 
             "The Contraction: Push powerfully upward through the balls of your feet, raising your heels as high as possible against the heavy resistance of the thigh pads. Squeeze hard before lowering."
-        ] 
-    },
-
-    // ================= GLUTES =================
-    { 
-        id: 41, name: "Barbell Hip Thrust", category: "strength", muscle: "glutes", equipment: "barbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Hip-Thrust.gif", 
-        steps: [
-            "Setup: Sit flat on the floor with your shoulder blades resting precisely against the edge of a sturdy, flat weight bench. Roll a heavily padded barbell directly over your legs so it rests deep in your hip crease.", 
-            "Foot Placement: Plant your feet firmly on the floor, spaced shoulder-width apart. Position them so that your shins are completely vertical (a 90-degree angle to the floor) when your hips are fully elevated at the top.", 
-            "The Thrust: Take a deep breath into your belly, brace your core hard, and drive aggressively through your heels. Thrust your hips explosively toward the ceiling, lifting the barbell.", 
-            "The Lockout: At the absolute top of the movement, your torso and thighs should form a straight, horizontal line. Look forward, keep your chin tucked, and squeeze your glutes violently for a full second before lowering your hips back to the floor."
-        ] 
-    },
-    { 
-        id: 42, name: "Glute Bridge", category: "strength", muscle: "glutes", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Glute-Bridge.gif", 
-        steps: [
-            "Starting Position: Lie completely flat on your back on a comfortable yoga mat. Bend your knees to a roughly 90-degree angle and place your feet flat on the floor, bringing your heels relatively close to your glutes.", 
-            "Arm Placement: Rest your arms straight down along your sides on the mat, with your palms pressing firmly into the floor to provide upper body stability.", 
-            "The Lift: Exhale and push firmly into the floor through your heels. Lift your hips high into the air until your back, hips, and upper thighs form a perfectly straight diagonal line.", 
-            "The Hold: Squeeze your gluteal muscles as tightly as you can at the apex of the movement. Hold this maximum contraction for one to two seconds, then slowly lower your hips back down to lightly tap the mat before the next rep."
-        ] 
-    },
-    { 
-        id: 43, name: "Cable Pull Through", category: "strength", muscle: "glutes", equipment: "cables", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Pull-Through.gif", 
-        steps: [
-            "Setup: Attach a tricep rope handle to the absolute lowest setting of a cable pulley machine. Stand with your back facing the machine, straddling the cable so it passes between your legs.", 
-            "Grip: Reach down and backward between your legs to firmly grasp the ends of the rope handle with both hands.", 
-            "The Hinge: Take a step forward to create tension. Keeping your back perfectly straight and a slight, fixed bend in your knees, hinge backward deeply at the hips. Let the cable pull your hands backward through your legs until you feel an intense stretch in your hamstrings and glutes.", 
-            "The Extension: Squeeze your glutes and forcefully thrust your hips forward to stand completely upright and erect. Squeeze your glutes at the top. Critically, do not use your arms or lower back to pull the weight; the power must come entirely from a hip hinge."
-        ] 
-    },
-    { 
-        id: 44, name: "Kettlebell Goblet Squat", category: "strength", muscle: "glutes", equipment: "kettlebell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Kettlebell-Goblet-Squat.gif", 
-        steps: [
-            "Grip: Pick up a heavy kettlebell with both hands. Hold it vertically by the sides of its handle (the 'horns') or cup the heavy bell portion. Keep it pulled in tight against the center of your upper chest.", 
-            "Stance: Stand with your feet set slightly wider than shoulder-width apart, with your toes pointing gently outwards to open up the hips.", 
-            "The Descent: Squat down deeply by pushing your hips back and down. Keep your chest up proudly; do not let the heavy front weight pull your torso forward. Aim to drop your elbows inside the line of your knees at the bottom of the squat.", 
-            "The Ascent: Drive forcefully through your heels and the mid-foot to stand back up. Actively focus on squeezing your glute muscles together as you reach the standing lockout position."
-        ] 
-    },
-    { 
-        id: 45, name: "Resistance Band Glute Kickback", category: "strength", muscle: "glutes", equipment: "resistance band", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Resistance-Band-Glute-Kickback.gif", 
-        steps: [
-            "Positioning: Get down on the floor on all fours in a tabletop position. Loop a small, heavy-duty resistance band securely around the arches of your feet or securely around your lower ankles.", 
-            "Stability: Place your hands flat under your shoulders. Keep your back completely flat, your neck in a neutral alignment, and brace your core tightly to ensure your lower back does not arch or sag during the movement.", 
-            "The Kick: Keeping your working knee bent at a 90-degree angle (or extending it straight out, depending on your preferred variation), aggressively kick one leg backward and upwards toward the ceiling.", 
-            "The Contraction: Push strongly against the band's resistance until your glute muscle is fully and painfully contracted. Hold that peak tension for a split second, and slowly return the knee down to hover just above the floor."
         ] 
     },
 
