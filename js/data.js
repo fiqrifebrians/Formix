@@ -544,207 +544,7 @@ const workoutDB = [
         ] 
     },
 
-    // ================= CARDIO (Top 20 Populer) =================
-    { 
-        id: 51, name: "Treadmill Running", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Treadmill.gif", 
-        steps: [
-            "Setup: Stand on the side rails of the treadmill. Select your desired speed and incline. Once the belt is moving steadily, carefully step onto the belt and begin walking to acclimate.", 
-            "Form & Posture: Transition into a running pace. Stand tall with your chest open and shoulders relaxed. Avoid leaning heavily on the handrails; your arms should swing naturally at a 90-degree angle by your sides.", 
-            "Foot Strike: To maximize efficiency and reduce joint impact (especially important if training for long distances or half marathons), focus on landing on your mid-foot rather than striking hard with your heel. Maintain a quick, light cadence.", 
-            "Execution: Breathe rhythmically. Maintain your pace for the duration of the cardiovascular session, gradually decreasing the speed to a walk to cool down before stopping the machine."
-        ] 
-    },
-    { 
-        id: 52, name: "Jump Rope", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Jump-Rope.gif", 
-        steps: [
-            "Setup: Grab the handles of a properly sized jump rope (when standing on the middle, the handles should reach your armpits). Hold your hands slightly forward and away from your hips.", 
-            "The Rotation: Keep your elbows tucked in close to your ribs. The rotation of the rope should be generated almost entirely by quick, small flicks of your wrists, not by making large circles with your entire arms.", 
-            "The Jump: As the rope swings over your head and approaches your feet, push off the balls of your feet to jump just an inch or two into the air—only high enough to clear the rope.", 
-            "Rhythm: Land softly on the balls of your feet with a slight bend in your knees to absorb impact. Establish a steady, continuous bouncing rhythm."
-        ] 
-    },
-    { 
-        id: 53, name: "Mountain Climber", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Mountain-Climber.gif", 
-        steps: [
-            "Starting Stance: Get onto the floor in a strict, high push-up position. Your hands should be planted firmly directly underneath your shoulders. Ensure your body forms a straight, rigid line from head to heels.", 
-            "The Drive: Engage your abdominal muscles intensely. Quickly lift your right foot off the floor and drive your right knee forcefully straight up toward the center of your chest.", 
-            "The Switch: As you quickly kick your right foot back to the starting position, simultaneously jump your left knee up toward your chest in a seamless exchange.", 
-            "The Pace: Continue alternating legs in a rapid, running-like motion against the floor. Crucially, keep your hips locked down parallel to the floor; do not let your glutes bounce high up into the air."
-        ] 
-    },
-    { 
-        id: 54, name: "Burpees", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Burpee.gif", 
-        steps: [
-            "Phase 1 (The Drop): Start in a neutral standing position. In one quick, explosive motion, drop your hips down, bend your knees, and plant your hands flat on the floor directly in front of your feet.", 
-            "Phase 2 (The Sprawl): Explosively kick both of your legs straight back simultaneously so you land securely in a standard high plank/push-up position.", 
-            "Phase 3 (The Push-up): Perform a strict push-up. Lower your chest all the way down until it touches the floor, then push your body back up forcefully.", 
-            "Phase 4 (The Jump): Immediately hop your feet back up toward your hands, transitioning through a deep squat to stand up rapidly. Finish by leaping vertically into the air while clapping your hands overhead."
-        ] 
-    },
-    { 
-        id: 55, name: "Jumping Jacks", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Jumping-jacks.gif", 
-        steps: [
-            "Starting Position: Stand completely upright with your legs together, knees slightly bent, and your arms resting relaxed down by your sides.", 
-            "The Jump Out: In one synchronized, explosive motion, jump slightly into the air while simultaneously spreading your legs out slightly wider than shoulder-width apart.", 
-            "The Arm Sweep: As you jump your legs out, simultaneously sweep both of your arms out to the sides and up in a wide arc until your hands touch or clap together directly above your head.", 
-            "The Return: Immediately reverse the entire motion by jumping again, bringing your feet back together and sweeping your arms back down to your sides. Repeat continuously."
-        ] 
-    },
-    { 
-        id: 56, name: "Rowing Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Rowing-Machine.gif", 
-        steps: [
-            "The Catch: Sit on the ergometer (rowing machine) and secure your feet in the straps. Slide the seat forward, bend your knees, and grab the handle with an overhand grip. Your shins should be vertical, chest proud, and back flat.", 
-            "The Drive: Initiate the power stroke strictly by driving your legs aggressively into the footplates. Keep your arms straight and your core engaged as you push your body backward.", 
-            "The Finish: As your legs reach full extension, lean your torso slightly back (to about an 11 o'clock position) and forcefully pull the handle straight into your lower rib cage, squeezing your shoulder blades.", 
-            "The Recovery: Extend your arms forward first, then hinge your torso forward from the hips, and finally bend your knees to let the seat slide smoothly back to the starting 'catch' position."
-        ] 
-    },
-    { 
-        id: 57, name: "Elliptical Trainer", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Elliptical-Machine.gif", 
-        steps: [
-            "Setup: Step carefully onto the foot pedals of the elliptical machine and grab the moving handrails. Select your desired resistance level and incline on the console.", 
-            "Posture: Stand tall with a straight spine, keeping your head up and your abdominal muscles lightly engaged. Do not slouch or lean your upper body weight heavily onto the handles.", 
-            "The Motion: Begin pedaling in a smooth, forward, elliptical motion. Push down and forward through your entire foot, avoiding rising up solely onto your toes.", 
-            "Total Body Sync: Push and pull the handrails in synchronized rhythm with your leg movements. Use equal effort from your upper body and lower body to maximize cardiovascular output."
-        ] 
-    },
-    { 
-        id: 58, name: "Stationary Bike", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Stationary-Bike.gif", 
-        steps: [
-            "Adjustment: Adjust the seat height before starting. When seated with the pedal at its lowest point, your leg should be almost fully extended with just a 5-to-10-degree micro-bend in the knee.", 
-            "Posture: Sit on the saddle and grip the handlebars comfortably. Keep your back relatively straight and avoid aggressively rounding your shoulders forward.", 
-            "Pedaling Technique: Push down forcefully through the ball of your foot on the downward stroke, and actively pull up slightly on the upward stroke if your feet are strapped in. This ensures a smooth, circular power delivery.", 
-            "Pacing: Maintain a high, steady cadence (RPM). Adjust the magnetic or friction resistance to simulate climbing hills or sprinting on flat terrain according to your program."
-        ] 
-    },
-    { 
-        id: 59, name: "Stair Climber", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Stair-Climber.gif", 
-        steps: [
-            "Setup: Step onto the revolving staircase. Set a moderate, sustainable speed on the console. Lightly rest your fingertips on the side rails or heart rate monitors strictly for balance.", 
-            "Posture Warning: Stand totally upright. The most common error is severely hunching over and resting your upper body weight on the console. This completely defeats the purpose and reduces calorie burn.", 
-            "The Step: Place your entire foot onto each step, rather than just the balls of your feet. This activates the glutes and hamstrings fully.", 
-            "Execution: Push firmly down through your heel to step up. Maintain a steady, continuous rhythm, breathing deeply as you climb."
-        ] 
-    },
-    { 
-        id: 60, name: "High Knees", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/High-Knees.gif", 
-        steps: [
-            "Posture: Stand perfectly upright with your feet hip-width apart. Look straight ahead, puff your chest out, and brace your core.", 
-            "The Motion: Begin a running motion in place. However, instead of kicking your feet behind you, explosively drive your knees straight up high in front of your body.", 
-            "The Target: Aim to bring each knee up to at least waist or hip level on every single vertical stride.", 
-            "The Arms: Bend your elbows at 90 degrees and pump your arms vigorously forward and backward in opposite synchronization with your legs to generate momentum and elevate your heart rate."
-        ] 
-    },
-    { 
-        id: 61, name: "Battle Ropes", category: "cardio", muscle: "cardio", equipment: "cables", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Battle-Ropes.gif", 
-        steps: [
-            "Stance: Stand facing the battle rope anchor point. Grab one end of the heavy rope in each hand using an overhand or neutral 'handshake' grip. Drop into an athletic quarter-squat position with your chest up.", 
-            "Alternating Waves: To perform standard alternating waves, explosively whip your right arm up and down, immediately followed by your left arm, creating continuous undulating waves that travel all the way down the ropes to the anchor.", 
-            "Slam Variation: For power slams, lift both ropes high overhead simultaneously, extending your entire body, then aggressively slam them both down into the floor as hard as you can.", 
-            "Execution: Maintain high intensity and speed for short bursts (e.g., 20-30 seconds), using your core to stabilize your torso against the violent movement of your arms."
-        ] 
-    },
-    { 
-        id: 62, name: "Box Jump", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Box-Jump.gif", 
-        steps: [
-            "Preparation: Stand facing a sturdy plyometric box of an appropriate height, roughly one to two feet away. Stand with your feet shoulder-width apart.", 
-            "The Load: Hinge your hips backward and bend your knees to drop into a quarter-squat, simultaneously swinging both of your arms straight back behind you to load potential energy.", 
-            "The Leap: Swing your arms forcefully forward and upward while simultaneously exploding through your legs and extending your hips. Jump as high as you can onto the box.", 
-            "The Landing: Land softly and quietly on top of the box with both feet fully planted. Absorb the impact by bending your knees into a partial squat upon landing. Carefully step down (do not jump backward) to reset."
-        ] 
-    },
-    { 
-        id: 63, name: "Bear Crawl", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Bear-Crawl.gif", 
-        steps: [
-            "Starting Position: Get down on all fours in a tabletop position. Your hands should be flat on the floor directly under your shoulders, and your knees under your hips.", 
-            "The Hover: Tuck your toes under and lift your knees just one or two inches hovering off the ground. Your back must remain absolutely flat, like a table.", 
-            "The Crawl: Move forward by simultaneously stepping your right hand and your left foot forward in a small, controlled stride.", 
-            "Continuous Motion: Immediately follow by moving your left hand and right foot forward. Continue this contralateral crawling motion, maintaining the low knee hover and flat back the entire time."
-        ] 
-    },
-    { 
-        id: 64, name: "Skaters", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Skaters.gif", 
-        steps: [
-            "Starting Position: Stand on your right leg with a slight bend in your right knee. Let your left leg hover slightly off the floor.", 
-            "The Leap: Push explosively off your right foot to leap laterally (sideways) as far as you can to your left.", 
-            "The Landing: Land softly on your left foot, absorbing the impact by bending your left knee into a mini-squat. Simultaneously, let your right leg sweep behind your left leg in a curtsy motion without touching the floor.", 
-            "The Rebound: Immediately push off the left foot to bound laterally back to the right side. Swing your arms naturally from side to side like a speed skater to generate momentum."
-        ] 
-    },
-    { 
-        id: 65, name: "Jumping Lunges", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Jumping-Lunge.gif", 
-        steps: [
-            "Starting Stance: Begin in a standard lunge position with your right foot forward and your left foot back. Drop your hips so both knees are bent at 90-degree angles.", 
-            "The Explosion: Drive explosively through the floor with both feet, jumping vertically high into the air.", 
-            "The Switch: While suspended in mid-air, quickly and smoothly scissor your legs, switching their positions so your left leg is now forward and your right leg is back.", 
-            "The Landing: Land softly on the balls of your feet, immediately absorbing the impact by dropping seamlessly into the next deep lunge. Repeat continuously without pausing."
-        ] 
-    },
-    { 
-        id: 66, name: "Air Bike (Assault Bike)", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Air-Bike.gif", 
-        steps: [
-            "Setup: Adjust the seat height so your leg is nearly fully extended at the bottom of the pedal stroke. Sit on the saddle, place your feet on the pedals, and grip the moving handles.", 
-            "The Push/Pull: The Air Bike requires total body output. As you pedal forward with your legs, actively and violently push the right handle forward while pulling the left handle backward.", 
-            "Synergy: Coordinate the pushing and pulling of your arms with the driving force of your legs. The harder and faster you push/pull, the more wind resistance the fan wheel generates.", 
-            "Pacing: Use this machine for brutal, short HIIT intervals. Go all-out for 20-30 seconds, followed by a slow, easy pedal to recover."
-        ] 
-    },
-    { 
-        id: 67, name: "SkiErg", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/SkiErg.gif", 
-        steps: [
-            "Setup: Stand facing the SkiErg machine. Reach up and grasp the handles with an overhand grip. Keep your feet shoulder-width apart.", 
-            "The Pull: Initiate the downward stroke by heavily engaging your core and pulling the handles down and backward. Hinge at your hips and bend your knees slightly, simulating a Nordic skiing motion.", 
-            "The Finish: Pull the handles aggressively all the way past your thighs. At the bottom of the stroke, your arms should be extended downward and backward.", 
-            "The Return: Stand back up forcefully, extending your hips and raising your arms back up to the high starting position to prepare for the next stroke."
-        ] 
-    },
-    { 
-        id: 68, name: "Cardio Step-Up", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Step-Up.gif", 
-        steps: [
-            "Setup: Stand in front of a sturdy plyometric box, bench, or an aerobic step. Keep your chest up and core braced.", 
-            "The Step: Step up rapidly with your right foot, planting your entire foot flat on the box. Immediately push through your right heel to drive your body upward.", 
-            "The Tap: Bring your left foot up to lightly tap the top of the box next to your right foot.", 
-            "The Descent: Immediately and softly step back down to the floor with your left foot, followed by your right foot. Move at a rapid, cardiovascular pace, alternating the lead leg on each repetition."
-        ] 
-    },
-    { 
-        id: 69, name: "Running In Place", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Running-In-Place.gif", 
-        steps: [
-            "Posture: Stand tall with your feet hip-width apart. Keep your spine straight, chest open for maximum oxygen intake, and look directly forward.", 
-            "The Run: Begin jogging in place. Lift your feet off the floor by bending your knees. Focus on landing softly on the balls/mid-foot area rather than stomping your heels, mimicking efficient distance-running form.", 
-            "Arm Action: Bend your elbows at 90 degrees and swing your arms back and forth in rhythm with your legs. Do not let your arms cross the center line of your torso.", 
-            "Cadence: Maintain a steady, rhythmic, and consistent pace for a prolonged duration to build aerobic endurance and stamina."
-        ] 
-    },
-    { 
-        id: 70, name: "Treadmill Sprint", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Treadmill-Sprint.gif", 
-        steps: [
-            "Warm-up: Never sprint cold. Walk or jog lightly on the treadmill for 5-10 minutes. Stand on the side rails and increase the belt speed to a sprinting pace.", 
-            "The Mount: Carefully but confidently step onto the fast-moving belt, immediately matching the sprint speed with long, explosive strides.", 
-            "Sprint Form: Lean slightly forward. Drive your knees up high and pump your arms violently. Strike the belt with your mid-to-forefoot and pull the belt backward with your hamstrings and glutes.", 
-            "The Rest: Sprint at maximum effort for 15 to 30 seconds. To rest, securely grab the handrails and quickly hop your feet off the belt back onto the side rails to recover before the next interval."
-        ] 
-    },
+    // ================= NEW CARDIO WORKOUTS (20) =================
     { 
         id: 101, name: "Burpee Long Jump", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Burpee-Long-Jump.gif", 
@@ -766,6 +566,16 @@ const workoutDB = [
         ] 
     },
     { 
+        id: 103, name: "Bear Crawl", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Bear-Crawl.gif", 
+        steps: [
+            "Starting Position: Get down on all fours in a tabletop position. Your hands should be flat directly under your shoulders.",
+            "The Hover: Tuck your toes under and lift your knees just one or two inches hovering off the ground. Your back must remain absolutely flat, like a table.",
+            "The Crawl: Move forward by simultaneously stepping your right hand and your left foot forward in a small, controlled stride.",
+            "Continuous Motion: Immediately follow by moving your left hand and right foot forward. Continue this contralateral crawling motion without letting your knees touch the floor."
+        ] 
+    },
+    { 
         id: 104, name: "Power Lunge", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/05/Power-Lunge.gif", 
         steps: [
@@ -773,6 +583,16 @@ const workoutDB = [
             "The Load: Lower your hips slightly to build potential energy, keeping your chest upright and core tight.",
             "The Explosion: Drive explosively through the heel of your front foot and the toes of your back foot to launch your entire body vertically into the air.",
             "The Switch: While suspended in the air, quickly scissor your legs to switch their positions. Land softly back into the lunge position and immediately repeat."
+        ] 
+    },
+    { 
+        id: 105, name: "Running", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/04/Running.gif", 
+        steps: [
+            "Posture: Maintain a tall, upright posture with a very slight forward lean from the ankles, not the waist. Keep your shoulders relaxed and chest open.",
+            "Foot Strike: Focus on landing softly on your mid-foot, directly underneath your center of gravity. Avoid over-striding and heavy heel striking.",
+            "Arm Swing: Bend your elbows at approximately 90 degrees. Swing your arms straight forward and back in rhythm with your legs, without crossing your body's centerline.",
+            "Cadence: Maintain a steady, efficient turnover rate (cadence). Focus on a consistent breathing pattern to build cardiovascular endurance."
         ] 
     },
     { 
@@ -786,6 +606,36 @@ const workoutDB = [
         ] 
     },
     { 
+        id: 107, name: "Jump Rope", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Jump-Rope.gif", 
+        steps: [
+            "Setup: Hold the jump rope handles with your hands positioned slightly forward of your hips. Keep your elbows tucked strictly against your ribs.",
+            "The Rotation: The rope should be turned using quick, small circular motions from your wrists only. Do not swing your entire arms.",
+            "The Jump: Push off the balls of your feet to jump just an inch or two into the air—only high enough to let the rope pass underneath.",
+            "Rhythm: Land softly on the balls of your feet with a micro-bend in your knees to absorb impact. Maintain a rapid, consistent bouncing rhythm."
+        ] 
+    },
+    { 
+        id: 108, name: "Stationary Bike", category: "cardio", muscle: "cardio", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Stationary-Bike.gif", 
+        steps: [
+            "Adjustment: Adjust the saddle height so that your leg has a slight 5-to-10-degree bend at the lowest point of the pedal stroke. Ensure the handlebars are at a comfortable distance.",
+            "Posture: Sit on the saddle and grip the handlebars. Keep your spine relatively straight and avoid excessively rounding your upper back.",
+            "Pedaling Technique: Push down forcefully through the ball of your foot on the downward stroke, and actively pull up slightly on the upward stroke for maximum efficiency.",
+            "Pacing & Resistance: Maintain a high, steady cadence (RPM). Adjust the machine's resistance to simulate climbing hills or sprinting on flat roads."
+        ] 
+    },
+    { 
+        id: 109, name: "Treadmill", category: "cardio", muscle: "cardio", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Treadmill.gif", 
+        steps: [
+            "Setup: Stand on the side rails. Select your desired speed and incline on the console. Once the belt is moving steadily, carefully step onto the center of the belt.",
+            "Form: Stand tall with your chest open. Avoid leaning heavily on the handrails; your arms should swing naturally by your sides.",
+            "Execution: Walk or run at a steady pace. Keep your gaze forward to maintain balance and proper neck alignment.",
+            "Cool Down: Maintain your pace for the duration of the session, then gradually decrease the speed to a slow walk to safely cool down before stepping off."
+        ] 
+    },
+    { 
         id: 110, name: "Walk Wave Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/06/Walk-Wave-Machine.gif", 
         steps: [
@@ -793,6 +643,46 @@ const workoutDB = [
             "The Motion: Begin shifting your weight from side to side in a smooth, wave-like, or arc trajectory. Push down firmly through your entire foot.",
             "Core Engagement: Keep your core tight and your torso upright to stabilize your body against the lateral/diagonal forces of the machine.",
             "Pacing: Establish a rhythmic, continuous sweeping motion. Adjust the resistance and stride rate according to your cardiovascular goals."
+        ] 
+    },
+    { 
+        id: 111, name: "Rowing Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Rowing-Machine.gif", 
+        steps: [
+            "The Catch: Sit on the ergometer and secure your feet in the straps. Slide forward, bend your knees, and grab the handle. Your shins should be vertical, chest proud, and back flat.",
+            "The Drive: Initiate the power stroke strictly by driving your legs aggressively into the footplates. Keep your arms straight as you push your body backward.",
+            "The Finish: As your legs reach full extension, lean your torso slightly back and forcefully pull the handle straight into your lower rib cage.",
+            "The Recovery: Extend your arms forward first, then hinge your torso forward from the hips, and finally bend your knees to let the seat slide smoothly back to the catch position."
+        ] 
+    },
+    { 
+        id: 112, name: "Stair Climber Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Stair-Climber.gif", 
+        steps: [
+            "Setup: Step onto the revolving staircase. Set a moderate, sustainable speed on the console. Lightly rest your fingertips on the side rails strictly for balance.",
+            "Posture Warning: Stand totally upright. Do not hunch over or rest your body weight heavily on the console, as this reduces caloric burn and stresses the lower back.",
+            "The Step: Place your entire foot onto each step, rather than just the balls of your feet. This fully activates the glutes and hamstrings.",
+            "Execution: Push firmly down through your heel to step up. Maintain a steady, continuous rhythm without skipping steps."
+        ] 
+    },
+    { 
+        id: 113, name: "Elliptical Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Elliptical-Machine.gif", 
+        steps: [
+            "Setup: Step safely onto the foot pedals and grab the moving handrails. Select your desired resistance and incline profile.",
+            "Posture: Stand tall with a straight spine, keeping your head up and core lightly engaged. Do not slouch over the console.",
+            "The Motion: Begin pedaling in a smooth, forward, elliptical motion. Push down and forward evenly through your entire foot.",
+            "Total Body Sync: Push and pull the handrails in synchronized rhythm with your leg movements, utilizing equal effort from your upper and lower body."
+        ] 
+    },
+    { 
+        id: 114, name: "Mountain Climber", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Mountain-Climber.gif", 
+        steps: [
+            "Starting Stance: Get into a strict, high push-up position. Your hands should be planted firmly directly underneath your shoulders. Your body must form a straight line.",
+            "The Drive: Engage your abdominal muscles intensely. Quickly lift your right foot off the floor and drive your right knee forcefully straight up toward the center of your chest.",
+            "The Switch: As you kick your right foot back to the starting position, simultaneously jump your left knee up toward your chest in a seamless exchange.",
+            "The Pace: Continue alternating legs in a rapid, running-like motion. Keep your hips locked down parallel to the floor; do not let your glutes bounce high."
         ] 
     },
     { 
@@ -833,6 +723,16 @@ const workoutDB = [
             "The Drop: Quickly jump your feet out wide while simultaneously dropping your hips deep into a wide squat position.",
             "The Reach: As you drop into the squat, swing your arms straight up and overhead until your hands meet.",
             "The Explosion: Explosively push through the floor to jump back up, bringing your feet together and returning your arms to your sides before immediately dropping back into the squat."
+        ] 
+    },
+    { 
+        id: 119, name: "Jumping Jack", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Jumping-jacks.gif", 
+        steps: [
+            "Starting Position: Stand completely upright with your legs together, knees slightly bent, and your arms resting relaxed down by your sides.",
+            "The Jump Out: In one synchronized, explosive motion, jump slightly into the air while simultaneously spreading your legs out slightly wider than shoulder-width.",
+            "The Arm Sweep: As you jump your legs out, sweep both of your arms out to the sides and up in a wide arc until your hands touch above your head.",
+            "The Return: Immediately reverse the motion by jumping again, bringing your feet back together and sweeping your arms back down to your sides."
         ] 
     },
     { 
