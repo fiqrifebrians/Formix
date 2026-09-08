@@ -56,6 +56,7 @@ body {
     border-radius: 5px;
     transition: all 0.3s;
 }
+
 .back-link:hover { 
     background-color: var(--black);
     color: var(--white); 
@@ -67,6 +68,7 @@ body {
     background-color: var(--white);
     border-bottom: 1px solid var(--gray-border);
 }
+
 .hero h1, .page-header h1 {
     font-weight: 800;
     font-size: 3rem;
@@ -74,6 +76,7 @@ body {
     letter-spacing: -1px;
     text-transform: uppercase;
 }
+
 .hero p, .page-header p {
     color: var(--gray-text);
     font-size: 1.1rem;
@@ -107,6 +110,7 @@ main {
     box-shadow: 4px 4px 0px var(--gray-border);
     cursor: pointer;
 }
+
 .card:hover {
     transform: translate(-4px, -4px);
     box-shadow: 8px 8px 0px var(--black);
@@ -124,6 +128,7 @@ main {
     margin: 0 0 0.5rem 0;
     text-transform: uppercase;
 }
+
 .card p { color: var(--gray-text); margin: 0; font-size: 0.95rem; }
 
 .card-arrow {
@@ -136,6 +141,7 @@ main {
     transition: all 0.3s ease;
     font-weight: bold;
 }
+
 .card:hover .card-arrow {
     opacity: 1;
     transform: translateX(0);
@@ -151,61 +157,28 @@ main {
     box-shadow: 6px 6px 0px var(--black);
     overflow: hidden;
 }
+
 @media(min-width: 850px) { .workout-card { flex-direction: row; } }
 
-/* PERBAIKAN GAMBAR: Memastikan image termuat & tidak terpotong */
+/* PERBAIKAN STRUKTUR GAMBAR (KEMBALI KE 1 GAMBAR) */
 .video-container {
     flex: 1;
     background-color: var(--white);
     position: relative;
     display: flex;
-    flex-direction: row;
-    border-bottom: 1px solid var(--black);
-}
-@media(min-width: 850px) { .video-container { border-right: 1px solid var(--black); border-bottom: none; } }
-
-.img-wrapper {
-    flex: 1;
-    position: relative;
-    overflow: hidden;
-    border-right: 1px solid var(--black);
-    display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
-}
-.img-wrapper:last-child {
-    border-right: none;
+    border-bottom: 1px solid var(--black);
 }
 
-.img-wrapper img {
+@media(min-width: 850px) { .video-container { border-right: 1px solid var(--black); border-bottom: none; } }
+
+.video-container img {
     width: 100%;
     height: auto;
     max-height: 400px;
-    object-fit: contain; /* Contain agar gambar tidak terpotong */
-    filter: grayscale(100%);
-    transition: filter 0.4s ease, transform 0.4s ease;
+    object-fit: contain; 
     padding: 1rem;
-}
-
-.workout-card:hover .img-wrapper img {
-    filter: grayscale(0%);
-    transform: scale(1.05);
-}
-
-.img-label {
-    position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    background-color: var(--white);
-    color: var(--black);
-    padding: 0.3rem 0.6rem;
-    font-size: 0.7rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    border: 1px solid var(--black);
-    box-shadow: 2px 2px 0px var(--black);
-    z-index: 2;
 }
 
 .workout-details { flex: 1; padding: 3rem; display: flex; flex-direction: column; }
@@ -232,6 +205,7 @@ main {
     opacity: 0;
     transform: translateY(20px);
 }
+
 @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
 
 footer {

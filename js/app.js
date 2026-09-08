@@ -77,16 +77,9 @@ function renderWorkouts() {
 
         const stepsHtml = workout.steps.map(step => `<li>${step}</li>`).join('');
         
-        let mediaHtml = `
-            <div class="img-wrapper">
-                <span class="img-label">Start</span>
-                <img src="${workout.images[0]}" alt="${workout.name} Start Position" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23eee\\'/><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\' font-size=\\'12\\' fill=\\'%23999\\'>GymVisual Image</text></svg>'">
-            </div>
-            <div class="img-wrapper">
-                <span class="img-label">End</span>
-                <img src="${workout.images[1]}" alt="${workout.name} End Position" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23eee\\'/><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\' font-size=\\'12\\' fill=\\'%23999\\'>GymVisual Image</text></svg>'">
-            </div>
-        `;
+        // Render 1 gambar saja sesuai permintaan (menggunakan index 0 dari array image)
+        const fallbackImg = "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80";
+        let mediaHtml = `<img src="${workout.media_url}" alt="${workout.name} demonstration" onerror="this.onerror=null; this.src='${fallbackImg}';">`;
 
         const muscleData = muscles.find(m => m.id === workout.muscle);
         const equipData = equipments.find(e => e.id === workout.equipment);
