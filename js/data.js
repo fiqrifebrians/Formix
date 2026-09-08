@@ -543,7 +543,7 @@ const workoutDB = [
     // ================= NEW CARDIO WORKOUTS (20) =================
     { 
         id: 101, name: "Burpee Long Jump", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Burpee-Long-Jump.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2025/10/Burpee-Long-Jump.gif", 
         steps: [
             "The Drop: Start in a standing position. Drop your hips and place your hands firmly on the ground in front of your feet.",
             "The Push-up: Kick your legs back into a high plank position. Perform a strict push-up by lowering your chest to the floor and pushing back up.",
@@ -553,7 +553,7 @@ const workoutDB = [
     },
     { 
         id: 102, name: "Navy Seal Burpee", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2022/02/Navy-Seal-Burpee.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2023/10/Navy-Seal-Burpee.gif", 
         steps: [
             "Initial Sprawl: Drop your hands to the floor and kick your feet back into a plank position.",
             "Push-up 1: Perform one strict push-up. At the top of the plank, drive your right knee aggressively to your chest and back.",
@@ -573,7 +573,7 @@ const workoutDB = [
     },
     { 
         id: 104, name: "Power Lunge", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/05/Power-Lunge.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2023/09/power-lunge.gif", 
         steps: [
             "The Setup: Begin in a standard lunge position, with your right foot forward and left foot back. Both knees should be bent at 90-degree angles.",
             "The Load: Lower your hips slightly to build potential energy, keeping your chest upright and core tight.",
