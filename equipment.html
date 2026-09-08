@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>FORMIX | Equipment</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo" onclick="location.href='index.html'" style="cursor:pointer;">
+            <i class="fa-solid fa-layer-group"></i> FORMIX
+        </div>
+        <a href="index.html" class="back-link"><i class="fa-solid fa-chevron-left"></i> Home</a>
+    </nav>
+    
+    <header class="page-header">
+        <h1>AVAILABLE EQUIPMENT</h1>
+        <p>What do you have access to?</p>
+    </header>
+
+    <main>
+        <div id="equipment-list" class="grid-container fade-in">
+            <!-- Populated by JS -->
+        </div>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", renderEquipmentList);
+    </script>
+</body>
+</html>
