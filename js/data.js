@@ -9,7 +9,7 @@ const muscles = [
     { id: "calves", name: "Calves" },
     { id: "glutes", name: "Glutes" },
     { id: "forearms", name: "Forearms" },
-    { id: "cardio", name: "Cardio" }
+    // { id: "cardio", name: "Cardio" }
 ];
 
 const equipments = [
