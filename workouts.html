@@ -3,25 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,800;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>FORMIX | Workouts</title>
 </head>
 <body>
     <nav class="navbar">
         <div class="logo" onclick="location.href='index.html'" style="cursor:pointer;">
+            <img src="assets/icons/logo.svg" alt="Formix Logo" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem; vertical-align: middle;" onerror="this.style.display='none'"> 
             FORMIX
         </div>
-        <button onclick="history.back()" class="back-link" style="background:none;border:none;">BACK</button>
+        <button onclick="history.back()" class="back-link" style="background:none;border:none;">&larr; Back</button>
     </nav>
+    
     <header class="page-header">
         <h1 id="workout-title">WORKOUTS</h1>
+        <!-- Container untuk Dropdown Filter -->
+        <div id="filter-container"></div>
     </header>
+
     <main>
-        <div id="workout-list" class="workout-container fade-in"></div>
+        <div id="workout-list" class="workout-container fade-in">
+            <!-- Populated by JS -->
+        </div>
     </main>
+
     <script src="js/data.js"></script>
     <script src="js/app.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", renderWorkouts);</script>
+    <script>
+        document.addEventListener("DOMContentLoaded", renderWorkouts);
+    </script>
 </body>
 </html>

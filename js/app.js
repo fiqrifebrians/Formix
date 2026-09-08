@@ -35,50 +35,102 @@ function renderEquipmentList() {
     });
 }
 
+// Menyimpan state base workout agar bisa difilter ulang
+let baseWorkouts = [];
+
 function renderWorkouts() {
-    const container = document.getElementById("workout-list");
     const title = document.getElementById("workout-title");
-    if (!container) return;
+    const filterContainer = document.getElementById("filter-container");
+    if (!document.getElementById("workout-list")) return;
 
     const muscleQuery = getQueryParam("muscle");
     const equipmentQuery = getQueryParam("equipment");
     const categoryQuery = getQueryParam("category");
 
-    let filteredWorkouts = [];
+    let filterType = ""; // Menentukan apakah kita akan memfilter berdasarkan alat atau otot
 
-    // Filter updated for Cardio
+    // BUG FIXED: categoryQuery sekarang membaca "cardio" dengan benar
     if (categoryQuery === "cardio") {
         title.innerText = "CARDIO WORKOUTS";
-        filteredWorkouts = workoutDB.filter(w => w.category === "cardio");
+        baseWorkouts = workoutDB.filter(w => w.category === "cardio");
+        filterType = "equipment"; 
     } else if (muscleQuery) {
         title.innerText = `${muscleQuery.toUpperCase()} WORKOUTS`;
-        filteredWorkouts = workoutDB.filter(w => w.muscle === muscleQuery);
+        baseWorkouts = workoutDB.filter(w => w.muscle === muscleQuery);
+        filterType = "equipment";
     } else if (equipmentQuery) {
         title.innerText = `${equipmentQuery.toUpperCase()} WORKOUTS`;
-        filteredWorkouts = workoutDB.filter(w => w.equipment === equipmentQuery);
+        baseWorkouts = workoutDB.filter(w => w.equipment === equipmentQuery);
+        filterType = "muscle";
     } else {
         title.innerText = "ALL WORKOUTS";
-        filteredWorkouts = workoutDB;
+        baseWorkouts = workoutDB;
     }
 
-    if (filteredWorkouts.length === 0) {
+    // MENGHASILKAN DROPDOWN FILTER
+    if (filterContainer && baseWorkouts.length > 0 && filterType !== "") {
+        filterContainer.innerHTML = ""; 
+        
+        const wrapper = document.createElement("div");
+        wrapper.className = "filter-wrapper";
+        
+        const label = document.createElement("label");
+        label.innerText = `FILTER BY ${filterType}:`;
+        
+        const select = document.createElement("select");
+        select.className = "filter-select";
+        select.innerHTML = `<option value="all">ALL ${filterType.toUpperCase()}</option>`;
+        
+        // Mendapatkan nilai unik (contoh: cari semua jenis alat yang ada di list dada/chest)
+        const uniqueValues = [...new Set(baseWorkouts.map(w => w[filterType]))].filter(v => v);
+        
+        uniqueValues.forEach(val => {
+            const optName = filterType === "muscle" 
+                ? (muscles.find(m => m.id === val)?.name || val)
+                : (equipments.find(e => e.id === val)?.name || val);
+            select.innerHTML += `<option value="${val}">${optName.toUpperCase()}</option>`;
+        });
+
+        // Event listener ketika dropdown diubah
+        select.addEventListener("change", (e) => {
+            const selectedVal = e.target.value;
+            let subFiltered = baseWorkouts;
+            if (selectedVal !== "all") {
+                subFiltered = baseWorkouts.filter(w => w[filterType] === selectedVal);
+            }
+            renderCards(subFiltered);
+        });
+
+        wrapper.appendChild(label);
+        wrapper.appendChild(select);
+        filterContainer.appendChild(wrapper);
+    }
+
+    // Render list pertama kali (semua tanpa sub-filter)
+    renderCards(baseWorkouts);
+}
+
+function renderCards(workoutsArray) {
+    const container = document.getElementById("workout-list");
+    container.innerHTML = ""; // Bersihkan list sebelumnya
+
+    if (workoutsArray.length === 0) {
         container.innerHTML = `<div style="text-align:center; padding:4rem; background:#fff; border:1px solid #e4e4e7; width:100%;">
             <div style="font-size:3rem; color:#d4d4d8; margin-bottom:1rem;">&#9888;</div>
             <h3>NO WORKOUTS FOUND</h3>
-            <p style="color:#71717a;">We are currently updating our database for this selection.</p>
+            <p style="color:#71717a;">We don't have this specific variation yet.</p>
         </div>`;
         return;
     }
 
-    filteredWorkouts.forEach((workout, index) => {
+    workoutsArray.forEach((workout, index) => {
         const card = document.createElement("div");
         card.className = "workout-card";
-        card.style.animationDelay = `${index * 0.15}s`;
+        card.style.animationDelay = `${index * 0.1}s`;
         card.classList.add("fade-in");
 
         const stepsHtml = workout.steps.map(step => `<li>${step}</li>`).join('');
         
-        // Single GIF renderer with robust fallback
         const fallbackImg = "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80";
         let mediaHtml = `<img src="${workout.media_url}" alt="${workout.name} demonstration" onerror="this.onerror=null; this.src='${fallbackImg}'; this.style.filter='grayscale(100%)';">`;
 
