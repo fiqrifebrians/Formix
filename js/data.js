@@ -66,7 +66,7 @@ const workoutDB = [
     },
     { 
         id: 5, name: "Resistance Band Chest Press", category: "strength", muscle: "chest", equipment: "resistance band", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Resistance-Band-Chest-Press.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2022/05/Standing-incline-chest-press.gif", 
         steps: [
             "Anchoring: Securely attach the center of a heavy-duty resistance band to a sturdy pole, closed door frame, or wall anchor point positioned exactly at your chest height.", 
             "Stance: Grab one handle (or end of the band) in each hand. Turn to face completely away from the anchor point. Step forward until there is strong tension in the band before you even begin the press. Keep your elbows up at chest level, pointing slightly down.", 
@@ -88,7 +88,7 @@ const workoutDB = [
     },
     { 
         id: 7, name: "Barbell Row", category: "strength", muscle: "back", equipment: "barbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Row.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/04/Reverse-Grip-Barbell-Row.gif", 
         steps: [
             "Starting Position: Stand with your feet about shoulder-width apart, with your mid-foot directly under the barbell. Push your hips back and hinge forward until your torso is roughly a 45-degree angle to the floor. Your back must remain absolutely flat, with no rounding in the lumbar spine.", 
             "The Grip: Reach down and grab the barbell with an overhand grip, hands placed slightly wider than shoulder-width. Keep your head in a neutral position, gazing at the floor a few feet ahead of you.", 
@@ -130,7 +130,7 @@ const workoutDB = [
     // ================= LEGS (TERMASUK GLUTES SEKARANG) =================
     { 
         id: 11, name: "Barbell Squat", category: "strength", muscle: "legs", equipment: "barbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Squat.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/BARBELL-SQUAT.gif", 
         steps: [
             "Setup: Approach a squat rack and duck under the barbell. Position the bar securely across the meaty, upper part of your trapezius muscles. Grip the bar tightly, stand up to unrack it, and take one or two deliberate steps backward.", 
             "Stance: Set your feet roughly shoulder-width apart. Your toes should be pointing slightly outward. Keep your chest up proudly, look straight ahead, and take a deep breath into your belly to brace your core.", 
@@ -150,7 +150,7 @@ const workoutDB = [
     },
     { 
         id: 13, name: "Leg Press", category: "strength", muscle: "legs", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Leg-Press.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2015/11/Leg-Press.gif", 
         steps: [
             "Positioning: Sit deeply into the seat of the leg press machine. Ensure your glutes and lower back are pressed firmly and flatly against the backrest. There should be no gap between your lumbar spine and the pad.", 
             "Foot Placement: Place your feet squarely on the heavy sled, positioned about shoulder-width apart in the center of the platform. Push slightly to unrack the weight and disengage the machine's safety levers.", 
@@ -170,7 +170,7 @@ const workoutDB = [
     },
     { 
         id: 15, name: "Leg Extension", category: "strength", muscle: "legs", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Leg-Extension.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/LEG-EXTENSION.gif", 
         steps: [
             "Adjustment: Sit on the leg extension machine. Adjust the backrest so the back of your knees fits snugly against the edge of the seat. Adjust the lower roller pad so it rests comfortably directly on top of your lower shins/ankles.", 
             "Grip and Posture: Grip the handles firmly on the sides of the seat to anchor your upper body down. Keep your chest up and your back completely flat against the backrest.", 
