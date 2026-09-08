@@ -3,7 +3,7 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
-// Render Muscle Grid (No icons)
+// Render Muscle Grid
 function renderMuscleList() {
     const container = document.getElementById("muscle-list");
     if (!container) return;
@@ -20,7 +20,7 @@ function renderMuscleList() {
     });
 }
 
-// Render Equipment Grid (No icons)
+// Render Equipment Grid
 function renderEquipmentList() {
     const container = document.getElementById("equipment-list");
     if (!container) return;
@@ -37,7 +37,7 @@ function renderEquipmentList() {
     });
 }
 
-// Render Workouts (No icons in tags)
+// Render Workouts (Logika Filter Diperbaiki)
 function renderWorkouts() {
     const container = document.getElementById("workout-list");
     const title = document.getElementById("workout-title");
@@ -49,6 +49,7 @@ function renderWorkouts() {
 
     let filteredWorkouts = [];
 
+    // Filter yang ketat agar HIIT hanya menampilkan data HIIT
     if (categoryQuery === "hiit") {
         title.innerText = "HIIT WORKOUTS";
         filteredWorkouts = workoutDB.filter(w => w.category === "hiit");
@@ -75,21 +76,14 @@ function renderWorkouts() {
     filteredWorkouts.forEach((workout, index) => {
         const card = document.createElement("div");
         card.className = "workout-card";
-        
         card.style.animationDelay = `${index * 0.15}s`;
         card.classList.add("fade-in");
 
         const stepsHtml = workout.steps.map(step => `<li>${step}</li>`).join('');
         
-        let mediaHtml = '';
-        if(workout.is_video) {
-            mediaHtml = `
-                <video autoplay loop muted playsinline>
-                    <source src="${workout.media_url}" type="video/mp4">
-                </video>`;
-        } else {
-            mediaHtml = `<img src="${workout.media_url}" alt="${workout.name} demonstration">`;
-        }
+        // Memasang onerror fallback jika gambar gymvisual diblokir
+        const fallbackImg = "https://images.unsplash.com/photo-1598971639058-fab3c3109a00?auto=format&fit=crop&w=800&q=80";
+        let mediaHtml = `<img src="${workout.media_url}" alt="${workout.name} demonstration" onerror="this.onerror=null;this.src='${fallbackImg}';">`;
 
         const muscleData = muscles.find(m => m.id === workout.muscle);
         const equipData = equipments.find(e => e.id === workout.equipment);
