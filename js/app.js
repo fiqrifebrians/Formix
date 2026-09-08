@@ -46,9 +46,10 @@ function renderWorkouts() {
 
     let filteredWorkouts = [];
 
-    if (categoryQuery === "hiit") {
-        title.innerText = "HIIT WORKOUTS";
-        filteredWorkouts = workoutDB.filter(w => w.category === "hiit");
+    // Filter updated for Cardio
+    if (categoryQuery === "cardio") {
+        title.innerText = "CARDIO WORKOUTS";
+        filteredWorkouts = workoutDB.filter(w => w.category === "cardio");
     } else if (muscleQuery) {
         title.innerText = `${muscleQuery.toUpperCase()} WORKOUTS`;
         filteredWorkouts = workoutDB.filter(w => w.muscle === muscleQuery);
@@ -77,9 +78,9 @@ function renderWorkouts() {
 
         const stepsHtml = workout.steps.map(step => `<li>${step}</li>`).join('');
         
-        // Render 1 gambar saja sesuai permintaan (menggunakan index 0 dari array image)
+        // Single GIF renderer with robust fallback
         const fallbackImg = "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80";
-        let mediaHtml = `<img src="${workout.media_url}" alt="${workout.name} demonstration" onerror="this.onerror=null; this.src='${fallbackImg}';">`;
+        let mediaHtml = `<img src="${workout.media_url}" alt="${workout.name} demonstration" onerror="this.onerror=null; this.src='${fallbackImg}'; this.style.filter='grayscale(100%)';">`;
 
         const muscleData = muscles.find(m => m.id === workout.muscle);
         const equipData = equipments.find(e => e.id === workout.equipment);
