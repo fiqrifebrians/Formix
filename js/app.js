@@ -3,7 +3,6 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
-// Render Muscle Grid
 function renderMuscleList() {
     const container = document.getElementById("muscle-list");
     if (!container) return;
@@ -20,7 +19,6 @@ function renderMuscleList() {
     });
 }
 
-// Render Equipment Grid
 function renderEquipmentList() {
     const container = document.getElementById("equipment-list");
     if (!container) return;
@@ -37,7 +35,6 @@ function renderEquipmentList() {
     });
 }
 
-// Render Workouts (Logika Filter Diperbaiki)
 function renderWorkouts() {
     const container = document.getElementById("workout-list");
     const title = document.getElementById("workout-title");
@@ -49,7 +46,6 @@ function renderWorkouts() {
 
     let filteredWorkouts = [];
 
-    // Filter yang ketat agar HIIT hanya menampilkan data HIIT
     if (categoryQuery === "hiit") {
         title.innerText = "HIIT WORKOUTS";
         filteredWorkouts = workoutDB.filter(w => w.category === "hiit");
@@ -81,9 +77,17 @@ function renderWorkouts() {
 
         const stepsHtml = workout.steps.map(step => `<li>${step}</li>`).join('');
         
-        // Memasang onerror fallback jika gambar gymvisual diblokir
-        const fallbackImg = "https://images.unsplash.com/photo-1598971639058-fab3c3109a00?auto=format&fit=crop&w=800&q=80";
-        let mediaHtml = `<img src="${workout.media_url}" alt="${workout.name} demonstration" onerror="this.onerror=null;this.src='${fallbackImg}';">`;
+        // Membagi 2 gambar: Gambar Awal & Gambar Akhir
+        let mediaHtml = `
+            <div class="img-wrapper">
+                <span class="img-label">Start</span>
+                <img src="${workout.images[0]}" alt="${workout.name} Start Position">
+            </div>
+            <div class="img-wrapper">
+                <span class="img-label">End</span>
+                <img src="${workout.images[1]}" alt="${workout.name} End Position">
+            </div>
+        `;
 
         const muscleData = muscles.find(m => m.id === workout.muscle);
         const equipData = equipments.find(e => e.id === workout.equipment);
