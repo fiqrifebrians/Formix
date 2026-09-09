@@ -1,13 +1,14 @@
 const muscles = [
     { id: "chest", name: "Chest" },
     { id: "back", name: "Back" },
-    { id: "legs", name: "Legs" }, // Quads, Hamstrings, dan Glutes digabung di sini
+    { id: "legs", name: "Legs" },
     { id: "shoulders", name: "Shoulders" },
     { id: "biceps", name: "Biceps" },
     { id: "triceps", name: "Triceps" },
     { id: "core", name: "Core" },
     { id: "calves", name: "Calves" },
-    { id: "forearms", name: "Forearms" }
+    { id: "forearms", name: "Forearms" },
+    { id: "cardio", name: "Cardio" }
 ];
 
 const equipments = [
@@ -65,19 +66,69 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 5, name: "Resistance Band Chest Press", category: "strength", muscle: "chest", equipment: "resistance band", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2022/05/Standing-incline-chest-press.gif", 
+        id: 5, name: "Pec Deck Fly", category: "strength", muscle: "chest", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Pec-Deck-Fly.gif", 
         steps: [
-            "Anchoring: Securely attach the center of a heavy-duty resistance band to a sturdy pole, closed door frame, or wall anchor point positioned exactly at your chest height.", 
-            "Stance: Grab one handle (or end of the band) in each hand. Turn to face completely away from the anchor point. Step forward until there is strong tension in the band before you even begin the press. Keep your elbows up at chest level, pointing slightly down.", 
-            "Pressing: Exhale and push the handles straight out directly in front of you. Fully extend your arms, squeezing your chest muscles intensely as your hands converge slightly at the end of the movement.", 
-            "Eccentric Phase: Inhale and strictly resist the pulling force of the band as you slowly bring your hands back toward your chest, taking 2-3 seconds to complete the negative portion of the repetition."
+            "Setup: Sit on the Pec Deck machine with your back flat against the pad. Adjust the seat height so that the handles are exactly at chest level.", 
+            "Grip: Grab the handles (or place your forearms on the pads, depending on the machine design) ensuring your elbows are slightly bent and aligned with your shoulders.", 
+            "The Contraction: Exhale and squeeze your pectoral muscles to bring the handles together directly in front of your chest. Hold the peak contraction for a full second.", 
+            "The Stretch: Inhale and slowly let the handles return to the starting position, opening your chest until you feel a comfortable stretch without hyperextending your shoulders."
+        ] 
+    },
+    { 
+        id: 6, name: "Low Cable Crossover", category: "strength", muscle: "chest", equipment: "cables", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Low-Cable-Crossover.gif", 
+        steps: [
+            "Setup: Set the pulleys on a dual cable machine to the lowest floor setting. Grab the D-handles with an underhand grip (palms facing forward/up).", 
+            "Posture: Stand in the center of the machine, take a slight step forward to create tension, and maintain a proud chest with a straight back.", 
+            "The Upward Sweep: Keeping a slight bend in your elbows, exhale and scoop the cables upward and inward in a wide arc until your hands meet at upper-chest or chin level. This heavily targets the upper pectoral fibers.", 
+            "The Descent: Inhale and lower the handles slowly and steadily back down to your sides, feeling a stretch across your chest."
+        ] 
+    },
+    { 
+        id: 7, name: "High Cable Crossover", category: "strength", muscle: "chest", equipment: "cables", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/High-Cable-Crossover.gif", 
+        steps: [
+            "Setup: Set the pulleys to the highest setting on the cable machine. Grasp the handles and step forward to stagger your stance, leaning your torso slightly forward.", 
+            "The Downward Sweep: With a locked, slight bend in your elbows, exhale and pull the handles downward and inward toward your hips or lower abdomen. This angle specifically targets the lower chest.", 
+            "The Squeeze: Cross your wrists slightly over each other at the bottom of the movement to maximize the inner-chest contraction.", 
+            "The Return: Slowly let the cables pull your arms back up to the starting, stretched position under strict control."
+        ] 
+    },
+    { 
+        id: 8, name: "Dumbbell Bench Press", category: "strength", muscle: "chest", equipment: "dumbbell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Press.gif", 
+        steps: [
+            "Setup: Sit on the edge of a flat bench with a dumbbell resting on each knee. Kick your knees up one at a time to safely hoist the dumbbells to shoulder level as you lie back.", 
+            "Positioning: Plant your feet firmly, arch your back slightly, and squeeze your shoulder blades together. Hold the dumbbells directly over your chest.", 
+            "The Descent: Inhale and slowly lower the dumbbells straight down to the sides of your chest. Keep your elbows tucked at a 45-degree angle.", 
+            "The Press: Exhale and forcefully press the dumbbells back up to the starting position, squeezing your chest at the top without clanking the weights together."
+        ] 
+    },
+    { 
+        id: 9, name: "Machine Fly", category: "strength", muscle: "chest", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Machine-Fly.gif", 
+        steps: [
+            "Setup: Adjust the seat height so the machine's handles are parallel to your mid-chest. Sit with your back firmly pressed against the backrest.", 
+            "Grip: Grasp the handles with a neutral grip (palms facing each other) and maintain a slight bend in your elbows.", 
+            "Execution: Squeeze your chest muscles to bring your arms together in a wide hugging motion. Pause and squeeze intensely at the center.", 
+            "Return: Slowly release the weight back to the starting position, maintaining tension on the chest without letting the weight stack slam down."
+        ] 
+    },
+    { 
+        id: 10, name: "Lever Chest Press", category: "strength", muscle: "chest", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Lever-Chest-Press.gif", 
+        steps: [
+            "Setup: Sit down on the lever chest press machine. Adjust the seat so the horizontal handles align perfectly with your mid-chest.", 
+            "Grip: Place your feet flat on the floor, keep your chest high, and grab the handles with an overhand (pronated) grip.", 
+            "The Press: Exhale and press the handles forward until your arms are fully extended, ensuring your shoulders stay pinned back against the pad.", 
+            "The Return: Inhale and slowly lower the handles back to the start, controlling the lever's weight throughout the entire eccentric phase."
         ] 
     },
 
     // ================= BACK =================
     { 
-        id: 6, name: "Pull-Up", category: "strength", muscle: "back", equipment: "bodyweight", 
+        id: 11, name: "Pull-Up", category: "strength", muscle: "back", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Pull-up.gif", 
         steps: [
             "The Grip: Stand directly beneath a secure pull-up bar. Reach up or jump to grasp the bar with an overhand, pronated grip (palms facing completely away from your body). Your hands should be placed comfortably wider than your shoulders.", 
@@ -87,7 +138,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 7, name: "Barbell Row", category: "strength", muscle: "back", equipment: "barbell", 
+        id: 12, name: "Barbell Row", category: "strength", muscle: "back", equipment: "barbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/04/Reverse-Grip-Barbell-Row.gif", 
         steps: [
             "Starting Position: Stand with your feet about shoulder-width apart, with your mid-foot directly under the barbell. Push your hips back and hinge forward until your torso is roughly a 45-degree angle to the floor. Your back must remain absolutely flat, with no rounding in the lumbar spine.", 
@@ -97,7 +148,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 8, name: "Dumbbell Row", category: "strength", muscle: "back", equipment: "dumbbell", 
+        id: 13, name: "Dumbbell Row", category: "strength", muscle: "back", equipment: "dumbbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Row.gif", 
         steps: [
             "Setup: Approach a flat workout bench. Place your right knee securely on the lower half of the bench and your right hand firmly on the upper half for support. Your torso should be flat and nearly parallel to the floor.", 
@@ -107,7 +158,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 9, name: "Lat Pulldown", category: "strength", muscle: "back", equipment: "machine", 
+        id: 14, name: "Lat Pulldown", category: "strength", muscle: "back", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Lat-Pulldown.gif", 
         steps: [
             "Adjustment: Sit down at the lat pulldown machine station. Carefully adjust the knee pad height so it fits very snugly over your upper thighs—this will anchor your lower body down when lifting heavy weight.", 
@@ -117,7 +168,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 10, name: "Seated Cable Row", category: "strength", muscle: "back", equipment: "cables", 
+        id: 15, name: "Seated Cable Row", category: "strength", muscle: "back", equipment: "cables", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Seated-Cable-Row.gif", 
         steps: [
             "Positioning: Sit down on the machine's bench. Place your feet securely on the front footpads or crossbar. Ensure you maintain a slight, permanent bend in your knees to protect your lower back—never lock your knees out completely.", 
@@ -126,10 +177,20 @@ const workoutDB = [
             "The Return: Slowly extend your arms forward. Allow your shoulders to be pulled forward slightly at the very end of the motion to achieve a full stretch in your lats, then immediately begin the next pull."
         ] 
     },
-
-    // ================= LEGS (TERMASUK GLUTES SEKARANG) =================
     { 
-        id: 11, name: "Barbell Squat", category: "strength", muscle: "legs", equipment: "barbell", 
+        id: 16, name: "Bent Over Dumbbell Row", category: "strength", muscle: "back", equipment: "dumbbell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Bent-Over-Dumbbell-Row.gif", 
+        steps: [
+            "Stance: Stand holding a dumbbell in each hand. Keep your feet shoulder-width apart and maintain a slight bend in your knees.", 
+            "The Hinge: Push your hips backward and hinge your torso forward until it is nearly parallel with the floor. Your back must remain perfectly straight. Let the dumbbells hang down directly in front of you.", 
+            "The Pull: Engage your core and pull both dumbbells up toward your ribcage simultaneously. Keep your elbows tucked close to your body and focus on pinching your shoulder blades together.", 
+            "The Lowering: Squeeze your back at the top for a second, then lower the dumbbells slowly and steadily back to the starting hanging position."
+        ] 
+    },
+
+    // ================= LEGS =================
+    { 
+        id: 17, name: "Barbell Squat", category: "strength", muscle: "legs", equipment: "barbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/BARBELL-SQUAT.gif", 
         steps: [
             "Setup: Approach a squat rack and duck under the barbell. Position the bar securely across the meaty, upper part of your trapezius muscles. Grip the bar tightly, stand up to unrack it, and take one or two deliberate steps backward.", 
@@ -139,7 +200,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 12, name: "Dumbbell Lunges", category: "strength", muscle: "legs", equipment: "dumbbell", 
+        id: 18, name: "Dumbbell Lunge", category: "strength", muscle: "legs", equipment: "dumbbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Lunge.gif", 
         steps: [
             "Starting Position: Stand completely upright, holding a moderately heavy dumbbell in each hand directly at your sides. Your arms should be fully extended. Pull your shoulders back, keep your chest high, and look straight ahead.", 
@@ -149,7 +210,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 13, name: "Leg Press", category: "strength", muscle: "legs", equipment: "machine", 
+        id: 19, name: "Leg Press", category: "strength", muscle: "legs", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2015/11/Leg-Press.gif", 
         steps: [
             "Positioning: Sit deeply into the seat of the leg press machine. Ensure your glutes and lower back are pressed firmly and flatly against the backrest. There should be no gap between your lumbar spine and the pad.", 
@@ -159,7 +220,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 14, name: "Romanian Deadlift", category: "strength", muscle: "legs", equipment: "barbell", 
+        id: 20, name: "Romanian Deadlift", category: "strength", muscle: "legs", equipment: "barbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Romanian-Deadlift.gif", 
         steps: [
             "Setup: Stand tall holding a barbell in front of your thighs with a pronated (overhand) grip, hands shoulder-width apart. Keep your feet hip-width apart and your chest proud.", 
@@ -169,7 +230,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 15, name: "Leg Extension", category: "strength", muscle: "legs", equipment: "machine", 
+        id: 21, name: "Leg Extension", category: "strength", muscle: "legs", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/LEG-EXTENSION.gif", 
         steps: [
             "Adjustment: Sit on the leg extension machine. Adjust the backrest so the back of your knees fits snugly against the edge of the seat. Adjust the lower roller pad so it rests comfortably directly on top of your lower shins/ankles.", 
@@ -179,7 +240,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 41, name: "Barbell Hip Thrust", category: "strength", muscle: "legs", equipment: "barbell", 
+        id: 22, name: "Barbell Hip Thrust", category: "strength", muscle: "legs", equipment: "barbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Hip-Thrust.gif", 
         steps: [
             "Setup: Sit flat on the floor with your shoulder blades resting precisely against the edge of a sturdy, flat weight bench. Roll a heavily padded barbell directly over your legs so it rests deep in your hip crease.", 
@@ -189,7 +250,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 42, name: "Glute Bridge", category: "strength", muscle: "legs", equipment: "bodyweight", 
+        id: 23, name: "Glute Bridge", category: "strength", muscle: "legs", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Glute-Bridge.gif", 
         steps: [
             "Starting Position: Lie completely flat on your back on a comfortable yoga mat. Bend your knees to a roughly 90-degree angle and place your feet flat on the floor, bringing your heels relatively close to your glutes.", 
@@ -199,7 +260,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 43, name: "Cable Pull Through", category: "strength", muscle: "legs", equipment: "cables", 
+        id: 24, name: "Cable Pull Through", category: "strength", muscle: "legs", equipment: "cables", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Pull-Through.gif", 
         steps: [
             "Setup: Attach a tricep rope handle to the absolute lowest setting of a cable pulley machine. Stand with your back facing the machine, straddling the cable so it passes between your legs.", 
@@ -209,7 +270,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 44, name: "Kettlebell Goblet Squat", category: "strength", muscle: "legs", equipment: "kettlebell", 
+        id: 25, name: "Kettlebell Goblet Squat", category: "strength", muscle: "legs", equipment: "kettlebell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Kettlebell-Goblet-Squat.gif", 
         steps: [
             "Grip: Pick up a heavy kettlebell with both hands. Hold it vertically by the sides of its handle (the 'horns') or cup the heavy bell portion. Keep it pulled in tight against the center of your upper chest.", 
@@ -219,19 +280,59 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 45, name: "Resistance Band Glute Kickback", category: "strength", muscle: "legs", equipment: "resistance band", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Resistance-Band-Glute-Kickback.gif", 
+        id: 26, name: "Smith Machine Squat", category: "strength", muscle: "legs", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Smith-Machine-Squat.gif", 
         steps: [
-            "Positioning: Get down on the floor on all fours in a tabletop position. Loop a small, heavy-duty resistance band securely around the arches of your feet or securely around your lower ankles.", 
-            "Stability: Place your hands flat under your shoulders. Keep your back completely flat, your neck in a neutral alignment, and brace your core tightly to ensure your lower back does not arch or sag during the movement.", 
-            "The Kick: Keeping your working knee bent at a 90-degree angle (or extending it straight out, depending on your preferred variation), aggressively kick one leg backward and upwards toward the ceiling.", 
-            "The Contraction: Push strongly against the band's resistance until your glute muscle is fully and painfully contracted. Hold that peak tension for a split second, and slowly return the knee down to hover just above the floor."
+            "Setup: Set the bar on the Smith Machine to shoulder height. Step under it, resting the bar across your upper traps. Unhook the bar by rotating your wrists.", 
+            "Stance: Position your feet slightly forward of your hips. This angled stance is unique to the Smith Machine and allows greater focus on the quadriceps.", 
+            "The Descent: Push your hips back and bend your knees to lower your body into a deep squat, keeping your back completely flat against the guided track.", 
+            "The Ascent: Press powerfully through your heels to return to the standing position, squeezing your quads and glutes at the top."
+        ] 
+    },
+    { 
+        id: 27, name: "Dumbbell Goblet Squat", category: "strength", muscle: "legs", equipment: "dumbbell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Goblet-Squat.gif", 
+        steps: [
+            "Grip: Hold a single dumbbell vertically by one end, cupping it with both hands directly against your chest.", 
+            "Stance: Stand with your feet slightly wider than shoulder-width apart, toes pointing slightly outward.", 
+            "The Squat: Lower your hips down and back, keeping your chest up. Allow your elbows to track inside your knees at the bottom of the movement.", 
+            "The Drive: Push through your entire foot to stand back up straight, maintaining the dumbbell close to your chest."
+        ] 
+    },
+    { 
+        id: 28, name: "Dumbbell Walking Lunge", category: "strength", muscle: "legs", equipment: "dumbbell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Walking-Lunge.gif", 
+        steps: [
+            "Stance: Stand tall holding a dumbbell in each hand by your sides. Brace your core and pull your shoulders back.", 
+            "The Step: Take a long, controlled stride forward with your right foot. Plant it firmly and drop your back knee straight down toward the floor.", 
+            "The Lunge: Ensure your front thigh is parallel to the ground and your front knee is not extending over your toes.", 
+            "The Walk: Instead of pushing backward, push off your front right heel to step your left foot completely forward into the next lunge. Continue walking in a straight line."
+        ] 
+    },
+    { 
+        id: 29, name: "Leg Curl", category: "strength", muscle: "legs", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Leg-Curl.gif", 
+        steps: [
+            "Adjustment: Lie face down on the lying leg curl machine. Adjust the roller pad so it rests securely against the back of your lower calves, just above the heels.", 
+            "Posture: Keep your torso flat on the bench and lightly grip the handles provided at the front of the machine to stabilize your upper body.", 
+            "The Curl: Exhale and curl your legs upward, pulling the pad as close to your glutes as possible. Focus entirely on squeezing the hamstrings.", 
+            "The Return: Inhale and lower your legs back to the starting position in a slow, highly controlled manner to maximize eccentric tension."
+        ] 
+    },
+    { 
+        id: 30, name: "Dumbbell Romanian Deadlift", category: "strength", muscle: "legs", equipment: "dumbbell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Romanian-Deadlift.gif", 
+        steps: [
+            "Setup: Stand upright holding a pair of dumbbells in front of your thighs with a pronated (overhand) grip.", 
+            "The Hinge: With a slight, locked bend in your knees, push your hips and glutes far backward. Keep your back perfectly straight and your chest up.", 
+            "The Stretch: Lower the dumbbells by sliding them down the front of your legs. Stop lowering when you feel an intense stretch in your hamstrings (usually mid-shin level).", 
+            "The Extension: Squeeze your glutes and forcefully thrust your hips forward to return to a standing position."
         ] 
     },
 
     // ================= SHOULDERS =================
     { 
-        id: 16, name: "Overhead Press", category: "strength", muscle: "shoulders", equipment: "barbell", 
+        id: 31, name: "Overhead Press", category: "strength", muscle: "shoulders", equipment: "barbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Overhead-Press.gif", 
         steps: [
             "Setup: Position a barbell on a squat rack at upper-chest height. Step up and grip the bar slightly wider than your shoulders. Unrack the bar so it rests securely across your collarbones and the front of your deltoids.", 
@@ -241,7 +342,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 17, name: "Lateral Raise", category: "strength", muscle: "shoulders", equipment: "dumbbell", 
+        id: 32, name: "Lateral Raise", category: "strength", muscle: "shoulders", equipment: "dumbbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Lateral-Raise.gif", 
         steps: [
             "Starting Position: Stand upright holding a relatively light pair of dumbbells in each hand. Let them rest at your sides with your palms facing your outer thighs. Keep your chest up.", 
@@ -251,7 +352,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 18, name: "Face Pull", category: "strength", muscle: "shoulders", equipment: "cables", 
+        id: 33, name: "Face Pull", category: "strength", muscle: "shoulders", equipment: "cables", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Face-Pull.gif", 
         steps: [
             "Setup: Attach a dual-handle tricep rope to a cable pulley set at upper-chest or face height. Grab the ends of the rope from underneath so your thumbs are pointing directly backward toward your face.", 
@@ -261,7 +362,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 19, name: "Machine Shoulder Press", category: "strength", muscle: "shoulders", equipment: "machine", 
+        id: 34, name: "Machine Shoulder Press", category: "strength", muscle: "shoulders", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Machine-Shoulder-Press.gif", 
         steps: [
             "Adjustment: Sit down in the shoulder press machine. Carefully adjust the seat height so that the horizontal handles align perfectly with the tops of your shoulders.", 
@@ -271,8 +372,8 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 20, name: "Dumbbell Front Raise", category: "strength", muscle: "shoulders", equipment: "dumbbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Front-Raise.gif", 
+        id: 35, name: "Two Arm Dumbbell Front Raise", category: "strength", muscle: "shoulders", equipment: "dumbbell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Two-Arm-Dumbbell-Front-Raise.gif", 
         steps: [
             "Setup: Stand tall holding a dumbbell in each hand, resting them gently on the front of your thighs. Your palms should be facing your legs (pronated grip).", 
             "Posture: Pull your shoulders down and back, preventing them from shrugging up toward your ears. Brace your abdominals tightly.", 
@@ -280,10 +381,40 @@ const workoutDB = [
             "The Peak: Stop raising when the dumbbells reach exact shoulder height and are parallel to the floor. Pause briefly, then slowly lower the weights back to the front of your thighs."
         ] 
     },
+    { 
+        id: 36, name: "Standing Dumbbell Shoulder Press", category: "strength", muscle: "shoulders", equipment: "dumbbell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Standing-Dumbbell-Shoulder-Press.gif", 
+        steps: [
+            "Setup: Stand upright with feet shoulder-width apart. Clean a pair of dumbbells up to shoulder height, palms facing forward.", 
+            "Posture: Brace your core and squeeze your glutes. This prevents your lower back from arching excessively under the load.", 
+            "The Press: Exhale and press the dumbbells straight up overhead until your arms are fully extended. Do not clank the weights together at the top.", 
+            "The Descent: Inhale and lower the dumbbells slowly back down to shoulder level with high control."
+        ] 
+    },
+    { 
+        id: 37, name: "Dumbbell Shoulder Press", category: "strength", muscle: "shoulders", equipment: "dumbbell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Shoulder-Press.gif", 
+        steps: [
+            "Setup: Sit on an upright utility bench with a back support. Hoist a dumbbell to each shoulder, palms facing forward.", 
+            "Posture: Press your upper and lower back firmly against the pad. Plant your feet flat on the floor.", 
+            "The Press: Press the dumbbells straight upward in a slight arc until they are directly over your head and your arms are locked out.", 
+            "The Return: Slowly lower the weights back down to shoulder level, keeping your elbows tracking slightly forward of your torso rather than flared straight out to the sides."
+        ] 
+    },
+    { 
+        id: 38, name: "Lever Shoulder Press", category: "strength", muscle: "shoulders", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Lever-Shoulder-Press.gif", 
+        steps: [
+            "Adjustment: Sit on the lever shoulder press machine. Adjust the seat height so the handles are level with your shoulders.", 
+            "Grip: Grab the handles securely. Keep your chest up and back flat against the pad.", 
+            "Execution: Push the handles straight up. The lever machine will guide the arc of motion. Exhale as you press.", 
+            "Release: Lower the handles back down smoothly, resisting the weight throughout the entire descent."
+        ] 
+    },
 
     // ================= BICEPS =================
     { 
-        id: 21, name: "Barbell Curl", category: "strength", muscle: "biceps", equipment: "barbell", 
+        id: 39, name: "Barbell Curl", category: "strength", muscle: "biceps", equipment: "barbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Curl.gif", 
         steps: [
             "Stance & Grip: Stand straight with your feet shoulder-width apart for a solid base. Reach down and hold a barbell with a supinated (underhand, palms facing up) grip. Your hands should be spaced precisely at shoulder-width.", 
@@ -293,7 +424,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 22, name: "Dumbbell Bicep Curl", category: "strength", muscle: "biceps", equipment: "dumbbell", 
+        id: 40, name: "Dumbbell Bicep Curl", category: "strength", muscle: "biceps", equipment: "dumbbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Curl.gif", 
         steps: [
             "Starting Position: Stand perfectly tall, holding a dumbbell in each hand down by your sides. Rotate your wrists outward so that your palms are facing straight forward.", 
@@ -303,7 +434,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 23, name: "EZ Bar Preacher Curl", category: "strength", muscle: "biceps", equipment: "ez bar", 
+        id: 41, name: "EZ Bar Preacher Curl", category: "strength", muscle: "biceps", equipment: "ez bar", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/EZ-Bar-Preacher-Curl.gif", 
         steps: [
             "Setup: Sit at a preacher curl bench. Adjust the seat so that your armpits fit snugly over the top edge of the pad. Position the entire back of your upper arms flat against the angled pad. Grasp an EZ curl bar using the inner, angled grips.", 
@@ -313,7 +444,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 24, name: "Cable Bicep Curl", category: "strength", muscle: "biceps", equipment: "cables", 
+        id: 42, name: "Cable Bicep Curl", category: "strength", muscle: "biceps", equipment: "cables", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Curl.gif", 
         steps: [
             "Setup: Attach a straight bar or EZ bar handle to the absolute lowest setting on a cable pulley machine. Stand facing the machine.", 
@@ -323,7 +454,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 25, name: "Dumbbell Hammer Curl", category: "strength", muscle: "biceps", equipment: "dumbbell", 
+        id: 43, name: "Dumbbell Hammer Curl", category: "strength", muscle: "biceps", equipment: "dumbbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Hammer-Curl.gif", 
         steps: [
             "Stance: Stand upright holding a dumbbell in each hand at arm's length by your sides.", 
@@ -332,10 +463,50 @@ const workoutDB = [
             "The Lowering: Squeeze hard at the top, then slowly lower the weights back down to the fully extended starting position."
         ] 
     },
+    { 
+        id: 44, name: "Waiter Curl", category: "strength", muscle: "biceps", equipment: "dumbbell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Waiter-Curl.gif", 
+        steps: [
+            "Grip: Hold a single dumbbell vertically. Place both hands flat underneath the top weight plate, as if you are holding a tray like a waiter.", 
+            "Stance: Stand tall with your chest up and elbows tucked tightly against your ribs.", 
+            "The Curl: Curl the dumbbell upwards towards your chest, keeping your palms facing the ceiling the entire time.", 
+            "The Squeeze: Squeeze your biceps at the peak, then slowly lower the dumbbell back to the starting position."
+        ] 
+    },
+    { 
+        id: 45, name: "Concentration Curl", category: "strength", muscle: "biceps", equipment: "dumbbell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Concentration-Curl.gif", 
+        steps: [
+            "Setup: Sit on the edge of a flat bench. Spread your legs wide. Hold a dumbbell in one hand and rest the back of your upper arm against the inside of your corresponding thigh.", 
+            "Positioning: Let the dumbbell hang down fully. Rest your non-working hand on your other knee for stability.", 
+            "The Curl: Slowly curl the dumbbell upward toward your chest, strictly isolating the bicep without moving your upper arm from your thigh.", 
+            "The Lowering: Pause and squeeze the bicep intensely, then lower the dumbbell in a highly controlled manner."
+        ] 
+    },
+    { 
+        id: 46, name: "Dumbbell Preacher Curl", category: "strength", muscle: "biceps", equipment: "dumbbell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Preacher-Curl.gif", 
+        steps: [
+            "Setup: Sit at a preacher bench. Hold a dumbbell in one hand with an underhand grip and place the back of that upper arm flat against the pad.", 
+            "Execution: Let your arm fully extend to stretch the bicep. Exhale and curl the dumbbell up toward your shoulder.", 
+            "Focus: Because the arm is braced, you cannot use momentum. Focus on the peak contraction at the top.", 
+            "Return: Lower the dumbbell slowly to the starting position, ensuring you control the eccentric phase entirely."
+        ] 
+    },
+    { 
+        id: 47, name: "Zottman Curl", category: "strength", muscle: "biceps", equipment: "dumbbell", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Zottman-Curl.gif", 
+        steps: [
+            "Setup: Stand holding a dumbbell in each hand by your sides. Begin with a supinated (palms up) grip.", 
+            "Upward Phase: Curl the dumbbells up toward your shoulders exactly as you would in a standard bicep curl.", 
+            "The Twist: At the very top of the curl, pause and rotate your wrists so your palms are now facing downwards (a pronated grip).", 
+            "Downward Phase: Slowly lower the dumbbells back to the starting position using this overhand grip. Rotate your wrists back to palms-up at the bottom to repeat."
+        ] 
+    },
 
     // ================= TRICEPS =================
     { 
-        id: 26, name: "Tricep Pushdown", category: "strength", muscle: "triceps", equipment: "cables", 
+        id: 48, name: "Tricep Pushdown", category: "strength", muscle: "triceps", equipment: "cables", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Triceps-Pushdown.gif", 
         steps: [
             "Setup: Attach a straight bar, V-bar, or double-sided rope to a high pulley on a cable machine. Grab the attachment tightly with an overhand grip.", 
@@ -345,7 +516,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 27, name: "EZ Bar Skullcrusher", category: "strength", muscle: "triceps", equipment: "ez bar", 
+        id: 49, name: "EZ Bar Skullcrusher", category: "strength", muscle: "triceps", equipment: "ez bar", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/EZ-Bar-Skullcrusher.gif", 
         steps: [
             "Setup: Lie completely flat on a weight bench. Hold an EZ curl bar with an overhand, narrow grip (hands closer than shoulder-width) directly above your chest, with your arms fully extended.", 
@@ -354,7 +525,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 28, name: "Triceps Dips", category: "strength", muscle: "triceps", equipment: "bodyweight", 
+        id: 50, name: "Triceps Dips", category: "strength", muscle: "triceps", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Triceps-Dips.gif", 
         steps: [
             "Mounting: Jump up onto a set of parallel dip bars, supporting your entire body weight on your fully extended arms with a neutral grip.", 
@@ -364,7 +535,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 29, name: "Dumbbell Overhead Extension", category: "strength", muscle: "triceps", equipment: "dumbbell", 
+        id: 51, name: "Dumbbell Overhead Extension", category: "strength", muscle: "triceps", equipment: "dumbbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Triceps-Extension.gif", 
         steps: [
             "Setup: Sit on a bench with low back support or stand perfectly upright. Grip a single, heavy dumbbell with both hands, cupping the inner, top plate with your palms facing up toward the ceiling.", 
@@ -374,7 +545,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 30, name: "Cable Overhead Triceps Extension", category: "strength", muscle: "triceps", equipment: "cables", 
+        id: 52, name: "Cable Overhead Triceps Extension", category: "strength", muscle: "triceps", equipment: "cables", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Triceps-Extension.gif", 
         steps: [
             "Setup: Attach a rope to a cable pulley set at the bottom or middle setting. Grab the ends of the rope, turn your back to the machine, and bring the rope up behind your head.", 
@@ -386,7 +557,7 @@ const workoutDB = [
 
     // ================= CORE =================
     { 
-        id: 31, name: "Plank", category: "strength", muscle: "core", equipment: "bodyweight", 
+        id: 53, name: "Plank", category: "strength", muscle: "core", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Plank.gif", 
         steps: [
             "Positioning: Get face down on the floor or a yoga mat. Prop yourself up on your forearms and the tips of your toes. Your elbows must be positioned directly underneath your shoulders at a 90-degree angle.", 
@@ -396,7 +567,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 32, name: "Cable Crunch", category: "strength", muscle: "core", equipment: "cables", 
+        id: 54, name: "Cable Crunch", category: "strength", muscle: "core", equipment: "cables", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Crunch.gif", 
         steps: [
             "Setup: Attach a double-ended rope handle to a high cable pulley. Kneel down facing the machine (or facing away, depending on your preferred biomechanics) and grab the rope. Pull it down and hold the ends securely right next to your ears or behind your neck.", 
@@ -406,7 +577,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 33, name: "Russian Twist", category: "strength", muscle: "core", equipment: "medicine ball", 
+        id: 55, name: "Russian Twist", category: "strength", muscle: "core", equipment: "medicine ball", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Russian-Twist.gif", 
         steps: [
             "Starting Position: Sit flat on the floor. Lean your straight torso back slightly (about a 45-degree angle) until you feel your abs engage to hold you up. Bend your knees and lift your feet a few inches off the ground to balance on your tailbone.", 
@@ -416,7 +587,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 34, name: "Hanging Leg Raise", category: "strength", muscle: "core", equipment: "bodyweight", 
+        id: 56, name: "Hanging Leg Raise", category: "strength", muscle: "core", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Hanging-Leg-Raise.gif", 
         steps: [
             "The Hang: Jump up and grasp a pull-up bar with a shoulder-width, overhand grip. Let your body hang completely still with your legs pointing straight down to the floor.", 
@@ -426,7 +597,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 35, name: "Ab Machine Crunch", category: "strength", muscle: "core", equipment: "machine", 
+        id: 57, name: "Ab Machine Crunch", category: "strength", muscle: "core", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Crunch-Machine.gif", 
         steps: [
             "Adjustment: Sit in an abdominal crunch machine. Take the time to properly adjust the seat height so the padded chest lever is resting comfortably on your upper chest, and hook your shins or feet securely under the lower foot rollers.", 
@@ -438,7 +609,7 @@ const workoutDB = [
 
     // ================= CALVES =================
     { 
-        id: 36, name: "Standing Calf Raise", category: "strength", muscle: "calves", equipment: "bodyweight", 
+        id: 58, name: "Standing Calf Raise", category: "strength", muscle: "calves", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Standing-Calf-Raise.gif", 
         steps: [
             "Setup: Stand on the rigid edge of an elevated platform, an aerobic step, or a sturdy wooden block. Position the balls of your feet firmly on the edge, allowing your heels to hang completely off into the air.", 
@@ -448,7 +619,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 37, name: "Barbell Calf Raise", category: "strength", muscle: "calves", equipment: "barbell", 
+        id: 59, name: "Barbell Calf Raise", category: "strength", muscle: "calves", equipment: "barbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Calf-Raise.gif", 
         steps: [
             "Positioning: Load a barbell on a squat rack. Duck under it and position it securely across your upper back/trapezius muscles, utilizing a pad if necessary, just as you would for a standard back squat.", 
@@ -458,7 +629,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 38, name: "Donkey Calf Raise", category: "strength", muscle: "calves", equipment: "machine", 
+        id: 60, name: "Donkey Calf Raise", category: "strength", muscle: "calves", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Donkey-Calf-Raise.gif", 
         steps: [
             "Setup: Step onto the elevated foot platform of a dedicated donkey calf raise machine. Bend forward at the hips to a 90-degree angle and position your lower back/sacrum area snugly upward under the heavy padded lever arm.", 
@@ -468,7 +639,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 39, name: "Dumbbell Calf Raise", category: "strength", muscle: "calves", equipment: "dumbbell", 
+        id: 61, name: "Dumbbell Calf Raise", category: "strength", muscle: "calves", equipment: "dumbbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Calf-Raise.gif", 
         steps: [
             "Grip: Grab a heavy pair of dumbbells with a neutral grip and let them hang straight down at arm's length by your sides.", 
@@ -478,7 +649,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 40, name: "Seated Calf Raise", category: "strength", muscle: "calves", equipment: "machine", 
+        id: 62, name: "Seated Calf Raise", category: "strength", muscle: "calves", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Seated-Calf-Raise.gif", 
         steps: [
             "Setup: Sit upright on the seated calf raise machine. Place the balls of your feet on the lower foot platform and position the heavy, weighted pads securely over the top of your lower thighs, just above the knees.", 
@@ -490,7 +661,7 @@ const workoutDB = [
 
     // ================= FOREARMS =================
     { 
-        id: 46, name: "Barbell Wrist Curl", category: "strength", muscle: "forearms", equipment: "barbell", 
+        id: 63, name: "Barbell Wrist Curl", category: "strength", muscle: "forearms", equipment: "barbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Wrist-Curl.gif", 
         steps: [
             "Setup: Sit on the edge of a flat weight bench. Hold a light to moderate barbell with an underhand (supinated, palms facing up) grip.", 
@@ -500,7 +671,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 47, name: "Dumbbell Reverse Wrist Curl", category: "strength", muscle: "forearms", equipment: "dumbbell", 
+        id: 64, name: "Dumbbell Reverse Wrist Curl", category: "strength", muscle: "forearms", equipment: "dumbbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Reverse-Wrist-Curl.gif", 
         steps: [
             "Setup: Sit down on a flat bench. Hold a light dumbbell in each hand using an overhand (pronated, palms facing down) grip.", 
@@ -510,7 +681,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 48, name: "Farmers Walk", category: "strength", muscle: "forearms", equipment: "kettlebell", 
+        id: 65, name: "Farmers Walk", category: "strength", muscle: "forearms", equipment: "kettlebell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Farmers-Walk.gif", 
         steps: [
             "The Pickup: Stand directly between two very heavy kettlebells (or dumbbells). Squat down with a perfectly flat back, brace your core, and grip the handles as tightly and aggressively as humanly possible.", 
@@ -520,7 +691,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 49, name: "EZ Bar Reverse Curl", category: "strength", muscle: "forearms", equipment: "ez bar", 
+        id: 66, name: "EZ Bar Reverse Curl", category: "strength", muscle: "forearms", equipment: "ez bar", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/EZ-Bar-Reverse-Curl.gif", 
         steps: [
             "Stance: Stand perfectly straight with your feet shoulder-width apart to establish a strong foundation.", 
@@ -530,7 +701,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 50, name: "Behind The Back Barbell Wrist Curl", category: "strength", muscle: "forearms", equipment: "barbell", 
+        id: 67, name: "Behind The Back Barbell Wrist Curl", category: "strength", muscle: "forearms", equipment: "barbell", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Behind-The-Back-Barbell-Wrist-Curl.gif", 
         steps: [
             "Setup: Stand facing away from a barbell that is resting on a squat rack set at hip height. Reach behind your back and grab the bar with a shoulder-width, pronated (palms facing away from you) grip.", 
@@ -540,9 +711,9 @@ const workoutDB = [
         ] 
     },
 
-    // ================= NEW CARDIO WORKOUTS (20) =================
+    // ================= NEW CARDIO WORKOUTS =================
     { 
-        id: 101, name: "Burpee Long Jump", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        id: 68, name: "Burpee Long Jump", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2025/10/Burpee-Long-Jump.gif", 
         steps: [
             "The Drop: Start in a standing position. Drop your hips and place your hands firmly on the ground in front of your feet.",
@@ -552,7 +723,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 102, name: "Navy Seal Burpee", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        id: 69, name: "Navy Seal Burpee", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2023/10/Navy-Seal-Burpee.gif", 
         steps: [
             "Initial Sprawl: Drop your hands to the floor and kick your feet back into a plank position.",
@@ -562,7 +733,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 103, name: "Bear Crawl", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        id: 70, name: "Bear Crawl", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Bear-Crawl.gif", 
         steps: [
             "Starting Position: Get down on all fours in a tabletop position. Your hands should be flat directly under your shoulders.",
@@ -572,8 +743,8 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 104, name: "Power Lunge", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2023/09/power-lunge.gif", 
+        id: 71, name: "Power Lunge", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/05/Power-Lunge.gif", 
         steps: [
             "The Setup: Begin in a standard lunge position, with your right foot forward and left foot back. Both knees should be bent at 90-degree angles.",
             "The Load: Lower your hips slightly to build potential energy, keeping your chest upright and core tight.",
@@ -582,7 +753,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 105, name: "Running", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        id: 72, name: "Running", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/04/Running.gif", 
         steps: [
             "Posture: Maintain a tall, upright posture with a very slight forward lean from the ankles, not the waist. Keep your shoulders relaxed and chest open.",
@@ -592,7 +763,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 106, name: "Sprint", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        id: 73, name: "Sprint", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Sprint.gif", 
         steps: [
             "The Acceleration: Lean your body forward and push off the ground with maximum explosive force from the balls of your feet.",
@@ -602,7 +773,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 107, name: "Jump Rope", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        id: 74, name: "Jump Rope", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Jump-Rope.gif", 
         steps: [
             "Setup: Hold the jump rope handles with your hands positioned slightly forward of your hips. Keep your elbows tucked strictly against your ribs.",
@@ -612,7 +783,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 108, name: "Stationary Bike", category: "cardio", muscle: "cardio", equipment: "machine", 
+        id: 75, name: "Stationary Bike", category: "cardio", muscle: "cardio", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Stationary-Bike.gif", 
         steps: [
             "Adjustment: Adjust the saddle height so that your leg has a slight 5-to-10-degree bend at the lowest point of the pedal stroke. Ensure the handlebars are at a comfortable distance.",
@@ -622,7 +793,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 109, name: "Treadmill", category: "cardio", muscle: "cardio", equipment: "machine", 
+        id: 76, name: "Treadmill", category: "cardio", muscle: "cardio", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Treadmill.gif", 
         steps: [
             "Setup: Stand on the side rails. Select your desired speed and incline on the console. Once the belt is moving steadily, carefully step onto the center of the belt.",
@@ -632,7 +803,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 110, name: "Walk Wave Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
+        id: 77, name: "Walk Wave Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/06/Walk-Wave-Machine.gif", 
         steps: [
             "Mounting: Carefully step onto the foot pedals of the wave/arc machine. Grip the stationary or moving handles to secure your balance.",
@@ -642,7 +813,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 111, name: "Rowing Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
+        id: 78, name: "Rowing Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Rowing-Machine.gif", 
         steps: [
             "The Catch: Sit on the ergometer and secure your feet in the straps. Slide forward, bend your knees, and grab the handle. Your shins should be vertical, chest proud, and back flat.",
@@ -652,7 +823,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 112, name: "Stair Climber Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
+        id: 79, name: "Stair Climber Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Stair-Climber.gif", 
         steps: [
             "Setup: Step onto the revolving staircase. Set a moderate, sustainable speed on the console. Lightly rest your fingertips on the side rails strictly for balance.",
@@ -662,7 +833,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 113, name: "Elliptical Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
+        id: 80, name: "Elliptical Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Elliptical-Machine.gif", 
         steps: [
             "Setup: Step safely onto the foot pedals and grab the moving handrails. Select your desired resistance and incline profile.",
@@ -672,7 +843,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 114, name: "Mountain Climber", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        id: 81, name: "Mountain Climber", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Mountain-Climber.gif", 
         steps: [
             "Starting Stance: Get into a strict, high push-up position. Your hands should be planted firmly directly underneath your shoulders. Your body must form a straight line.",
@@ -682,7 +853,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 115, name: "Power Skips", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        id: 82, name: "Power Skips", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2022/02/Power-Skips.gif", 
         steps: [
             "The Load: Stand tall and step forward slightly with your right foot. Bend your knees slightly to load the jump.",
@@ -692,7 +863,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 116, name: "Bicycle Crunch", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        id: 83, name: "Bicycle Crunch", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Bicycle-Crunch.gif", 
         steps: [
             "Setup: Lie flat on your back on a mat. Place your hands lightly behind your head without pulling on your neck. Lift both legs so your knees are bent at 90 degrees.",
@@ -702,7 +873,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 117, name: "Butt Kicks", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        id: 84, name: "Butt Kicks", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/04/Butt-Kicks.gif", 
         steps: [
             "Posture: Stand tall with your feet hip-width apart. Keep your chest up, core braced, and look straight ahead.",
@@ -712,7 +883,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 118, name: "Plyo Jacks", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        id: 85, name: "Plyo Jacks", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/05/Plyo-Jacks.gif", 
         steps: [
             "Starting Stance: Begin standing tall with your feet together and your arms down by your sides.",
@@ -722,7 +893,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 119, name: "Jumping Jack", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        id: 86, name: "Jumping Jack", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Jumping-jacks.gif", 
         steps: [
             "Starting Position: Stand completely upright with your legs together, knees slightly bent, and your arms resting relaxed down by your sides.",
@@ -732,7 +903,7 @@ const workoutDB = [
         ] 
     },
     { 
-        id: 120, name: "High Knee Skips", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        id: 87, name: "High Knee Skips", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/05/High-Knee-Skips.gif", 
         steps: [
             "The Motion: Begin a skipping motion moving forward or in place. Emphasize vertical height and knee drive rather than forward distance.",
