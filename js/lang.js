@@ -43,22 +43,25 @@ const translations = {
     }
 };
 
-// Fungsi untuk mengganti bahasa
 function setLanguage(lang) {
     localStorage.setItem('formix_lang', lang);
     applyLanguage(lang);
     updateSwitcherUI(lang);
     
-    // Jika berada di halaman workouts, re-render datanya agar filter ikut diterjemahkan
+    // Me-render ulang daftar komponen secara live saat bahasa diganti
     if (typeof renderWorkouts === "function" && document.getElementById("workout-list")) {
         renderWorkouts();
     }
+    if (typeof renderMuscleList === "function" && document.getElementById("muscle-list")) {
+        renderMuscleList();
+    }
+    if (typeof renderEquipmentList === "function" && document.getElementById("equipment-list")) {
+        renderEquipmentList();
+    }
 }
 
-// Fungsi untuk menerapkan teks ke elemen HTML berdasarkan ID atau Atribut
 function applyLanguage(lang) {
     const t = translations[lang];
-    
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -68,7 +71,6 @@ function applyLanguage(lang) {
     });
 }
 
-// Fungsi untuk mengubah tampilan tombol EN | ID
 function updateSwitcherUI(lang) {
     const enBtn = document.getElementById('lang-en');
     const idBtn = document.getElementById('lang-id');
@@ -84,10 +86,8 @@ function updateSwitcherUI(lang) {
     }
 }
 
-// Eksekusi saat halaman dimuat
 document.addEventListener("DOMContentLoaded", () => {
     let currentLang = localStorage.getItem('formix_lang') || 'en';
-    
     const enBtn = document.getElementById('lang-en');
     const idBtn = document.getElementById('lang-id');
 

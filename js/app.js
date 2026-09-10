@@ -6,16 +6,21 @@ function getQueryParam(param) {
 function renderMuscleList() {
     const container = document.getElementById("muscle-list");
     if (!container) return;
+    container.innerHTML = ""; 
+
+    const currentLang = localStorage.getItem('formix_lang') || 'en';
 
     muscles.forEach(item => {
-        // Hapus (kecualikan) Cardio dari daftar otot
         if (item.id === "cardio") return;
+
+        // Ambil terjemahan nama otot
+        const displayName = currentLang === 'id' && item.name_id ? item.name_id : item.name;
 
         const card = document.createElement("a");
         card.href = `workouts.html?muscle=${item.id}`;
         card.className = "card";
         card.innerHTML = `
-            <h2>${item.name}</h2>
+            <h2>${displayName}</h2>
             <div class="card-arrow">&rarr;</div>
         `;
         container.appendChild(card);
@@ -25,13 +30,19 @@ function renderMuscleList() {
 function renderEquipmentList() {
     const container = document.getElementById("equipment-list");
     if (!container) return;
+    container.innerHTML = "";
+
+    const currentLang = localStorage.getItem('formix_lang') || 'en';
 
     equipments.forEach(item => {
+        // Ambil terjemahan nama alat
+        const displayName = currentLang === 'id' && item.name_id ? item.name_id : item.name;
+
         const card = document.createElement("a");
         card.href = `workouts.html?equipment=${item.id}`;
         card.className = "card";
         card.innerHTML = `
-            <h2>${item.name}</h2>
+            <h2>${displayName}</h2>
             <div class="card-arrow">&rarr;</div>
         `;
         container.appendChild(card);
@@ -49,7 +60,6 @@ function renderWorkouts() {
     const equipmentQuery = getQueryParam("equipment");
     const categoryQuery = getQueryParam("category");
     
-    // Ambil data bahasa saat ini
     const currentLang = localStorage.getItem('formix_lang') || 'en';
     const langDict = translations[currentLang];
 
@@ -60,11 +70,15 @@ function renderWorkouts() {
         baseWorkouts = workoutDB.filter(w => w.category === "cardio");
         filterType = "equipment"; 
     } else if (muscleQuery) {
-        title.innerText = `${muscleQuery.toUpperCase()} WORKOUTS`;
+        const muscleData = muscles.find(m => m.id === muscleQuery);
+        const mName = currentLang === 'id' && muscleData?.name_id ? muscleData.name_id : (muscleData?.name || muscleQuery);
+        title.innerText = `${mName.toUpperCase()} WORKOUTS`;
         baseWorkouts = workoutDB.filter(w => w.muscle === muscleQuery);
         filterType = "equipment";
     } else if (equipmentQuery) {
-        title.innerText = `${equipmentQuery.toUpperCase()} WORKOUTS`;
+        const equipData = equipments.find(e => e.id === equipmentQuery);
+        const eName = currentLang === 'id' && equipData?.name_id ? equipData.name_id : (equipData?.name || equipmentQuery);
+        title.innerText = `${eName.toUpperCase()} WORKOUTS`;
         baseWorkouts = workoutDB.filter(w => w.equipment === equipmentQuery);
         filterType = "muscle";
     } else {
@@ -88,9 +102,14 @@ function renderWorkouts() {
         const uniqueValues = [...new Set(baseWorkouts.map(w => w[filterType]))].filter(v => v);
         
         uniqueValues.forEach(val => {
-            const optName = filterType === "muscle" 
-                ? (muscles.find(m => m.id === val)?.name || val)
-                : (equipments.find(e => e.id === val)?.name || val);
+            let optName = val;
+            if (filterType === "muscle") {
+                const md = muscles.find(m => m.id === val);
+                optName = currentLang === 'id' && md?.name_id ? md.name_id : (md?.name || val);
+            } else {
+                const ed = equipments.find(e => e.id === val);
+                optName = currentLang === 'id' && ed?.name_id ? ed.name_id : (ed?.name || val);
+            }
             select.innerHTML += `<option value="${val}">${optName.toUpperCase()}</option>`;
         });
 
@@ -100,7 +119,7 @@ function renderWorkouts() {
             if (selectedVal !== "all") {
                 subFiltered = baseWorkouts.filter(w => w[filterType] === selectedVal);
             }
-            renderCards(subFiltered, langDict);
+            renderCards(subFiltered, langDict, currentLang);
         });
 
         wrapper.appendChild(label);
@@ -108,10 +127,10 @@ function renderWorkouts() {
         filterContainer.appendChild(wrapper);
     }
 
-    renderCards(baseWorkouts, langDict);
+    renderCards(baseWorkouts, langDict, currentLang);
 }
 
-function renderCards(workoutsArray, langDict) {
+function renderCards(workoutsArray, langDict, currentLang) {
     const container = document.getElementById("workout-list");
     container.innerHTML = "";
 
@@ -130,7 +149,9 @@ function renderCards(workoutsArray, langDict) {
         card.style.animationDelay = `${index * 0.1}s`;
         card.classList.add("fade-in");
 
-        const stepsHtml = workout.steps.map(step => `<li>${step}</li>`).join('');
+        // Deteksi array steps mana yang dipakai
+        const stepsArray = currentLang === 'id' && workout.steps_id ? workout.steps_id : workout.steps;
+        const stepsHtml = stepsArray.map(step => `<li>${step}</li>`).join('');
         
         const fallbackImg = "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80";
         let mediaHtml = `<img src="${workout.media_url}" alt="${workout.name} demonstration" onerror="this.onerror=null; this.src='${fallbackImg}'; this.style.filter='grayscale(100%)';">`;
@@ -138,8 +159,9 @@ function renderCards(workoutsArray, langDict) {
         const muscleData = muscles.find(m => m.id === workout.muscle);
         const equipData = equipments.find(e => e.id === workout.equipment);
         
-        const muscleName = muscleData ? muscleData.name : workout.muscle;
-        const equipName = equipData ? equipData.name : workout.equipment;
+        // Terjemahan dinamis untuk label tags
+        const muscleName = currentLang === 'id' && muscleData?.name_id ? muscleData.name_id : (muscleData?.name || workout.muscle);
+        const equipName = currentLang === 'id' && equipData?.name_id ? equipData.name_id : (equipData?.name || workout.equipment);
 
         card.innerHTML = `
             <div class="video-container">
