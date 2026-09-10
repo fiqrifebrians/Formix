@@ -155,7 +155,7 @@ const workoutDB = [
     },
     { 
         id: 9, name: "Machine Fly", category: "strength", muscle: "chest", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Machine-Fly.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/05/10301301-Lever-Pec-Deck-Fly_Chest_720.gif", 
         steps: [
             "Setup: Adjust the seat height so the machine's handles are parallel to your mid-chest. Sit with your back firmly pressed against the backrest.", 
             "Grip: Grasp the handles with a neutral grip (palms facing each other) and maintain a slight bend in your elbows.", 
@@ -171,7 +171,7 @@ const workoutDB = [
     },
     { 
         id: 10, name: "Lever Chest Press", category: "strength", muscle: "chest", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Lever-Chest-Press.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/06/Lever-Chest-Press.gif", 
         steps: [
             "Setup: Sit down on the lever chest press machine. Adjust the seat so the horizontal handles align perfectly with your mid-chest.", 
             "Grip: Place your feet flat on the floor, keep your chest high, and grab the handles with an overhand (pronated) grip.", 
@@ -383,7 +383,7 @@ const workoutDB = [
     },
     { 
         id: 23, name: "Glute Bridge", category: "strength", muscle: "legs", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Glute-Bridge.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2022/02/Banded-Glute-Bridge.gif", 
         steps: [
             "Starting Position: Lie completely flat on your back on a comfortable yoga mat. Bend your knees to a roughly 90-degree angle and place your feet flat on the floor, bringing your heels relatively close to your glutes.", 
             "Arm Placement: Rest your arms straight down along your sides on the mat, with your palms pressing firmly into the floor to provide upper body stability.", 
@@ -399,7 +399,7 @@ const workoutDB = [
     },
     { 
         id: 24, name: "Cable Pull Through", category: "strength", muscle: "legs", equipment: "cables", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Pull-Through.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/06/kettlebell-goblet-squat.gif", 
         steps: [
             "Setup: Attach a tricep rope handle to the absolute lowest setting of a cable pulley machine. Stand with your back facing the machine, straddling the cable so it passes between your legs.", 
             "Grip: Reach down and backward between your legs to firmly grasp the ends of the rope handle with both hands.", 
@@ -431,7 +431,7 @@ const workoutDB = [
     },
     { 
         id: 26, name: "Smith Machine Squat", category: "strength", muscle: "legs", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Smith-Machine-Squat.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2024/10/smith-machine-squat.gif", 
         steps: [
             "Setup: Set the bar on the Smith Machine to shoulder height. Step under it, resting the bar across your upper traps. Unhook the bar by rotating your wrists.", 
             "Stance: Position your feet slightly forward of your hips. This angled stance is unique to the Smith Machine and allows greater focus on the quadriceps.", 
@@ -447,7 +447,7 @@ const workoutDB = [
     },
     { 
         id: 27, name: "Dumbbell Goblet Squat", category: "strength", muscle: "legs", equipment: "dumbbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Goblet-Squat.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2023/01/Dumbbell-Goblet-Squat.gif", 
         steps: [
             "Grip: Hold a single dumbbell vertically by one end, cupping it with both hands directly against your chest.", 
             "Stance: Stand with your feet slightly wider than shoulder-width apart, toes pointing slightly outward.", 
@@ -463,7 +463,7 @@ const workoutDB = [
     },
     { 
         id: 28, name: "Dumbbell Walking Lunge", category: "strength", muscle: "legs", equipment: "dumbbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Walking-Lunge.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2023/09/dumbbell-lunges.gif", 
         steps: [
             "Stance: Stand tall holding a dumbbell in each hand by your sides. Brace your core and pull your shoulders back.", 
             "The Step: Take a long, controlled stride forward with your right foot. Plant it firmly and drop your back knee straight down toward the floor.", 
@@ -513,7 +513,7 @@ const workoutDB = [
     // ================= SHOULDERS =================
     { 
         id: 31, name: "Overhead Press", category: "strength", muscle: "shoulders", equipment: "barbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Overhead-Press.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/07/Barbell-Standing-Military-Press.gif", 
         steps: [
             "Setup: Position a barbell on a squat rack at upper-chest height. Step up and grip the bar slightly wider than your shoulders. Unrack the bar so it rests securely across your collarbones and the front of your deltoids.", 
             "Stance: Take a step back. Stand with your feet hip-width apart. It is highly critical to squeeze your glutes tightly and brace your core—this creates a rigid column of support that protects your lower back.", 
@@ -561,7 +561,7 @@ const workoutDB = [
     },
     { 
         id: 34, name: "Machine Shoulder Press", category: "strength", muscle: "shoulders", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Machine-Shoulder-Press.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Smith-Machine-Shoulder-Press.gif", 
         steps: [
             "Adjustment: Sit down in the shoulder press machine. Carefully adjust the seat height so that the horizontal handles align perfectly with the tops of your shoulders.", 
             "Grip: Press your lower back and shoulder blades firmly against the back pad. Reach up and grasp the handles with a comfortable, overhand (pronated) grip.", 
@@ -577,7 +577,7 @@ const workoutDB = [
     },
     { 
         id: 35, name: "Two Arm Dumbbell Front Raise", category: "strength", muscle: "shoulders", equipment: "dumbbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Two-Arm-Dumbbell-Front-Raise.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/08/Two-Arm-Dumbbell-Front-Raise.gif", 
         steps: [
             "Setup: Stand tall holding a dumbbell in each hand, resting them gently on the front of your thighs. Your palms should be facing your legs (pronated grip).", 
             "Posture: Pull your shoulders down and back, preventing them from shrugging up toward your ears. Brace your abdominals tightly.", 
@@ -593,7 +593,7 @@ const workoutDB = [
     },
     { 
         id: 36, name: "Standing Dumbbell Shoulder Press", category: "strength", muscle: "shoulders", equipment: "dumbbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Standing-Dumbbell-Shoulder-Press.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2023/09/Standing-Dumbbell-Overhead-Press.gif", 
         steps: [
             "Setup: Stand upright with feet shoulder-width apart. Clean a pair of dumbbells up to shoulder height, palms facing forward.", 
             "Posture: Brace your core and squeeze your glutes. This prevents your lower back from arching excessively under the load.", 
@@ -625,7 +625,7 @@ const workoutDB = [
     },
     { 
         id: 38, name: "Lever Shoulder Press", category: "strength", muscle: "shoulders", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Lever-Shoulder-Press.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/04/Lever-Shoulder-Press.gif", 
         steps: [
             "Adjustment: Sit on the lever shoulder press machine. Adjust the seat height so the handles are level with your shoulders.", 
             "Grip: Grab the handles securely. Keep your chest up and back flat against the pad.", 
