@@ -15,9 +15,9 @@
         </div>
         <div class="nav-right">
             <div class="lang-switcher">
-                <span class="active">EN</span><span class="separator">|</span><span>ID</span>
+                <span id="lang-en" class="active">EN</span><span class="separator">|</span><span id="lang-id">ID</span>
             </div>
-            <button onclick="history.back()" class="back-link" style="background:none;border:none;">&larr; Back</button>
+            <button onclick="history.back()" class="back-link" style="background:none;border:none;" data-i18n="back_btn">&larr; Back</button>
         </div>
     </nav>
     
@@ -33,6 +33,7 @@
     </main>
 
     <script src="js/data.js"></script>
+    <script src="js/lang.js"></script>
     <script src="js/app.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", renderWorkouts);

@@ -8,7 +8,7 @@ function renderMuscleList() {
     if (!container) return;
 
     muscles.forEach(item => {
-        // Mencegah "cardio" muncul di daftar by muscle
+        // Hapus (kecualikan) Cardio dari daftar otot
         if (item.id === "cardio") return;
 
         const card = document.createElement("a");
@@ -48,11 +48,15 @@ function renderWorkouts() {
     const muscleQuery = getQueryParam("muscle");
     const equipmentQuery = getQueryParam("equipment");
     const categoryQuery = getQueryParam("category");
+    
+    // Ambil data bahasa saat ini
+    const currentLang = localStorage.getItem('formix_lang') || 'en';
+    const langDict = translations[currentLang];
 
     let filterType = ""; 
 
     if (categoryQuery === "cardio") {
-        title.innerText = "CARDIO WORKOUTS";
+        title.innerText = langDict.nav_cardio + " WORKOUTS";
         baseWorkouts = workoutDB.filter(w => w.category === "cardio");
         filterType = "equipment"; 
     } else if (muscleQuery) {
@@ -79,7 +83,7 @@ function renderWorkouts() {
         
         const select = document.createElement("select");
         select.className = "filter-select";
-        select.innerHTML = `<option value="all">ALL ${filterType.toUpperCase()}</option>`;
+        select.innerHTML = `<option value="all">${langDict.filter_all} ${filterType.toUpperCase()}</option>`;
         
         const uniqueValues = [...new Set(baseWorkouts.map(w => w[filterType]))].filter(v => v);
         
@@ -96,7 +100,7 @@ function renderWorkouts() {
             if (selectedVal !== "all") {
                 subFiltered = baseWorkouts.filter(w => w[filterType] === selectedVal);
             }
-            renderCards(subFiltered);
+            renderCards(subFiltered, langDict);
         });
 
         wrapper.appendChild(label);
@@ -104,18 +108,18 @@ function renderWorkouts() {
         filterContainer.appendChild(wrapper);
     }
 
-    renderCards(baseWorkouts);
+    renderCards(baseWorkouts, langDict);
 }
 
-function renderCards(workoutsArray) {
+function renderCards(workoutsArray, langDict) {
     const container = document.getElementById("workout-list");
     container.innerHTML = "";
 
     if (workoutsArray.length === 0) {
         container.innerHTML = `<div style="text-align:center; padding:4rem; background:#fff; border:1px solid #e4e4e7; width:100%;">
             <div style="font-size:3rem; color:#d4d4d8; margin-bottom:1rem;">&#9888;</div>
-            <h3>NO WORKOUTS FOUND</h3>
-            <p style="color:#71717a;">We don't have this specific variation yet.</p>
+            <h3>${langDict.no_workout}</h3>
+            <p style="color:#71717a;">${langDict.no_workout_desc}</p>
         </div>`;
         return;
     }
@@ -147,7 +151,7 @@ function renderCards(workoutsArray) {
                     <span class="tag">${muscleName}</span>
                     <span class="tag">${equipName}</span>
                 </div>
-                <h4>Execution:</h4>
+                <h4>${langDict.label_execution}</h4>
                 <ol class="steps">
                     ${stepsHtml}
                 </ol>

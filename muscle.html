@@ -15,15 +15,15 @@
         </div>
         <div class="nav-right">
             <div class="lang-switcher">
-                <span class="active">EN</span><span class="separator">|</span><span>ID</span>
+                <span id="lang-en" class="active">EN</span><span class="separator">|</span><span id="lang-id">ID</span>
             </div>
-            <a href="index.html" class="back-link">&larr; Home</a>
+            <a href="index.html" class="back-link" data-i18n="home_btn">&larr; Home</a>
         </div>
     </nav>
     
     <header class="page-header">
-        <h1>TARGET MUSCLES</h1>
-        <p>Select a muscle group to focus on.</p>
+        <h1 data-i18n="page_muscle_title">TARGET MUSCLES</h1>
+        <p data-i18n="page_muscle_desc">Select a muscle group to focus on.</p>
     </header>
 
     <main>
@@ -33,6 +33,7 @@
     </main>
 
     <script src="js/data.js"></script>
+    <script src="js/lang.js"></script>
     <script src="js/app.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", renderMuscleList);

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <!-- Favicon ditambahkan -->
     <link rel="icon" type="image/png" href="assets/mini-logo.png">
     <title>Formix</title>
 </head>
@@ -14,18 +13,17 @@
         <div class="logo">
             FORMIX
         </div>
-        <!-- Opsi Bahasa -->
         <div class="nav-right">
             <div class="lang-switcher">
-                <span class="active">EN</span><span class="separator">|</span><span>ID</span>
+                <span id="lang-en" class="active">EN</span><span class="separator">|</span><span id="lang-id">ID</span>
             </div>
         </div>
     </nav>
     
     <header class="hero">
         <div class="hero-content">
-            <!-- Penjelasan singkat & Widget UI -->
-            <p>The ultimate visual database for precision gym movements.</p>
+            <h1 data-i18n="hero_title">MASTER YOUR FORM</h1>
+            <p data-i18n="hero_desc">The ultimate visual database for precision gym movements.</p>
             <div class="db-widget">
                 <div class="db-stat"><span class="db-number">80+</span><span class="db-label">Exercises</span></div>
                 <div class="db-stat"><span class="db-number">100%</span><span class="db-label">Visual Form</span></div>
@@ -39,8 +37,8 @@
                 <div class="card-icon">
                     <img src="assets/biceps.png" alt="Muscle Icon" style="width: 3.5rem; height: 3.5rem; object-fit: contain;">
                 </div>
-                <h2>BY MUSCLE</h2>
-                <p>Target specific muscle groups</p>
+                <h2 data-i18n="nav_muscle">BY MUSCLE</h2>
+                <p data-i18n="nav_muscle_desc">Target specific muscle groups</p>
                 <div class="card-arrow">
                     <img src="assets/next.png" alt="Go" style="width: 1.5rem; height: 1.5rem; filter: invert(1);">
                 </div>
@@ -50,8 +48,8 @@
                 <div class="card-icon">
                     <img src="assets/dumbbells.png" alt="Equipment Icon" style="width: 3.5rem; height: 3.5rem; object-fit: contain;">
                 </div>
-                <h2>BY EQUIPMENT</h2>
-                <p>Filter by available tools</p>
+                <h2 data-i18n="nav_equip">BY EQUIPMENT</h2>
+                <p data-i18n="nav_equip_desc">Filter by available tools</p>
                 <div class="card-arrow">
                     <img src="assets/next.png" alt="Go" style="width: 1.5rem; height: 1.5rem; filter: invert(1);">
                 </div>
@@ -61,8 +59,8 @@
                 <div class="card-icon">
                     <img src="assets/tabata.png" alt="Cardio Icon" style="width: 3.5rem; height: 3.5rem; object-fit: contain;">
                 </div>
-                <h2>CARDIO</h2>
-                <p>Endurance & Heart Rate Training</p>
+                <h2 data-i18n="nav_cardio">CARDIO</h2>
+                <p data-i18n="nav_cardio_desc">Endurance & Heart Rate Training</p>
                 <div class="card-arrow">
                     <img src="assets/next.png" alt="Go" style="width: 1.5rem; height: 1.5rem; filter: invert(1);">
                 </div>
@@ -70,8 +68,11 @@
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 FORMIX. All Rights Reserved.</p>
+    <footer data-i18n="footer">
+        &copy; 2026 FORMIX. All Rights Reserved.
     </footer>
+
+    <!-- Muat file bahasa sebelum file app -->
+    <script src="js/lang.js"></script>
 </body>
 </html>
