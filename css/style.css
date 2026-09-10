@@ -1,4 +1,45 @@
-/* TAMBAHAN GAYA UNTUK NAV KANAN & OPSI BAHASA */
+:root {
+    --black: #050505;
+    --white: #ffffff;
+    --gray-light: #f4f4f5;
+    --gray-border: #e4e4e7;
+    --gray-text: #71717a;
+    --font-main: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--gray-light);
+    color: var(--black);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* ================= NAVBAR & LOGO ================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--gray-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .nav-right {
     display: flex;
     align-items: center;
@@ -26,7 +67,50 @@
     cursor: default;
 }
 
-/* WIDGET HERO EXPLANATION */
+.back-link {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--gray-light);
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.back-link:hover { 
+    background-color: var(--black);
+    color: var(--white); 
+}
+
+/* ================= HEADERS & WIDGET ================= */
+.hero, .page-header {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--gray-border);
+}
+
+.hero h1, .page-header h1 {
+    font-weight: 800;
+    font-size: 3rem;
+    margin: 0;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+.hero p, .page-header p {
+    color: var(--gray-text);
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
 .db-widget {
     display: flex;
     justify-content: center;
@@ -55,4 +139,192 @@
     font-weight: 600;
     text-transform: uppercase;
     color: var(--gray-text);
+}
+
+/* ================= MAIN & GRIDS ================= */
+main {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 50vh;
+}
+
+.selection-container, .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background-color: var(--white);
+    padding: 3rem 2rem;
+    border: 1px solid var(--gray-border);
+    text-align: left;
+    text-decoration: none;
+    color: var(--black);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 4px 4px 0px var(--gray-border);
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0px var(--black);
+    border-color: var(--black);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card h2 {
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+}
+
+.card p { color: var(--gray-text); margin: 0; font-size: 0.95rem; }
+
+.card-arrow {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    font-size: 1.5rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ================= FILTER DROPDOWN ================= */
+.filter-wrapper {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-wrapper label {
+    font-weight: 800;
+    color: var(--gray-text);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.filter-select {
+    padding: 0.6rem 1.5rem;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 800;
+    border: 2px solid var(--black);
+    background-color: var(--white);
+    color: var(--black);
+    cursor: pointer;
+    outline: none;
+    text-transform: uppercase;
+    border-radius: 0px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem top 50%;
+    background-size: 0.65rem auto;
+    padding-right: 3rem;
+    box-shadow: 3px 3px 0px var(--black);
+    transition: all 0.2s ease;
+}
+
+.filter-select:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--black);
+}
+
+.filter-select:focus {
+    background-color: var(--gray-light);
+}
+
+/* ================= WORKOUT CARDS ================= */
+.workout-container { display: flex; flex-direction: column; gap: 3rem; }
+
+.workout-card {
+    background-color: var(--white);
+    border: 1px solid var(--black);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 6px 6px 0px var(--black);
+    overflow: hidden;
+}
+
+@media(min-width: 850px) { .workout-card { flex-direction: row; } }
+
+.video-container {
+    flex: 1;
+    background-color: var(--white);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--black);
+}
+
+@media(min-width: 850px) { .video-container { border-right: 1px solid var(--black); border-bottom: none; } }
+
+.video-container img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain; 
+    padding: 1rem;
+}
+
+.workout-details { flex: 1; padding: 3rem; display: flex; flex-direction: column; }
+.workout-details h3 { font-weight: 800; font-size: 2rem; margin: 0 0 1rem 0; text-transform: uppercase; }
+
+.tags { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.tag {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.workout-details h4 { font-weight: 600; margin-bottom: 1rem; color: var(--gray-text); }
+.steps { padding-left: 1.2rem; margin: 0; flex-grow: 1; }
+.steps li { margin-bottom: 0.8rem; line-height: 1.6; color: #333; }
+.steps li::marker { font-weight: 800; }
+
+/* ================= ANIMATIONS ================= */
+.fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+
+/* ================= FOOTER ================= */
+footer {
+    text-align: center;
+    padding: 3rem;
+    background-color: var(--white);
+    border-top: 1px solid var(--gray-border);
+    color: var(--gray-text);
+    font-size: 0.9rem;
+    font-weight: 600;
 }
