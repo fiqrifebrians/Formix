@@ -4,70 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <title>FORMIX | Precision Workouts</title>
-    <style>
-        :root { --black: #050505; --white: #ffffff; --gray-light: #f4f4f5; --gray-border: #e4e4e7; --gray-text: #71717a; --font-main: 'Inter', sans-serif; }
-        * { box-sizing: border-box; }
-        body { font-family: var(--font-main); background-color: var(--gray-light); color: var(--black); margin: 0; padding: 0; line-height: 1.6; }
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem; background-color: var(--white); border-bottom: 1px solid var(--gray-border); position: sticky; top: 0; z-index: 100; }
-        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.5rem; }
-        .hero { text-align: center; padding: 4rem 1rem; background-color: var(--white); border-bottom: 1px solid var(--gray-border); }
-        .hero h1 { font-weight: 800; font-size: 3rem; margin: 0; letter-spacing: -1px; text-transform: uppercase; }
-        .hero p { color: var(--gray-text); font-size: 1.1rem; margin-top: 1rem; }
-        main { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; min-height: 50vh; }
-        .selection-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .card { background-color: var(--white); padding: 3rem 2rem; border: 1px solid var(--gray-border); text-align: left; text-decoration: none; color: var(--black); display: flex; flex-direction: column; transition: all 0.3s ease; position: relative; box-shadow: 4px 4px 0px var(--gray-border); cursor: pointer; }
-        .card:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0px var(--black); border-color: var(--black); }
-        .card-icon { font-size: 2.5rem; margin-bottom: 1.5rem; }
-        .card h2 { font-weight: 800; font-size: 1.5rem; margin: 0 0 0.5rem 0; text-transform: uppercase; }
-        .card p { color: var(--gray-text); margin: 0; font-size: 0.95rem; }
-        .card-arrow { position: absolute; bottom: 2rem; right: 2rem; font-size: 1.5rem; opacity: 0; transform: translateX(-10px); transition: all 0.3s ease; font-weight: bold; }
-        .card:hover .card-arrow { opacity: 1; transform: translateX(0); }
-        .fade-in { animation: fadeIn 0.6s ease-out forwards; opacity: 0; transform: translateY(20px); }
-        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
-        footer { text-align: center; padding: 3rem; background-color: var(--white); border-top: 1px solid var(--gray-border); color: var(--gray-text); font-size: 0.9rem; font-weight: 600; }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Favicon ditambahkan -->
+    <link rel="icon" type="image/png" href="assets/mini-logo.png">
+    <title>Formix</title>
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">
-            <img src="assets/logo.svg" alt="Formix Logo" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem; vertical-align: middle;" onerror="this.style.display='none'"> 
             FORMIX
         </div>
+        <!-- Opsi Bahasa -->
+        <div class="nav-right">
+            <div class="lang-switcher">
+                <span class="active">EN</span><span class="separator">|</span><span>ID</span>
+            </div>
+        </div>
     </nav>
+    
+    <header class="hero">
+        <div class="hero-content">
+            <h1>MASTER YOUR FORM</h1>
+            <!-- Penjelasan singkat & Widget UI -->
+            <p>The ultimate visual database for precision gym movements.</p>
+            <div class="db-widget">
+                <div class="db-stat"><span class="db-number">80+</span><span class="db-label">Exercises</span></div>
+                <div class="db-stat"><span class="db-number">100%</span><span class="db-label">Visual Form</span></div>
+            </div>
+        </div>
+    </header>
     
     <main>
         <section class="selection-container fade-in">
             <a href="muscle.html" class="card">
                 <div class="card-icon">
-                    <img src="assets/biceps.png" alt="Muscle Icon" style="width: 3rem; height: 3rem;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'50\\' height=\\'50\\'><circle cx=\\'25\\' cy=\\'25\\' r=\\'20\\' fill=\\'%23ccc\\'/></svg>'">
+                    <img src="assets/biceps.png" alt="Muscle Icon" style="width: 3.5rem; height: 3.5rem; object-fit: contain;">
                 </div>
                 <h2>BY MUSCLE</h2>
                 <p>Target specific muscle groups</p>
                 <div class="card-arrow">
-                    <img src="assets/next.png" alt="Go" style="width: 1.5rem; height: 1.5rem;" onerror="this.style.display='none'">
+                    <img src="assets/next.png" alt="Go" style="width: 1.5rem; height: 1.5rem; filter: invert(1);">
                 </div>
             </a>
             
             <a href="equipment.html" class="card">
                 <div class="card-icon">
-                    <img src="assets/dumbbells.png" alt="Equipment Icon" style="width: 3rem; height: 3rem;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'50\\' height=\\'50\\'><rect x=\\'10\\' y=\\'20\\' width=\\'30\\' height=\\'10\\' fill=\\'%23ccc\\'/></svg>'">
+                    <img src="assets/dumbbells.png" alt="Equipment Icon" style="width: 3.5rem; height: 3.5rem; object-fit: contain;">
                 </div>
                 <h2>BY EQUIPMENT</h2>
                 <p>Filter by available tools</p>
                 <div class="card-arrow">
-                    <img src="assets/next.png" alt="Go" style="width: 1.5rem; height: 1.5rem;" onerror="this.style.display='none'">
+                    <img src="assets/next.png" alt="Go" style="width: 1.5rem; height: 1.5rem; filter: invert(1);">
                 </div>
             </a>
             
             <a href="workouts.html?category=cardio" class="card">
                 <div class="card-icon">
-                    <img src="assets/runner.png" alt="Cardio Icon" style="width: 3rem; height: 3rem;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'50\\' height=\\'50\\'><polygon points=\\'25,5 45,45 5,45\\' fill=\\'%23ccc\\'/></svg>'">
+                    <img src="assets/tabata.png" alt="Cardio Icon" style="width: 3.5rem; height: 3.5rem; object-fit: contain;">
                 </div>
                 <h2>CARDIO</h2>
                 <p>Endurance & Heart Rate Training</p>
                 <div class="card-arrow">
-                    <img src="assets/next.png" alt="Go" style="width: 1.5rem; height: 1.5rem;" onerror="this.style.display='none'">
+                    <img src="assets/next.png" alt="Go" style="width: 1.5rem; height: 1.5rem; filter: invert(1);">
                 </div>
             </a>
         </section>

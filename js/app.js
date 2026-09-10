@@ -8,6 +8,9 @@ function renderMuscleList() {
     if (!container) return;
 
     muscles.forEach(item => {
+        // Mencegah "cardio" muncul di daftar by muscle
+        if (item.id === "cardio") return;
+
         const card = document.createElement("a");
         card.href = `workouts.html?muscle=${item.id}`;
         card.className = "card";
@@ -35,7 +38,6 @@ function renderEquipmentList() {
     });
 }
 
-// Menyimpan state base workout agar bisa difilter ulang
 let baseWorkouts = [];
 
 function renderWorkouts() {
@@ -47,9 +49,8 @@ function renderWorkouts() {
     const equipmentQuery = getQueryParam("equipment");
     const categoryQuery = getQueryParam("category");
 
-    let filterType = ""; // Menentukan apakah kita akan memfilter berdasarkan alat atau otot
+    let filterType = ""; 
 
-    // BUG FIXED: categoryQuery sekarang membaca "cardio" dengan benar
     if (categoryQuery === "cardio") {
         title.innerText = "CARDIO WORKOUTS";
         baseWorkouts = workoutDB.filter(w => w.category === "cardio");
@@ -67,7 +68,6 @@ function renderWorkouts() {
         baseWorkouts = workoutDB;
     }
 
-    // MENGHASILKAN DROPDOWN FILTER
     if (filterContainer && baseWorkouts.length > 0 && filterType !== "") {
         filterContainer.innerHTML = ""; 
         
@@ -81,7 +81,6 @@ function renderWorkouts() {
         select.className = "filter-select";
         select.innerHTML = `<option value="all">ALL ${filterType.toUpperCase()}</option>`;
         
-        // Mendapatkan nilai unik (contoh: cari semua jenis alat yang ada di list dada/chest)
         const uniqueValues = [...new Set(baseWorkouts.map(w => w[filterType]))].filter(v => v);
         
         uniqueValues.forEach(val => {
@@ -91,7 +90,6 @@ function renderWorkouts() {
             select.innerHTML += `<option value="${val}">${optName.toUpperCase()}</option>`;
         });
 
-        // Event listener ketika dropdown diubah
         select.addEventListener("change", (e) => {
             const selectedVal = e.target.value;
             let subFiltered = baseWorkouts;
@@ -106,13 +104,12 @@ function renderWorkouts() {
         filterContainer.appendChild(wrapper);
     }
 
-    // Render list pertama kali (semua tanpa sub-filter)
     renderCards(baseWorkouts);
 }
 
 function renderCards(workoutsArray) {
     const container = document.getElementById("workout-list");
-    container.innerHTML = ""; // Bersihkan list sebelumnya
+    container.innerHTML = "";
 
     if (workoutsArray.length === 0) {
         container.innerHTML = `<div style="text-align:center; padding:4rem; background:#fff; border:1px solid #e4e4e7; width:100%;">
