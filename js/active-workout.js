@@ -4,6 +4,7 @@ let isStarted = false;
 let isEditMode = false;
 let progress = {}; 
 let selectedExerciseDataAct = null;
+let runningTimers = {}; // Menyimpan interval timer aktif
 
 document.addEventListener("DOMContentLoaded", () => {
     if(!currentUser) return window.location.href = 'signup.html';
@@ -44,9 +45,7 @@ function renderActiveList() {
         if (isEditMode) {
             controlHtml = `
                 <div class="edit-controls">
-                    <button class="btn-icon" onclick="moveUp(${idx})">&#9650;</button>
-                    <button class="btn-icon" onclick="moveDown(${idx})">&#9660;</button>
-                    <button class="btn-icon btn-danger" style="margin-top:auto;" onclick="deleteActiveExercise(${idx})">X</button>
+                    <button class="btn-primary btn-danger" style="margin:auto 0;" onclick="deleteActiveExercise(${idx})">REMOVE</button>
                 </div>
             `;
         } else if (isStarted) {
@@ -57,23 +56,34 @@ function renderActiveList() {
                 trackUI = `
                     <div class="tracker-row">
                         <button class="btn-icon" onclick="updateRound(${idx}, -1)" ${isComplete?'disabled':''}>-</button>
-                        <span>${progress[idx]} / ${totalRounds} Rounds</span>
+                        <span>${progress[idx]} / ${totalRounds} Rnd</span>
                         <button class="btn-icon" onclick="updateRound(${idx}, 1)" ${isComplete?'disabled':''}>+</button>
                     </div>
                 `;
             } else {
-                const totalTime = parseInt(ex.timer) || 0;
-                isComplete = progress[idx] >= 1;
-                trackUI = `
-                    <div class="tracker-row">
-                        <button class="btn-primary ${isComplete ? 'btn-success' : ''}" onclick="completeTimer(${idx})" ${isComplete?'disabled':''}>
-                            ${isComplete ? '✓ DONE' : 'MARK DONE ('+totalTime+'s)'}
-                        </button>
-                    </div>
-                `;
+                const totalLaps = parseInt(ex.laps) || 1;
+                isComplete = progress[idx] >= totalLaps;
+                
+                if (isComplete) {
+                    trackUI = `<div style="font-weight:800; font-size:1.2rem; color:#16a34a;">✓ DONE</div>`;
+                } else {
+                    const isRunning = runningTimers[idx] !== undefined;
+                    const displayTime = isRunning ? runningTimers[idx].timeLeft : parseInt(ex.timer);
+                    const currentLap = progress[idx] + 1;
+                    
+                    trackUI = `
+                        <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
+                            <span style="font-size:2.5rem; font-weight:900; font-variant-numeric: tabular-nums;" id="time-disp-${idx}">${displayTime}s</span>
+                            <span style="font-weight:600; color:var(--gray-text);">Lap ${currentLap} of ${totalLaps}</span>
+                            <button class="btn-primary" id="btn-time-${idx}" onclick="startCountdown(${idx}, ${parseInt(ex.timer)})" ${isRunning?'disabled':''}>
+                                ${isRunning ? 'RUNNING...' : 'START LAP'}
+                            </button>
+                        </div>
+                    `;
+                }
             }
             controlHtml = `
-                <div style="padding:1rem; border-left:1px solid var(--black); background: ${isComplete ? '#dcfce7' : 'transparent'}; flex: 0.5; display:flex; align-items:center; justify-content:center;">
+                <div style="padding:1.5rem; border-left:1px solid var(--black); background: ${isComplete ? '#dcfce7' : 'transparent'}; flex: 0.8; display:flex; align-items:center; justify-content:center;">
                     ${trackUI}
                 </div>
             `;
@@ -83,7 +93,7 @@ function renderActiveList() {
             <div class="video-container" style="flex:0.8"><img src="${fullExData.media_url}" onerror="this.src='assets/mini-logo.png';"></div>
             <div class="workout-details" style="flex:1.5">
                 <h3>${ex.name}</h3>
-                <h4 style="color:var(--primary); margin:0;">Target: ${ex.info}</h4>
+                <div class="target-badge">${ex.info}</div>
             </div>
             ${controlHtml}
         `;
@@ -91,20 +101,26 @@ function renderActiveList() {
     });
 }
 
-function moveUp(idx) {
-    if(idx === 0) return;
-    const temp = activeCW.exercises[idx];
-    activeCW.exercises[idx] = activeCW.exercises[idx-1];
-    activeCW.exercises[idx-1] = temp;
-    updateDB(); renderActiveList();
-}
-
-function moveDown(idx) {
-    if(idx === activeCW.exercises.length - 1) return;
-    const temp = activeCW.exercises[idx];
-    activeCW.exercises[idx] = activeCW.exercises[idx+1];
-    activeCW.exercises[idx+1] = temp;
-    updateDB(); renderActiveList();
+function startCountdown(idx, totalSec) {
+    if(runningTimers[idx]) return;
+    
+    runningTimers[idx] = { timeLeft: totalSec };
+    const btn = document.getElementById(`btn-time-${idx}`);
+    if(btn) { btn.innerText = "RUNNING..."; btn.disabled = true; }
+    
+    runningTimers[idx].interval = setInterval(() => {
+        runningTimers[idx].timeLeft--;
+        const disp = document.getElementById(`time-disp-${idx}`);
+        if(disp) disp.innerText = runningTimers[idx].timeLeft + "s";
+        
+        if (runningTimers[idx].timeLeft <= 0) {
+            clearInterval(runningTimers[idx].interval);
+            delete runningTimers[idx];
+            progress[idx]++; // Selesaikan 1 Lap
+            renderActiveList();
+            checkAllComplete();
+        }
+    }, 1000);
 }
 
 function deleteActiveExercise(idx) {
@@ -135,21 +151,15 @@ function updateRound(idx, val) {
     renderActiveList(); checkAllComplete();
 }
 
-function completeTimer(idx) {
-    progress[idx] = 1;
-    renderActiveList(); checkAllComplete();
-}
-
 function checkAllComplete() {
     let allDone = true;
     activeCW.exercises.forEach((ex, idx) => {
         if (ex.type === "reps" && progress[idx] < parseInt(ex.rounds)) allDone = false;
-        if (ex.type === "timer" && progress[idx] < 1) allDone = false;
+        if (ex.type === "timer" && progress[idx] < (parseInt(ex.laps) || 1)) allDone = false;
     });
     if (allDone) document.getElementById('finishModal').style.display = 'flex';
 }
 
-/* Modal Add Exercise Logic */
 function populateSelectsAct() {
     const mSel = document.getElementById('filter-muscle-act');
     const eSel = document.getElementById('filter-equip-act');
@@ -194,7 +204,7 @@ function selectExerciseForPlanAct(wObj) {
 function toggleExTypeAct() {
     const t = document.getElementById('ex-type-act').value;
     document.getElementById('reps-config-act').style.display = t === 'reps' ? 'flex' : 'none';
-    document.getElementById('timer-config-act').style.display = t === 'timer' ? 'block' : 'none';
+    document.getElementById('timer-config-act').style.display = t === 'timer' ? 'flex' : 'none';
 }
 
 function addExerciseToActivePlan() {
@@ -210,11 +220,12 @@ function addExerciseToActivePlan() {
         infoStr = `${r} Reps x ${rnd} Rounds`;
     } else {
         const sec = document.getElementById('ex-timer-act').value || 0;
-        infoStr = `${sec} Seconds`;
+        const laps = document.getElementById('ex-laps-act').value || 1;
+        infoStr = `${sec}s x ${laps} Laps`;
     }
 
-    activeCW.exercises.push({ baseId: selectedExerciseDataAct.id, name: wName, type: t, reps: document.getElementById('ex-reps-act').value, rounds: document.getElementById('ex-rounds-act').value, timer: document.getElementById('ex-timer-act').value, info: infoStr });
-    progress[activeCW.exercises.length - 1] = 0; // set track zero
+    activeCW.exercises.push({ baseId: selectedExerciseDataAct.id, name: wName, type: t, reps: document.getElementById('ex-reps-act').value, rounds: document.getElementById('ex-rounds-act').value, timer: document.getElementById('ex-timer-act').value, laps: document.getElementById('ex-laps-act').value || 1, info: infoStr });
+    progress[activeCW.exercises.length - 1] = 0; 
     updateDB(); closeAddModal(); renderActiveList();
     document.getElementById('ex-config-act').style.display = 'none'; selectedExerciseDataAct = null;
 }

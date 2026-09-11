@@ -86,6 +86,7 @@ main { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; min-height: 50vh; 
 .tracker-row span { font-size: 1.2rem; }
 .edit-controls { display: flex; flex-direction: column; gap: 5px; padding: 1rem; border-left: 1px solid var(--gray-border); align-items: center; justify-content: center; background: var(--gray-light);}
 .edit-controls button { font-size: 0.9rem; padding: 0.4rem 0.6rem; width: 100%;}
+.target-badge { display: inline-block; padding: 0.5rem 1rem; background: var(--black); color: var(--white); font-weight: 800; font-size: 1.1rem; border-radius: 4px; margin-bottom: 1.5rem; letter-spacing: 1px; box-shadow: 3px 3px 0px var(--primary); }
 
 /* WORKOUT CARDS */
 .workout-card { background-color: var(--white); border: 1px solid var(--black); display: flex; flex-direction: column; box-shadow: 6px 6px 0px var(--black); margin-bottom: 3rem; transition: 0.3s; }
@@ -109,11 +110,7 @@ footer { text-align: center; padding: 3rem; background: var(--white); border-top
     .page-header { padding-top: 5.5rem; }
     .hero h1, .page-header h1 { font-size: 2rem; }
     .header-back-btn {
-        top: 1.2rem;
-        right: 1.2rem;
-        padding: 0.4rem 0.8rem;
-        font-size: 0.7rem;
-        box-shadow: 2px 2px 0px var(--black);
+        top: 1.2rem; right: 1.2rem; padding: 0.4rem 0.8rem; font-size: 0.7rem; box-shadow: 2px 2px 0px var(--black);
     }
     .header-back-btn:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0px var(--black); }
     .workout-card { flex-direction: column; }

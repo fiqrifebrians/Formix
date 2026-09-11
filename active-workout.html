@@ -8,19 +8,19 @@
     <title>Formix - Active Workout</title>
 </head>
 <body>
-    <nav class="navbar"><a href="index.html" class="logo">FORMIX</a><div class="nav-right"><div class="lang-dropdown"><div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div><div class="lang-dropdown-content"><a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a><a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a></div></div><div id="auth-container"></div></div></nav>
+    <nav class="navbar"><a href="index.html" class="logo"><img src="assets/mini-logo.png"> FORMIX</a><div class="nav-right"><div class="lang-dropdown"><div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div><div class="lang-dropdown-content"><a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a><a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a></div></div><div id="auth-container"></div></div></nav>
     <header class="page-header">
         <a href="javascript:history.back()" class="header-back-btn" data-i18n="btn_back">&larr; Back</a>
         <h1 id="active-title">LOADING...</h1>
     </header>
     <main>
         <div class="active-header-actions">
-            <button id="btn-start-workout" class="btn-primary" style="background:#16a34a;" onclick="startWorkout()">START WORKOUT</button>
-            <button id="btn-edit-workout" class="btn-primary" onclick="toggleEditMode()">EDIT WORKOUT</button>
+            <button id="btn-start-workout" class="btn-primary" style="background:#16a34a; padding: 1rem 2rem; font-size:1.2rem;" onclick="startWorkout()">START WORKOUT</button>
+            <button id="btn-edit-workout" class="btn-primary" style="padding: 1rem 2rem; font-size:1.2rem;" onclick="toggleEditMode()">EDIT WORKOUT</button>
         </div>
         <div id="active-list" class="workout-container"></div>
         <div style="text-align:center; margin-top:2rem;">
-            <button id="btn-add-ex" class="btn-primary" style="display:none;" onclick="openAddModal()">+ ADD EXERCISE</button>
+            <button id="btn-add-ex" class="btn-primary" style="display:none; font-size:1.2rem;" onclick="openAddModal()">+ ADD EXERCISE</button>
         </div>
     </main>
 
@@ -47,8 +47,9 @@
                         <input type="number" id="ex-reps-act" placeholder="Reps"> x 
                         <input type="number" id="ex-rounds-act" placeholder="Rounds">
                     </div>
-                    <div id="timer-config-act" style="display:none;">
-                        <input type="number" id="ex-timer-act" placeholder="Seconds">
+                    <div id="timer-config-act" style="display:none; gap:0.5rem; align-items:center;">
+                        <input type="number" id="ex-timer-act" placeholder="Seconds"> x
+                        <input type="number" id="ex-laps-act" placeholder="Laps">
                     </div>
                     <button class="btn-primary" type="button" onclick="addExerciseToActivePlan()" style="margin-top:1rem; width:100%;">+ Add to Routine</button>
                 </div>
@@ -56,12 +57,12 @@
         </div>
     </div>
 
-    <!-- Modal Finish -->
+    <!-- Modal Finish Profesional -->
     <div id="finishModal" class="modal">
         <div class="modal-content text-center">
-            <h2>WORKOUT COMPLETED</h2>
-            <p>You have successfully finished this routine.</p>
-            <button class="btn-primary" onclick="window.location.href='my-workout.html'" style="margin-top:1.5rem;">Return to Dashboard</button>
+            <h2 style="font-size:2.5rem; border-bottom:3px solid var(--black); padding-bottom:1rem;">WORKOUT COMPLETED</h2>
+            <p style="font-size:1.1rem; color:var(--gray-text); margin-top:1.5rem;">Outstanding effort. You have successfully conquered all exercises in this routine.</p>
+            <button class="btn-primary" onclick="window.location.href='my-workout.html'" style="margin-top:2rem; width:100%; font-size:1.1rem;">RETURN TO DASHBOARD</button>
         </div>
     </div>
 
