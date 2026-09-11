@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Formix - My Workouts</title>
+</head>
+<body>
+    <nav class="navbar"><a href="index.html" class="logo">FORMIX</a><div class="nav-right"><div id="auth-container"></div></div></nav>
+    <header class="page-header">
+        <h1 data-i18n="wkt_title">MY WORKOUTS</h1>
+    </header>
+    <main>
+        <div class="cw-header">
+            <h3>Your Routine</h3>
+            <button class="btn-primary" onclick="openCreateModal()" data-i18n="btn_create">+ Create Workout</button>
+        </div>
+        <div id="my-workout-list"></div>
+    </main>
+
+    <!-- Modal Buat Workout -->
+    <div id="createModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Create Custom Workout</h2>
+            <div class="form-group"><label>Workout Name</label><input type="text" id="cw-name"></div>
+            <div class="form-group">
+                <label>Add Exercise</label>
+                <select id="exercise-select"></select>
+                <input type="text" id="ex-reps" placeholder="Reps (e.g. 12)" style="margin-top:0.5rem">
+                <input type="text" id="ex-timer" placeholder="Timer (e.g. 60s)" style="margin-top:0.5rem">
+                <button class="btn-primary" type="button" onclick="addExerciseToPlan()" style="margin-top:0.5rem">+ Add</button>
+            </div>
+            <ul id="temp-exercises" style="margin-bottom:2rem; font-weight:bold;"></ul>
+            <button class="btn-primary" onclick="saveCustomWorkout()" data-i18n="btn_save">Save</button>
+        </div>
+    </div>
+
+    <script src="js/db/upper.js"></script><script src="js/db/lower.js"></script><script src="js/db/cardio.js"></script>
+    <script src="js/lang.js"></script><script src="js/auth.js"></script><script src="js/app.js"></script><script src="js/my-workout.js"></script>
+</body>
+</html>
