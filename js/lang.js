@@ -18,7 +18,8 @@ const translations = {
         wkt_title: "MY WORKOUTS", btn_create: "+ Create Workout", btn_save: "Save", btn_delete: "Delete",
         label_execution: "Execution:", filter_all: "ALL",
         no_workout: "NO WORKOUTS FOUND", no_workout_desc: "We don't have this specific variation yet.",
-        cat_upper: "UPPER BODY", cat_lower: "LOWER BODY"
+        cat_upper: "UPPER BODY", cat_lower: "LOWER BODY",
+        btn_show_inst: "Show Instructions", btn_hide_inst: "Hide Instructions"
     },
     id: {
         nav_muscle: "BERDASARKAN OTOT", nav_muscle_desc: "Targetkan kelompok otot tertentu",
@@ -39,7 +40,8 @@ const translations = {
         wkt_title: "LATIHAN SAYA", btn_create: "+ Buat Latihan", btn_save: "Simpan", btn_delete: "Hapus",
         label_execution: "Instruksi:", filter_all: "SEMUA",
         no_workout: "TIDAK ADA DATA", no_workout_desc: "Kami belum memiliki variasi gerakan ini.",
-        cat_upper: "TUBUH BAGIAN ATAS", cat_lower: "TUBUH BAGIAN BAWAH"
+        cat_upper: "TUBUH BAGIAN ATAS", cat_lower: "TUBUH BAGIAN BAWAH",
+        btn_show_inst: "Tampilkan Instruksi", btn_hide_inst: "Sembunyikan Instruksi"
     }
 };
 
@@ -61,6 +63,7 @@ function setLanguage(lang) {
     if (typeof renderEquipmentList === "function" && document.getElementById("equipment-list")) renderEquipmentList();
     if (typeof filterModalExercises === "function") filterModalExercises();
     if (typeof filterModalExercisesAct === "function") filterModalExercisesAct();
+    if (typeof renderActiveList === "function" && document.getElementById("active-list")) renderActiveList(); // Update instruksi bahasa di mode Active Workout
 }
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -4,7 +4,7 @@ let isStarted = false;
 let isEditMode = false;
 let progress = {}; 
 let selectedExerciseDataAct = null;
-let runningTimers = {}; // Menyimpan interval timer aktif
+let runningTimers = {}; 
 
 document.addEventListener("DOMContentLoaded", () => {
     if(!currentUser) return window.location.href = 'signup.html';
@@ -35,6 +35,9 @@ function renderActiveList() {
     const container = document.getElementById('active-list');
     container.innerHTML = "";
 
+    const lang = localStorage.getItem('formix_lang') || 'en';
+    const langDict = translations[lang];
+
     activeCW.exercises.forEach((ex, idx) => {
         const fullExData = workoutDB.find(w => w.id == ex.baseId);
         const card = document.createElement("div");
@@ -45,7 +48,9 @@ function renderActiveList() {
         if (isEditMode) {
             controlHtml = `
                 <div class="edit-controls">
-                    <button class="btn-primary btn-danger" style="margin:auto 0;" onclick="deleteActiveExercise(${idx})">REMOVE</button>
+                    <button class="btn-icon" onclick="moveUp(${idx})">&#9650;</button>
+                    <button class="btn-icon" onclick="moveDown(${idx})">&#9660;</button>
+                    <button class="btn-icon btn-danger" style="margin-top:auto;" onclick="deleteActiveExercise(${idx})">X</button>
                 </div>
             `;
         } else if (isStarted) {
@@ -89,17 +94,41 @@ function renderActiveList() {
             `;
         }
 
+        // Ambil data instruksi bahasa dari DB
+        const stepsArr = lang === 'id' && fullExData.steps_id ? fullExData.steps_id : fullExData.steps;
+        const sHtml = stepsArr.map(s => `<li>${s}</li>`).join('');
+
         card.innerHTML = `
             <div class="video-container" style="flex:0.8"><img src="${fullExData.media_url}" onerror="this.src='assets/mini-logo.png';"></div>
             <div class="workout-details" style="flex:1.5">
                 <h3>${ex.name}</h3>
                 <div class="target-badge">${ex.info}</div>
+                <br>
+                <button id="btn-inst-${idx}" class="btn-toggle-inst" onclick="toggleInst(${idx})">${langDict.btn_show_inst}</button>
+                <div id="inst-${idx}" class="exec-instructions" style="display:none;">
+                    <h4>${langDict.label_execution}</h4>
+                    <ol class="steps">${sHtml}</ol>
+                </div>
             </div>
             ${controlHtml}
         `;
         container.appendChild(card);
     });
 }
+
+window.toggleInst = function(idx) {
+    const instDiv = document.getElementById(`inst-${idx}`);
+    const btn = document.getElementById(`btn-inst-${idx}`);
+    const lang = localStorage.getItem('formix_lang') || 'en';
+    
+    if (instDiv.style.display === 'none' || instDiv.style.display === '') {
+        instDiv.style.display = 'block';
+        btn.innerText = translations[lang].btn_hide_inst;
+    } else {
+        instDiv.style.display = 'none';
+        btn.innerText = translations[lang].btn_show_inst;
+    }
+};
 
 function startCountdown(idx, totalSec) {
     if(runningTimers[idx]) return;
@@ -116,11 +145,27 @@ function startCountdown(idx, totalSec) {
         if (runningTimers[idx].timeLeft <= 0) {
             clearInterval(runningTimers[idx].interval);
             delete runningTimers[idx];
-            progress[idx]++; // Selesaikan 1 Lap
+            progress[idx]++; 
             renderActiveList();
             checkAllComplete();
         }
     }, 1000);
+}
+
+function moveUp(idx) {
+    if(idx === 0) return;
+    const temp = activeCW.exercises[idx];
+    activeCW.exercises[idx] = activeCW.exercises[idx-1];
+    activeCW.exercises[idx-1] = temp;
+    updateDB(); renderActiveList();
+}
+
+function moveDown(idx) {
+    if(idx === activeCW.exercises.length - 1) return;
+    const temp = activeCW.exercises[idx];
+    activeCW.exercises[idx] = activeCW.exercises[idx+1];
+    activeCW.exercises[idx+1] = temp;
+    updateDB(); renderActiveList();
 }
 
 function deleteActiveExercise(idx) {
@@ -148,6 +193,11 @@ function updateRound(idx, val) {
     progress[idx] += val;
     if (progress[idx] < 0) progress[idx] = 0;
     if (progress[idx] > totalRounds) progress[idx] = totalRounds;
+    renderActiveList(); checkAllComplete();
+}
+
+function completeTimer(idx) {
+    progress[idx] = 1;
     renderActiveList(); checkAllComplete();
 }
 
