@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/mini-logo.png">
+    <title>Formix - Active Workout</title>
+</head>
+<body>
+    <nav class="navbar"><a href="index.html" class="logo"><img src="assets/mini-logo.png"> FORMIX</a><div class="nav-right"><div id="auth-container"></div></div></nav>
+    <header class="page-header">
+        <a href="javascript:history.back()" class="header-back-btn" data-i18n="btn_back">&larr; Back</a>
+        <h1 id="active-title">LOADING...</h1>
+        <p id="active-status" style="font-weight:800; color:var(--primary);">Status: Pending</p>
+    </header>
+    <main>
+        <div style="text-align:center; margin-bottom:2rem;">
+            <button id="btn-start-workout" class="btn-primary" style="font-size:1.2rem; padding:1rem 2rem; background:#16a34a;" onclick="startWorkout()">START WORKOUT</button>
+        </div>
+        <div id="active-list" class="workout-container"></div>
+    </main>
+
+    <!-- Modal Selesai -->
+    <div id="finishModal" class="modal">
+        <div class="modal-content" style="text-align:center;">
+            <h2 style="font-size:3rem; margin:0;">🎉</h2>
+            <h2>WORKOUT FINISHED!</h2>
+            <p>Great job! You have completed all exercises.</p>
+            <button class="btn-primary" onclick="window.location.href='my-workout.html'" style="margin-top:1rem;">Back to My Workouts</button>
+        </div>
+    </div>
+
+    <script src="js/db/muscles.js"></script><script src="js/db/upper.js"></script><script src="js/db/lower.js"></script><script src="js/db/cardio.js"></script>
+    <script src="js/lang.js"></script><script src="js/auth.js"></script><script src="js/app.js"></script><script src="js/active-workout.js"></script>
+</body>
+</html>
