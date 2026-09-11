@@ -3,7 +3,7 @@ const translations = {
         nav_muscle: "BY MUSCLE", nav_muscle_desc: "Target specific muscle groups",
         nav_equip: "BY EQUIPMENT", nav_equip_desc: "Filter by available tools",
         nav_cardio: "CARDIO", nav_cardio_desc: "Endurance & Heart Rate Training",
-        hero_title: "MASTER YOUR FORM", hero_desc: "The ultimate visual database for precision gym movements.",
+        hero_title: "BUILD YOUR PERFECT ROUTINE", hero_desc: "A complete fitness platform featuring visual exercise guides and customizable workout tracking.",
         wdg_ex: "Exercises", wdg_vis: "Visualization",
         footer: "&copy; 2026 FORMIX. All Rights Reserved.",
         page_muscle_title: "TARGET MUSCLES", page_muscle_desc: "Select a muscle group to focus on.",
@@ -25,7 +25,7 @@ const translations = {
         nav_muscle: "BERDASARKAN OTOT", nav_muscle_desc: "Targetkan kelompok otot tertentu",
         nav_equip: "BERDASARKAN ALAT", nav_equip_desc: "Saring alat yang tersedia",
         nav_cardio: "KARDIO", nav_cardio_desc: "Latihan Ketahanan & Detak Jantung",
-        hero_title: "KUASAI POSTURMU", hero_desc: "Pusat database visual untuk gerakan gym yang presisi.",
+        hero_title: "BANGUN LATIHAN IDEALMU", hero_desc: "Platform kebugaran lengkap dengan panduan visual dan pelacakan latihan yang dapat disesuaikan.",
         wdg_ex: "Latihan", wdg_vis: "Visualisasi",
         footer: "&copy; 2026 FORMIX. Hak Cipta Dilindungi.",
         page_muscle_title: "TARGET OTOT", page_muscle_desc: "Pilih kelompok otot yang ingin dilatih.",
@@ -63,7 +63,7 @@ function setLanguage(lang) {
     if (typeof renderEquipmentList === "function" && document.getElementById("equipment-list")) renderEquipmentList();
     if (typeof filterModalExercises === "function") filterModalExercises();
     if (typeof filterModalExercisesAct === "function") filterModalExercisesAct();
-    if (typeof renderActiveList === "function" && document.getElementById("active-list")) renderActiveList(); // Update instruksi bahasa di mode Active Workout
+    if (typeof renderActiveList === "function" && document.getElementById("active-list")) renderActiveList();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
