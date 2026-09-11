@@ -8,26 +8,60 @@
     <title>Formix - Active Workout</title>
 </head>
 <body>
-    <nav class="navbar"><a href="index.html" class="logo"><img src="assets/mini-logo.png"> FORMIX</a><div class="nav-right"><div id="auth-container"></div></div></nav>
+    <nav class="navbar"><a href="index.html" class="logo">FORMIX</a><div class="nav-right"><div class="lang-dropdown"><div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div><div class="lang-dropdown-content"><a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a><a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a></div></div><div id="auth-container"></div></div></nav>
     <header class="page-header">
         <a href="javascript:history.back()" class="header-back-btn" data-i18n="btn_back">&larr; Back</a>
         <h1 id="active-title">LOADING...</h1>
-        <p id="active-status" style="font-weight:800; color:var(--primary);">Status: Pending</p>
     </header>
     <main>
-        <div style="text-align:center; margin-bottom:2rem;">
-            <button id="btn-start-workout" class="btn-primary" style="font-size:1.2rem; padding:1rem 2rem; background:#16a34a;" onclick="startWorkout()">START WORKOUT</button>
+        <div class="active-header-actions">
+            <button id="btn-start-workout" class="btn-primary" style="background:#16a34a;" onclick="startWorkout()">START WORKOUT</button>
+            <button id="btn-edit-workout" class="btn-primary" onclick="toggleEditMode()">EDIT WORKOUT</button>
         </div>
         <div id="active-list" class="workout-container"></div>
+        <div style="text-align:center; margin-top:2rem;">
+            <button id="btn-add-ex" class="btn-primary" style="display:none;" onclick="openAddModal()">+ ADD EXERCISE</button>
+        </div>
     </main>
 
-    <!-- Modal Selesai -->
+    <!-- Modal Penambah Latihan Saat Edit -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeAddModal()">&times;</span>
+            <h2>Add Exercise</h2>
+            <div class="form-group" style="background:var(--gray-light); padding:1rem; border:1px solid var(--black);">
+                <div class="filter-row">
+                    <input type="text" id="filter-name-act" placeholder="Search name..." oninput="filterModalExercisesAct()">
+                    <select id="filter-muscle-act" onchange="filterModalExercisesAct()"><option value="all">All Muscles</option></select>
+                    <select id="filter-equip-act" onchange="filterModalExercisesAct()"><option value="all">All Equipments</option></select>
+                </div>
+                <div id="modal-ex-list-act" class="ex-list-modal"></div>
+                
+                <div id="ex-config-act" style="display:none; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--gray-border);">
+                    <h4 id="selected-ex-name-act" style="margin:0 0 0.5rem; color:var(--primary);"></h4>
+                    <select id="ex-type-act" onchange="toggleExTypeAct()" style="margin-bottom:0.5rem;">
+                        <option value="reps">Repetitions</option>
+                        <option value="timer">Timer</option>
+                    </select>
+                    <div id="reps-config-act" style="display:flex; gap:0.5rem; align-items:center;">
+                        <input type="number" id="ex-reps-act" placeholder="Reps"> x 
+                        <input type="number" id="ex-rounds-act" placeholder="Rounds">
+                    </div>
+                    <div id="timer-config-act" style="display:none;">
+                        <input type="number" id="ex-timer-act" placeholder="Seconds">
+                    </div>
+                    <button class="btn-primary" type="button" onclick="addExerciseToActivePlan()" style="margin-top:1rem; width:100%;">+ Add to Routine</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Finish -->
     <div id="finishModal" class="modal">
-        <div class="modal-content" style="text-align:center;">
-            <h2 style="font-size:3rem; margin:0;">🎉</h2>
-            <h2>WORKOUT FINISHED!</h2>
-            <p>Great job! You have completed all exercises.</p>
-            <button class="btn-primary" onclick="window.location.href='my-workout.html'" style="margin-top:1rem;">Back to My Workouts</button>
+        <div class="modal-content text-center">
+            <h2>WORKOUT COMPLETED</h2>
+            <p>You have successfully finished this routine.</p>
+            <button class="btn-primary" onclick="window.location.href='my-workout.html'" style="margin-top:1.5rem;">Return to Dashboard</button>
         </div>
     </div>
 

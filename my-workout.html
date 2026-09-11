@@ -8,7 +8,7 @@
     <title>Formix - My Workouts</title>
 </head>
 <body>
-    <nav class="navbar"><a href="index.html" class="logo"><img src="assets/mini-logo.png"> FORMIX</a><div class="nav-right"><div class="lang-dropdown"><div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div><div class="lang-dropdown-content"><a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a><a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a></div></div><div id="auth-container"></div></div></nav>
+    <nav class="navbar"><a href="index.html" class="logo">FORMIX</a><div class="nav-right"><div class="lang-dropdown"><div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div><div class="lang-dropdown-content"><a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a><a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a></div></div><div id="auth-container"></div></div></nav>
     <header class="page-header">
         <a href="javascript:history.back()" class="header-back-btn" data-i18n="btn_back">&larr; Back</a>
         <h1 data-i18n="wkt_title">MY WORKOUTS</h1>
@@ -21,14 +21,12 @@
         <div id="my-workout-list"></div>
     </main>
 
-    <!-- Modal Buat Workout -->
     <div id="createModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h2>Create Custom Workout</h2>
-            <div class="form-group"><label>Workout Name</label><input type="text" id="cw-name" placeholder="e.g. Monday Chest Day"></div>
+            <div class="form-group"><label>Workout Name</label><input type="text" id="cw-name"></div>
             
-            <!-- Filter Lanjutan -->
             <div class="form-group" style="background:var(--gray-light); padding:1rem; border:1px solid var(--black);">
                 <label>Find & Add Exercise</label>
                 <div class="filter-row">
@@ -38,19 +36,18 @@
                 </div>
                 <div id="modal-ex-list" class="ex-list-modal"></div>
                 
-                <!-- Opsi Reps/Timer Muncul Saat Dipilih -->
                 <div id="ex-config" style="display:none; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--gray-border);">
                     <h4 id="selected-ex-name" style="margin:0 0 0.5rem; color:var(--primary);"></h4>
                     <select id="ex-type" onchange="toggleExType()" style="margin-bottom:0.5rem;">
-                        <option value="reps">Reps x Rounds</option>
-                        <option value="timer">Timer (Seconds)</option>
+                        <option value="reps">Repetitions</option>
+                        <option value="timer">Timer</option>
                     </select>
                     <div id="reps-config" style="display:flex; gap:0.5rem; align-items:center;">
-                        <input type="number" id="ex-reps" placeholder="Reps (e.g. 12)"> x 
-                        <input type="number" id="ex-rounds" placeholder="Rounds (e.g. 4)">
+                        <input type="number" id="ex-reps" placeholder="Reps"> x 
+                        <input type="number" id="ex-rounds" placeholder="Rounds">
                     </div>
                     <div id="timer-config" style="display:none;">
-                        <input type="number" id="ex-timer" placeholder="Seconds (e.g. 60)">
+                        <input type="number" id="ex-timer" placeholder="Seconds">
                     </div>
                     <button class="btn-primary" type="button" onclick="addExerciseToPlan()" style="margin-top:1rem; width:100%;">+ Add to Plan</button>
                 </div>

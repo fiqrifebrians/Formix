@@ -8,40 +8,41 @@
     <title>Formix - My Account</title>
 </head>
 <body>
-    <nav class="navbar"><a href="index.html" class="logo"><img src="assets/mini-logo.png"> FORMIX</a><div class="nav-right"><div class="lang-dropdown"><div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div><div class="lang-dropdown-content"><a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a><a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a></div></div><div id="auth-container"></div></div></nav>
+    <nav class="navbar"><a href="index.html" class="logo">FORMIX</a><div class="nav-right"><div class="lang-dropdown"><div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div><div class="lang-dropdown-content"><a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a><a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a></div></div><div id="auth-container"></div></div></nav>
     <header class="page-header">
         <a href="javascript:history.back()" class="header-back-btn" data-i18n="btn_back">&larr; Back</a>
         <h1 data-i18n="acc_title">ACCOUNT SETTINGS</h1>
     </header>
     <main>
-        <!-- PROFILE EDIT -->
         <div class="account-container fade-in" style="margin-bottom:2rem;">
-            <h3 data-i18n="acc_edit_prof" style="margin-top:0; border-bottom:2px solid var(--black); padding-bottom:10px;">Edit Profile</h3>
+            <h3 data-i18n="acc_edit_prof" class="section-header" style="display:block; text-align:center; width:100%; border:none;">Edit Profile</h3>
             <form onsubmit="saveProfile(event)">
-                <div class="form-group">
-                    <label data-i18n="acc_pic">Profile Picture</label>
-                    <img id="prof-pic-preview" src="" style="width:100px; height:100px; display:none; border-radius:50%; object-fit:cover; margin-bottom:1rem; border: 2px solid var(--black);">
-                    <input type="file" id="prof-pic-file" accept="image/*" onchange="previewImage(event)">
+                <div class="form-group text-center">
+                    <img id="prof-pic-preview" src="" style="width:120px; height:120px; display:none; border-radius:50%; object-fit:cover; margin:0 auto 1rem; border: 3px solid var(--black);">
+                    <input type="file" id="prof-pic-file" accept="image/*" onchange="previewImage(event)" style="font-size:0.9rem;">
                 </div>
                 <div class="form-group"><label>Username</label><input type="text" id="prof-user" required></div>
                 <button type="submit" class="btn-primary" data-i18n="btn_save" style="width:100%">Save Profile</button>
             </form>
-            <button onclick="deleteAccount()" class="btn-primary btn-danger" data-i18n="btn_delete" style="width:100%; margin-top:1.5rem;">Delete Account</button>
+            <hr style="margin:2rem 0; border:1px solid var(--gray-border);">
+            <button onclick="deleteAccount()" class="btn-primary btn-danger" data-i18n="btn_delete" style="width:100%;">Delete Account</button>
         </div>
 
-        <!-- PASSWORD CHANGE -->
         <div class="account-container fade-in">
-            <h3 data-i18n="acc_change_pwd" style="margin-top:0; border-bottom:2px solid var(--black); padding-bottom:10px;">Change Password</h3>
-            <form onsubmit="changePassword(event)">
-                <div class="form-group"><label data-i18n="acc_old_pwd">Old Password</label><input type="password" id="old-pass" required></div>
-                <div class="form-group">
-                    <label data-i18n="acc_new_pwd">New Password</label>
-                    <input type="password" id="new-pass" required>
-                    <small style="color:var(--gray-text); display:block; margin-top:5px; font-size:0.75rem;" data-i18n="pwd_hint">Min 9 chars, 1 uppercase, 1 lowercase, 1 number.</small>
-                </div>
-                <div class="form-group"><label data-i18n="acc_conf_pwd">Confirm New Password</label><input type="password" id="conf-pass" required></div>
-                <button type="submit" class="btn-primary" data-i18n="btn_save" style="width:100%">Save Password</button>
-            </form>
+            <button id="toggle-pwd-btn" class="btn-primary" onclick="togglePasswordForm()" style="width:100%;" data-i18n="acc_change_pwd">Change Password</button>
+            <div id="pwd-form-container" style="display:none; margin-top:2rem;">
+                <h3 data-i18n="acc_change_pwd" class="section-header" style="display:block; text-align:center; width:100%; border:none; margin-top:0;">Change Password</h3>
+                <form onsubmit="changePassword(event)">
+                    <div class="form-group"><label data-i18n="acc_old_pwd">Old Password</label><input type="password" id="old-pass" required></div>
+                    <div class="form-group">
+                        <label data-i18n="acc_new_pwd">New Password</label>
+                        <input type="password" id="new-pass" required>
+                        <small style="color:var(--gray-text); display:block; margin-top:5px; font-size:0.75rem;" data-i18n="pwd_hint">Min 9 chars, 1 uppercase, 1 lowercase, 1 number.</small>
+                    </div>
+                    <div class="form-group"><label data-i18n="acc_conf_pwd">Confirm New Password</label><input type="password" id="conf-pass" required></div>
+                    <button type="submit" class="btn-primary" data-i18n="btn_save" style="width:100%">Save Password</button>
+                </form>
+            </div>
         </div>
     </main>
     <script src="js/lang.js"></script><script src="js/auth.js"></script>
@@ -57,7 +58,12 @@
                 uploadedPicBase64 = u.profilePic;
             }
         });
-
+        function togglePasswordForm() {
+            const container = document.getElementById('pwd-form-container');
+            const btn = document.getElementById('toggle-pwd-btn');
+            container.style.display = 'block';
+            btn.style.display = 'none';
+        }
         function previewImage(event) {
             const file = event.target.files[0];
             if(file) {
@@ -70,27 +76,20 @@
                 reader.readAsDataURL(file);
             }
         }
-
         function saveProfile(e) {
             e.preventDefault();
             let u = JSON.parse(localStorage.getItem('formix_currentUser'));
             const users = JSON.parse(localStorage.getItem('formix_users'));
             const newUsername = document.getElementById('prof-user').value;
-            
-            if (newUsername !== u.username && users[newUsername]) {
-                alert("Username already exists!"); return;
-            }
-
+            if (newUsername !== u.username && users[newUsername]) return alert("Username already exists!");
             delete users[u.username];
             u.username = newUsername;
             u.profilePic = uploadedPicBase64;
             users[u.username] = u;
-            
             localStorage.setItem('formix_users', JSON.stringify(users));
             localStorage.setItem('formix_currentUser', JSON.stringify(u));
             alert("Profile Updated!"); location.reload();
         }
-
         function changePassword(e) {
             e.preventDefault();
             let u = JSON.parse(localStorage.getItem('formix_currentUser'));
@@ -98,19 +97,18 @@
             const oldP = document.getElementById('old-pass').value;
             const newP = document.getElementById('new-pass').value;
             const confP = document.getElementById('conf-pass').value;
-
             if(oldP !== u.password) return alert("Incorrect Old Password!");
             if(newP !== confP) return alert("New passwords do not match!");
-            if(!validatePasswordStrength(newP)) return; // Validation alert inside function
-
+            if(!validatePasswordStrength(newP)) return;
             u.password = newP;
             users[u.username] = u;
             localStorage.setItem('formix_users', JSON.stringify(users));
             localStorage.setItem('formix_currentUser', JSON.stringify(u));
             alert("Password Changed Successfully!");
             document.getElementById('old-pass').value = ''; document.getElementById('new-pass').value = ''; document.getElementById('conf-pass').value = '';
+            document.getElementById('pwd-form-container').style.display = 'none';
+            document.getElementById('toggle-pwd-btn').style.display = 'block';
         }
-
         function deleteAccount() {
             if(confirm("Are you sure? This cannot be undone.")) {
                 const u = JSON.parse(localStorage.getItem('formix_currentUser'));

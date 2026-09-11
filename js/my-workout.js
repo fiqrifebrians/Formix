@@ -11,12 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
 function loadMyWorkouts() {
     const container = document.getElementById('my-workout-list');
     container.innerHTML = "";
-
     if (!currentUser.customWorkouts || currentUser.customWorkouts.length === 0) {
         container.innerHTML = `<p style="text-align:center; color:var(--gray-text);">No custom workouts found. Create one!</p>`;
         return;
     }
-
     currentUser.customWorkouts.forEach((cw, idx) => {
         container.innerHTML += `
             <div class="cw-item fade-in" style="animation-delay:${idx*0.1}s">
@@ -33,18 +31,13 @@ function loadMyWorkouts() {
     });
 }
 
-function openCreateModal() { 
-    document.getElementById('createModal').style.display = 'flex'; 
-    filterModalExercises(); 
-}
-
+function openCreateModal() { document.getElementById('createModal').style.display = 'flex'; filterModalExercises(); }
 function closeModal() { document.getElementById('createModal').style.display = 'none'; }
 
 function populateSelects() {
     const mSel = document.getElementById('filter-muscle');
     const eSel = document.getElementById('filter-equip');
     const lang = localStorage.getItem('formix_lang') || 'en';
-    
     muscles.forEach(m => {
         let name = lang === 'id' && m.name_id ? m.name_id : m.name;
         mSel.innerHTML += `<option value="${m.id}">${name}</option>`;
@@ -100,7 +93,6 @@ function addExerciseToPlan() {
     const t = document.getElementById('ex-type').value;
     const lang = localStorage.getItem('formix_lang') || 'en';
     const wName = lang === 'id' && selectedExerciseData.name_id ? selectedExerciseData.name_id : selectedExerciseData.name;
-    
     let infoStr = "";
     if (t === "reps") {
         const r = document.getElementById('ex-reps').value || 0;
@@ -110,17 +102,10 @@ function addExerciseToPlan() {
         const sec = document.getElementById('ex-timer').value || 0;
         infoStr = `${sec} Seconds`;
     }
-
     tempExercises.push({ 
-        baseId: selectedExerciseData.id, 
-        name: wName, 
-        type: t,
-        reps: document.getElementById('ex-reps').value,
-        rounds: document.getElementById('ex-rounds').value,
-        timer: document.getElementById('ex-timer').value,
-        info: infoStr
+        baseId: selectedExerciseData.id, name: wName, type: t,
+        reps: document.getElementById('ex-reps').value, rounds: document.getElementById('ex-rounds').value, timer: document.getElementById('ex-timer').value, info: infoStr
     });
-    
     renderTempExercises();
     document.getElementById('ex-config').style.display = 'none';
     selectedExerciseData = null;
@@ -133,22 +118,15 @@ function renderTempExercises() {
 function saveCustomWorkout() {
     const name = document.getElementById('cw-name').value;
     if(!name || tempExercises.length === 0) return alert("Name and at least 1 exercise required.");
-
     const newWorkout = { id: 'cw_'+Date.now(), name: name, exercises: tempExercises };
     currentUser.customWorkouts.push(newWorkout);
-    
-    updateUserInDB();
-    closeModal();
-    tempExercises = [];
-    document.getElementById('cw-name').value = '';
-    renderTempExercises();
-    loadMyWorkouts();
+    updateUserInDB(); closeModal();
+    tempExercises = []; document.getElementById('cw-name').value = ''; renderTempExercises(); loadMyWorkouts();
 }
 
 function deleteWorkout(id) {
     currentUser.customWorkouts = currentUser.customWorkouts.filter(cw => cw.id !== id);
-    updateUserInDB();
-    loadMyWorkouts();
+    updateUserInDB(); loadMyWorkouts();
 }
 
 function updateUserInDB() {

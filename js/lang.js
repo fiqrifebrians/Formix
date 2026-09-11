@@ -46,23 +46,21 @@ const translations = {
 function setLanguage(lang) {
     localStorage.setItem('formix_lang', lang);
     const t = translations[lang];
-    
     const flagSpan = document.getElementById('current-flag');
     const langSpan = document.getElementById('current-lang');
     if (flagSpan && langSpan) {
         flagSpan.innerText = lang === 'en' ? '🇬🇧' : '🇮🇩';
         langSpan.innerText = lang.toUpperCase();
     }
-
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (t[key]) el.innerHTML = t[key];
     });
-
     if (typeof renderWorkouts === "function" && document.getElementById("workout-list")) renderWorkouts();
     if (typeof renderMuscleList === "function" && document.getElementById("muscle-list")) renderMuscleList();
     if (typeof renderEquipmentList === "function" && document.getElementById("equipment-list")) renderEquipmentList();
-    if (typeof filterModalExercises === "function") filterModalExercises(); // Refresh filter modal if open
+    if (typeof filterModalExercises === "function") filterModalExercises();
+    if (typeof filterModalExercisesAct === "function") filterModalExercisesAct();
 }
 
 document.addEventListener("DOMContentLoaded", () => {

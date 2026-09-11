@@ -39,7 +39,6 @@ function handleLogin(e) {
     const u = document.getElementById('log-user').value;
     const p = document.getElementById('log-pass').value;
     const users = JSON.parse(localStorage.getItem('formix_users') || '{}');
-    
     if(users[u] && users[u].password === p) {
         localStorage.setItem('formix_currentUser', JSON.stringify(users[u]));
         window.location.href = 'index.html';
@@ -52,9 +51,7 @@ function handleSignup(e) {
     e.preventDefault();
     const u = document.getElementById('sign-user').value;
     const p = document.getElementById('sign-pass').value;
-    
     if(!validatePasswordStrength(p)) return;
-
     const users = JSON.parse(localStorage.getItem('formix_users') || '{}');
     if(users[u]) {
         alert('Username already exists!');
