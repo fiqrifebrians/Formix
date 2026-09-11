@@ -164,13 +164,13 @@ const upperWorkouts = [
     },
     { 
         id: 41, name: "EZ Bar Preacher Curl", category: "strength", muscle: "biceps", equipment: "ez bar", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/EZ-Bar-Preacher-Curl.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Z-Bar-Preacher-Curl.gif", 
         steps: ["Setup: Sit at a preacher curl bench. Position the back of your upper arms flat against the pad.", "The Contraction: Curl the bar upward in a smooth, controlled arc toward your chin.", "The Squeeze: Stop just short of vertical and squeeze your biceps tightly.", "The Extension: Lower the bar very slowly until arms are almost fully extended."],
         steps_id: ["Setup Preacher: Masuk ke bangku bantalan preacher. Lekatkan seluruh belakang lengan ke bantalan agar tubuh tak bisa mengayun.", "Kerut Naik: Angkat barbel EZ perlahan memutar ke arah dagu.", "Tahan Tegangan: Berhenti sesaat sebelum siku lurus vertikal sepenuhnya agar tegangan otot bisep tidak hilang.", "Peregangan: Ulurkan perlahan menuruni bantalan. Berhenti sedikit sebelum siku terkunci 100%."] 
     },
     { 
         id: 42, name: "Cable Bicep Curl", category: "strength", muscle: "biceps", equipment: "cables", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Curl.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/cable-curl.gif", 
         steps: ["Setup: Attach a straight bar handle to the lowest setting on a cable machine.", "Grip: Grab the bar, stand tall, and pin your elbows to your sides.", "Execution: Curl the bar upwards towards your upper chest against constant tension.", "Return: Lower the bar under strict control."],
         steps_id: ["Pasang Alat: Tempel palang di lantai bawah mesin kabel. Menghadap berhadapan ke arah mesin.", "Kuda-kuda: Berdiri tegap dan rapatkan siku Anda sejajar dengan tulang rusuk.", "Tarikan: Lipat palang ke atas melawan daya gravitasi konstan kabel.", "Turun: Luruskan beban tali kembali perlahan ke asalnya."] 
     },
@@ -188,7 +188,7 @@ const upperWorkouts = [
     },
     { 
         id: 45, name: "Concentration Curl", category: "strength", muscle: "biceps", equipment: "dumbbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Concentration-Curl.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2023/09/waiter-curl.gif", 
         steps: ["Setup: Sit on a bench, legs wide. Rest the back of your working arm against your inner thigh.", "Positioning: Let the dumbbell hang down fully for a deep stretch.", "The Curl: Slowly curl the dumbbell upward toward your chest.", "The Lowering: Squeeze the bicep intensely, then lower the dumbbell with control."],
         steps_id: ["Duduk Spesifik: Buka kaki lebar di ujung bangku. Tancapkan punggung siku Anda ke sisi dalam paha.", "Gantungan Lurus: Biarkan dumbel jatuh menarik lengan memanjang lurus ke arah lantai.", "Konsentrasi: Tekuk siku ke arah bahu. Kaki berfungsi mencegah lengan bergerak mundur.", "Remasan: Pertahankan kontraksi di titik tertinggi lalu ulur otot secara perlahan menahan beban turun."] 
     },
@@ -200,7 +200,7 @@ const upperWorkouts = [
     },
     { 
         id: 47, name: "Zottman Curl", category: "strength", muscle: "biceps", equipment: "dumbbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Zottman-Curl.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/04/zottman-curl.gif", 
         steps: ["Setup: Stand holding dumbbells with a supinated (palms up) grip.", "Upward Phase: Curl the dumbbells up toward your shoulders normally.", "The Twist: At the top, pause and rotate your wrists so palms face downwards.", "Downward Phase: Slowly lower the dumbbells using this overhand grip, then rotate back to start."],
         steps_id: ["Awal Normal: Mulai lipat dumbel dari bawah menggunakan posisi telapak menghadap ke atas biasa.", "Angkat Atas: Selesaikan putaran hingga beban sampai ke dada.", "Putaran Zottman: Putar langsung pergelangan 180 derajat di atas, sehingga punggung tangan menghadap ke atas.", "Fase Turun: Turunkan pelan dumbel dengan posisi tangan terbalik tersebut untuk menghajar urat lengan luar."] 
     },
@@ -208,13 +208,13 @@ const upperWorkouts = [
     // --- TRICEPS ---
     { 
         id: 48, name: "Tricep Pushdown", category: "strength", muscle: "triceps", equipment: "cables", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Triceps-Pushdown.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Pushdown.gif", 
         steps: ["Setup: Grab the cable attachment with an overhand grip.", "Posture: Lock your elbows firmly against your ribs.", "The Push: Push the attachment straight down until your arms are fully straight.", "The Return: Slowly control the weight as it comes back up to chest level."],
         steps_id: ["Persiapan: Pegang palang kabel pada posisi katrol tinggi.", "Postur: Kunci siku Anda rapat-rapat di sisi pinggang.", "Dorong: Gunakan otot trisep belakang lengan untuk menekan palang ke bawah hingga lengan lurus sepenuhnya.", "Kembali: Tahan beban saat palang perlahan kembali naik ke arah dada."] 
     },
     { 
         id: 49, name: "EZ Bar Skullcrusher", category: "strength", muscle: "triceps", equipment: "ez bar", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/EZ-Bar-Skullcrusher.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2022/02/Barbell-Reverse-Grip-Skullcrusher-1.gif", 
         steps: ["Setup: Lie flat on a bench. Hold an EZ bar directly above your chest.", "The Drop: Shift your arms back 15 degrees. Bend only at your elbows to slowly lower the bar to your forehead.", "The Extension: Forcefully extend your elbows to push the bar back up."],
         steps_id: ["Posisi: Berbaring terlentang. Pegang EZ Bar lurus ke arah langit-langit.", "Menyeret Jatuh: Condongkan lengan agak miring 15 derajat ke arah kepala belakang. Tekuk siku menjatuhkan barbel hingga mendekati dahi.", "Dorongan Ekstensi: Tolak kembali batang tersebut lurus memanjang menggunakan otot trisep luar."] 
     },
@@ -232,7 +232,7 @@ const upperWorkouts = [
     },
     { 
         id: 52, name: "Cable Overhead Triceps Extension", category: "strength", muscle: "triceps", equipment: "cables", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Triceps-Extension.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/04/Cable-Rope-Overhead-Triceps-Extension.gif", 
         steps: ["Setup: Attach a rope to a low cable pulley. Turn your back and bring the rope up behind your head.", "Stance: Take a split stance and lean slightly forward.", "The Extension: Keep elbows pointing up. Extend your arms forward and upward.", "The Return: Slowly let the cable pull hands back behind your head."],
         steps_id: ["Katrol Bawah: Pasang tali pada katrol bawah mesin kabel. Membelakangi mesin, tarik tali ke belakang tengkuk leher.", "Kuda-Kuda Depan: Posisikan satu kaki ke depan dan bungkukkan sedikit tubuh untuk menahan tarikan beban.", "Lontaran Siku: Luruskan lengan memanjang ke depan dan sedikit ke atas menjauhi area kepala belakang.", "Tarik Mundur Rilis: Tahan ayunan saat beban menarik kembali telapak merunduk memeluk leher belakang."] 
     },
@@ -240,13 +240,13 @@ const upperWorkouts = [
     // --- CORE ---
     { 
         id: 53, name: "Plank", category: "strength", muscle: "core", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Plank.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2025/07/body-saw-plank.gif", 
         steps: ["Positioning: Prop yourself up on your forearms and toes.", "Alignment: Ensure your body forms a perfectly straight line from head to heels.", "Engagement: Squeeze your core and glutes tightly.", "The Hold: Maintain this position while breathing steadily."],
         steps_id: ["Posisi: Menelungkup di lantai, bertumpu pada lengan bawah dan ujung jari kaki.", "Perataan Tubuh: Pastikan tubuh membentuk garis lurus yang rata dari kepala hingga tumit.", "Kencangkan: Kencangkan otot perut dan bokong secara maksimal.", "Tahan: Tahan posisi kaku ini selama durasi yang ditentukan sambil tetap bernapas normal."] 
     },
     { 
         id: 54, name: "Cable Crunch", category: "strength", muscle: "core", equipment: "cables", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Crunch.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Kneeling-Cable-Crunch.gif", 
         steps: ["Setup: Kneel facing the machine and grab the high pulley rope behind your neck.", "The Crunch: Contract your abdominals to curl your torso forward and downward.", "The Contraction: Exhale and squeeze your abs at the bottom.", "The Release: Slowly return to the upright kneeling position."],
         steps_id: ["Posisi Kabel Tinggi: Berlutut menghadap katrol tinggi dan tarik tali kabel agar kedua telapak berada di samping pelipis kepala.", "Lipatan Perut Tajam: Bungkukkan badan ke arah bawah paha dengan memutar engsel punggung sepenuhnya menyasar pusar perut.", "Buang Napas Bawah: Tahan kontraksi terkeras sejenak di paling bawah.", "Berdiri Berlutut: Tarik napas menahan beban saat posisi kembali lurus meninggi."] 
     },
@@ -258,13 +258,13 @@ const upperWorkouts = [
     },
     { 
         id: 56, name: "Hanging Leg Raise", category: "strength", muscle: "core", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Hanging-Leg-Raise.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/08/Hanging-Leg-Raises.gif", 
         steps: ["The Hang: Grasp a pull-up bar and hang completely still.", "The Lift: Keeping your legs straight, lift them up to form a 90-degree angle.", "Control: Do not use momentum or swing your body.", "The Lowering: Lower your legs slowly to maximize eccentric tension."],
         steps_id: ["Gantungan Mati: Bergelantungan santai dari tuas besi palang.", "Tembakan Mengunci Tungkai: Lenturkan perut dan angkat dua kaki kaku rata horizon menyayat depan badan.", "Haram Mengayun: Beban 100% dipompa murni tegangan perut tengah. Tubuh dilarang berayun membantu loncatan naik.", "Rilis Lambat Panjang: Jatuhkan tungkai panjang merentang bawah secara luar biasa melambat."] 
     },
     { 
         id: 57, name: "Ab Machine Crunch", category: "strength", muscle: "core", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Crunch-Machine.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2022/10/Seated-Ab-Crunch-Machine.gif", 
         steps: ["Adjustment: Sit in the machine and hook your shins securely.", "Grip: Lightly grasp the handles without using arm strength.", "The Crunch: Aggressively crunch your torso forward.", "The Return: Slowly resist the weight stack as you uncurl."],
         steps_id: ["Tumpuan Sadel Busa: Sesuaikan posisi duduk sehingga penopang perut pas melintang menindih dada dan paha.", "Tangan Rileks: Tangan cukup nangkring, dilarang ikut menarik gulungan mesin beban ke bawah.", "Lipatan Ganas Bawah: Lipat badan melilit ke arah lutut murni melalui jaringan perut dalam yang mengeras.", "Memanjangkan Kembali Terukur: Kendurkan dan mundur secara sadar menghindari lepas beban secara kasar bertumpuk."] 
     },
@@ -272,31 +272,31 @@ const upperWorkouts = [
     // --- FOREARMS ---
     { 
         id: 63, name: "Barbell Wrist Curl", category: "strength", muscle: "forearms", equipment: "barbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Wrist-Curl.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/barbell-Wrist-Curl.gif", 
         steps: ["Setup: Sit on a bench, resting your forearms flat against your thighs.", "The Extension: Allow the barbell to roll down to the tips of your fingers.", "The Curl: Forcefully curl your wrists upward as high as they can go."],
         steps_id: ["Persiapan: Duduk di bangku, letakkan lengan bawah rata menempel di atas paha dengan pergelangan tangan menggantung.", "Buka: Biarkan barbel bergulir turun perlahan hingga ke ujung jari-jari Anda.", "Gulung: Gulung jari-jari Anda lalu tekuk pergelangan tangan ke atas sekuat mungkin untuk mengangkat barbel."] 
     },
     { 
         id: 64, name: "Dumbbell Reverse Wrist Curl", category: "strength", muscle: "forearms", equipment: "dumbbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Reverse-Wrist-Curl.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/04/dumbbell-reverse-curl.gif", 
         steps: ["Setup: Hold a dumbbell in each hand using an overhand grip.", "Positioning: Rest your forearms on your thighs with wrists hanging over.", "The Movement: Curl your wrists upward toward the ceiling.", "The Return: Slowly lower the dumbbells back down to stretch."],
         steps_id: ["Duduk Tiarap Paha: Genggam dumbel dengan telapak menghadap aspal bawah lantai.", "Siklus Statis Gantung Tepi: Biarkan telapak menggantung bebas di tebing ujung celana paha batas lutut.", "Congkel Menukik Punggung Lengan Atas: Tengadahkan pergelangan naik lurus berlipat mendongak tajam langit plafon.", "Peluruhan Meregang Turun Jauh: Seret kendali berat terjatuh lepas sampai nol sudut regangan pergelangan ekstrim panjang."] 
     },
     { 
         id: 65, name: "Farmers Walk", category: "strength", muscle: "forearms", equipment: "kettlebell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Farmers-Walk.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2022/02/Farmers-walk_Cardio.gif", 
         steps: ["The Pickup: Squat down with a flat back and grip two heavy kettlebells tightly.", "The Posture: Stand up straight. Pull your shoulders back and look straight ahead.", "The Walk: Walk forward using rapid, deliberate steps.", "The Finish: Continue for a set distance, maintaining a crushing grip."],
         steps_id: ["Angkut Bawah Lebar: Jongkok menggapai tumpukan berat dua besi dan genggam mematikan urat.", "Bangkit Menjaga Berdiri: Menapak kuat bumi dan tarik dada tegap tegak menghindari beban berayun menyambar kaki lateral.", "Jalan Pendek Taktikal Serbu Cepat: Langkah stabil minim guncangan maju panjang konsisten.", "Penyelesaian Garis Akhir: Melangkah sejauh jarak ukur tanpa menyerahkan rilis ujung kepal memutih sakit terbakar urat menekan sebelum taruh dasar."] 
     },
     { 
         id: 66, name: "EZ Bar Reverse Curl", category: "strength", muscle: "forearms", equipment: "ez bar", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/EZ-Bar-Reverse-Curl.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/08/Reverse-Grip-EZ-Bar-Curl.gif", 
         steps: ["Stance: Stand straight. Hold an EZ bar with an overhand (pronated) grip.", "The Execution: Pin your elbows to your sides and curl the bar upward.", "The Eccentric: Lower the bar very slowly back to the start."],
         steps_id: ["Mundur Hadapan Kuda Kuda: Berdiri mantap. Pegang miring luar titik EZ bar memakai punggung telapak hadap wajah atas.", "Sodokan Ekstensor Balik Memompa Ke Langit Atas Pucuk Rusuk Belah: Tarik tekuk menyasar leher atas (kunci pinggang sikut mati).", "Beban Sentrifugal Merayap Lentur Pelan: Kendalikan gravitasi bar turun memudar kembali posisi tegak santai."] 
     },
     { 
         id: 67, name: "Behind The Back Barbell Wrist Curl", category: "strength", muscle: "forearms", equipment: "barbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Behind-The-Back-Barbell-Wrist-Curl.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/06/Behind-The-Back-Barbell-Wrist-Curl.gif", 
         steps: ["Setup: Stand facing away from a barbell. Reach behind your back and grab the bar.", "Positioning: Let the bar hang freely behind your glutes with arms straight.", "The Curl: Curl the barbell upward by flexing your wrists toward the ceiling.", "The Release: Lower the weight back down slowly."],
         steps_id: ["Setup Menghadap Mundur Buta Penglihatan Palang Batang Panggul Kaku Garis Lurus: Punggung tancap membelakangi batang tarik menjambak luas sebidang lurus bahu.", "Isolasi Melayang Buritan Jatuh Rawan Sempurna Tegak Panjang: Luruskan sejajar tulang tanpa satu sikut pun membengkok.", "Peras Melintir Menusuk Melingkar Urat Jepit Dalam Langsung Tegang Atas: Gulung murni memakai tarikan pelintir urat dasar telapak tangan ke belakang pantat naik.", "Siksa Ekstrem Buka Jari Ujung Beban Menukik Gravitasi Tarik Pelan Tuntas Dalam Panjang Lentur Nol Rata: Biar menggelundung ujung kuku dan kerut kembali memuncak pelan pasti meradang tebal kuat."] 
     }

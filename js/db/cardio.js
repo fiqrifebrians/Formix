@@ -49,7 +49,7 @@ const cardioWorkouts = [
     },
     { 
         id: 71, name: "Power Lunge", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/05/Power-Lunge.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2023/09/power-lunge.gif", 
         steps: [
             "Begin in a lunge position.",
             "Lower hips slightly, then drive up explosively into the air.",
@@ -65,7 +65,7 @@ const cardioWorkouts = [
     },
     { 
         id: 72, name: "Running", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/04/Running.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/07/Run.gif", 
         steps: [
             "Maintain a tall posture with a slight forward lean.",
             "Land softly on your mid-foot.",
@@ -81,7 +81,7 @@ const cardioWorkouts = [
     },
     { 
         id: 73, name: "Sprint", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Sprint.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2023/06/sprint.gif", 
         steps: [
             "Lean forward and push off aggressively.",
             "Drive knees high up with each stride.",
@@ -97,7 +97,7 @@ const cardioWorkouts = [
     },
     { 
         id: 74, name: "Jump Rope", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Jump-Rope.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2023/10/Skip-Jump-Rope.gif", 
         steps: [
             "Keep elbows tucked to your sides.",
             "Rotate the rope using only small wrist motions.",
@@ -113,7 +113,7 @@ const cardioWorkouts = [
     },
     { 
         id: 75, name: "Stationary Bike", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Stationary-Bike.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/06/Bike.gif", 
         steps: [
             "Adjust saddle height to allow a slight knee bend at the bottom of the stroke.",
             "Sit upright and grip handlebars.",
@@ -129,7 +129,7 @@ const cardioWorkouts = [
     },
     { 
         id: 76, name: "Treadmill", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Treadmill.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/06/Treadmill-.gif", 
         steps: [
             "Stand on side rails, start the belt, then carefully step on.",
             "Walk or run upright without heavily relying on handrails.",
@@ -145,7 +145,7 @@ const cardioWorkouts = [
     },
     { 
         id: 77, name: "Walk Wave Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/06/Walk-Wave-Machine.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/10/Walk-Wave-Machine.gif", 
         steps: [
             "Mounting: Carefully step onto the foot pedals of the wave/arc machine.",
             "The Motion: Begin shifting your weight from side to side in a smooth, wave-like trajectory.",
@@ -161,7 +161,7 @@ const cardioWorkouts = [
     },
     { 
         id: 78, name: "Rowing Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Rowing-Machine.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/06/Rowing-Machine.gif", 
         steps: [
             "Catch: Slide forward, bend knees, and grab the handle with arms straight.",
             "Drive: Push hard against the footplates with your legs.",
@@ -177,7 +177,7 @@ const cardioWorkouts = [
     },
     { 
         id: 79, name: "Stair Climber Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Stair-Climber.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/10/Walking-on-Stepmill.gif", 
         steps: [
             "Setup: Step onto the revolving staircase. Set a moderate speed.",
             "Posture Warning: Stand totally upright. Do not hunch over the console.",
@@ -193,7 +193,7 @@ const cardioWorkouts = [
     },
     { 
         id: 80, name: "Elliptical Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Elliptical-Machine.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/10/Elliptical-Machine.gif", 
         steps: [
             "Setup: Step onto the foot pedals and grab the moving handrails.",
             "Posture: Stand tall, keeping your head up. Do not slouch.",
@@ -209,7 +209,7 @@ const cardioWorkouts = [
     },
     { 
         id: 81, name: "Mountain Climber", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Mountain-Climber.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Mountain-climber.gif", 
         steps: [
             "Start in a high plank position.",
             "Drive one knee forcefully toward your chest.",
@@ -225,7 +225,7 @@ const cardioWorkouts = [
     },
     { 
         id: 82, name: "Power Skips", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2022/02/Power-Skips.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/09/Power-Skips.gif", 
         steps: [
             "Step forward slightly to load the jump.",
             "Drive one knee forcefully upward while jumping as high as possible.",
@@ -257,7 +257,7 @@ const cardioWorkouts = [
     },
     { 
         id: 84, name: "Butt Kicks", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/04/Butt-Kicks.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/10/Butt-Kicks.gif", 
         steps: [
             "Stand tall and brace your core.",
             "Begin jogging in place.",
@@ -273,7 +273,7 @@ const cardioWorkouts = [
     },
     { 
         id: 85, name: "Plyo Jacks", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/05/Plyo-Jacks.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/09/Plyo-Jacks.gif", 
         steps: [
             "Begin standing tall with your feet together.",
             "Quickly jump your feet out wide while dropping your hips deep into a squat.",
@@ -289,7 +289,7 @@ const cardioWorkouts = [
     },
     { 
         id: 86, name: "Jumping Jack", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Jumping-jacks.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/05/Jumping-jack.gif", 
         steps: [
             "Stand upright with feet together and arms at your sides.",
             "Jump up while spreading your legs out wide.",
@@ -305,7 +305,7 @@ const cardioWorkouts = [
     },
     { 
         id: 87, name: "High Knee Skips", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/05/High-Knee-Skips.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/High-Knee-Skips_Cardio.gif", 
         steps: [
             "Begin a skipping motion moving forward or in place.",
             "Aggressively drive your lead knee straight up into the air.",

@@ -128,7 +128,7 @@ const lowerWorkouts = [
     },
     { 
         id: 25, name: "Kettlebell Goblet Squat", category: "strength", muscle: "legs", equipment: "kettlebell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Kettlebell-Goblet-Squat.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/06/kettlebell-goblet-squat.gif", 
         steps: [
             "Grip: Pick up a heavy kettlebell with both hands. Keep it pulled in tight against the center of your chest.", 
             "Stance: Stand with your feet set slightly wider than shoulder-width apart.", 
@@ -226,7 +226,7 @@ const lowerWorkouts = [
     // --- CALVES ---
     { 
         id: 58, name: "Standing Calf Raise", category: "strength", muscle: "calves", equipment: "bodyweight", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Standing-Calf-Raise.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/06/Standing-Calf-Raise.gif", 
         steps: [
             "Setup: Stand on the edge of an elevated platform allowing your heels to hang completely off.", 
             "Balance: Hold onto a nearby wall lightly for upright balance.", 
@@ -242,7 +242,7 @@ const lowerWorkouts = [
     },
     { 
         id: 59, name: "Barbell Calf Raise", category: "strength", muscle: "calves", equipment: "barbell", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Calf-Raise.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2022/04/Standing-Barbell-Calf-Raise.gif", 
         steps: [
             "Positioning: Load a barbell on a squat rack. Position it securely across your upper back.", 
             "Stance: Stand perfectly tall with your feet hip-width apart.", 
@@ -258,7 +258,7 @@ const lowerWorkouts = [
     },
     { 
         id: 60, name: "Donkey Calf Raise", category: "strength", muscle: "calves", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Donkey-Calf-Raise.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/09/Donkey-Calf-Raise.gif", 
         steps: [
             "Setup: Step onto the foot platform of a donkey calf raise machine. Bend forward 90 degrees.", 
             "Posture: Grip the handles. Keep your legs mostly straight with a micro-bend.", 
@@ -290,7 +290,7 @@ const lowerWorkouts = [
     },
     { 
         id: 62, name: "Seated Calf Raise", category: "strength", muscle: "calves", equipment: "machine", 
-        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Seated-Calf-Raise.gif", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/06/Lever-Seated-Calf-Raise.gif", 
         steps: [
             "Setup: Sit upright on the seated calf raise machine. Position the weighted pads over your lower thighs.", 
             "Release: Push up slightly with your toes to disengage the safety lever.", 
