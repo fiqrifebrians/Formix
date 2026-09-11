@@ -4,37 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/mini-logo.png">
     <title>Formix - My Account</title>
 </head>
 <body>
     <nav class="navbar"><a href="index.html" class="logo">FORMIX</a><div class="nav-right"><div id="auth-container"></div></div></nav>
-    <header class="page-header"><h1 data-i18n="acc_title">ACCOUNT SETTINGS</h1></header>
+    <header class="page-header">
+        <a href="javascript:history.back()" class="header-back-btn" data-i18n="btn_back">&larr; Back</a>
+        <h1 data-i18n="acc_title">ACCOUNT SETTINGS</h1>
+    </header>
     <main>
         <div class="account-container fade-in">
             <form onsubmit="saveProfile(event)">
-                <div class="form-group">
-                    <label>Profile Picture URL</label>
-                    <input type="text" id="prof-pic" placeholder="Paste image URL here">
-                </div>
-                <div class="form-group">
-                    <label>New Username</label>
-                    <input type="text" id="prof-user">
-                </div>
-                <div class="form-group">
-                    <label>New Password</label>
-                    <input type="password" id="prof-pass">
-                </div>
-                <button type="submit" class="btn-primary" data-i18n="btn_save">Save Changes</button>
+                <div class="form-group"><label>Profile Picture URL</label><input type="text" id="prof-pic" placeholder="Paste image URL here"></div>
+                <div class="form-group"><label>New Username</label><input type="text" id="prof-user"></div>
+                <div class="form-group"><label>New Password</label><input type="password" id="prof-pass"></div>
+                <button type="submit" class="btn-primary" data-i18n="btn_save" style="width:100%">Save Changes</button>
             </form>
             <hr style="margin:2rem 0; border:1px solid var(--gray-border);">
-            <button onclick="deleteAccount()" class="btn-primary btn-danger" data-i18n="btn_delete">Delete Account</button>
+            <button onclick="deleteAccount()" class="btn-primary btn-danger" data-i18n="btn_delete" style="width:100%">Delete Account</button>
         </div>
     </main>
     <script src="js/lang.js"></script><script src="js/auth.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const u = JSON.parse(localStorage.getItem('formix_currentUser'));
-            if(!u) window.location.href = 'login.html';
+            if(!u) window.location.href = 'signup.html';
             document.getElementById('prof-user').value = u.username;
             document.getElementById('prof-pic').value = u.profilePic || '';
         });
@@ -42,11 +37,11 @@
             e.preventDefault();
             let u = JSON.parse(localStorage.getItem('formix_currentUser'));
             const users = JSON.parse(localStorage.getItem('formix_users'));
-            delete users[u.username]; // Remove old mapping
+            delete users[u.username];
             u.username = document.getElementById('prof-user').value || u.username;
             u.password = document.getElementById('prof-pass').value || u.password;
             u.profilePic = document.getElementById('prof-pic').value;
-            users[u.username] = u; // Add new mapping
+            users[u.username] = u;
             localStorage.setItem('formix_users', JSON.stringify(users));
             localStorage.setItem('formix_currentUser', JSON.stringify(u));
             alert("Profile Updated!"); location.reload();

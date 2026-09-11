@@ -5,64 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/mini-logo.png">
     <title>Formix</title>
 </head>
 <body>
     <nav class="navbar">
         <a href="index.html" class="logo">FORMIX</a>
         <div class="nav-right">
-            <!-- Pilihan Bahasa Hover -->
             <div class="lang-dropdown">
-                <div class="lang-dropbtn"><span id="current-flag">🇺🇸</span> <span id="current-lang">EN</span> &#9662;</div>
+                <div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div>
                 <div class="lang-dropdown-content">
-                    <a href="javascript:void(0)" onclick="setLanguage('en')">🇺🇸 EN</a>
-                    <a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 ID</a>
+                    <a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a>
+                    <a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a>
                 </div>
             </div>
-            <!-- Auth Container (Diatur oleh auth.js) -->
             <div id="auth-container"></div>
         </div>
     </nav>
-    
     <header class="hero">
         <div class="hero-content">
             <h1 data-i18n="hero_title">MASTER YOUR FORM</h1>
             <p data-i18n="hero_desc">The ultimate visual database for precision gym movements.</p>
             <div class="db-widget">
-                <div class="db-stat"><span class="db-number">80+</span><span class="db-label">Exercises</span></div>
+                <div class="db-stat"><span class="db-number">80+</span><span class="db-label" data-i18n="wdg_ex">Exercises</span></div>
+                <div class="db-stat"><span class="db-number">100%</span><span class="db-label" data-i18n="wdg_vis">Visual</span></div>
             </div>
         </div>
     </header>
-    
     <main>
         <section class="selection-container fade-in">
             <a href="muscle.html" class="card">
-                <div class="card-icon">💪</div>
+                <div class="card-icon"><img src="assets/biceps.png" alt="Muscle"></div>
                 <h2 data-i18n="nav_muscle">BY MUSCLE</h2>
                 <p data-i18n="nav_muscle_desc">Target specific muscle groups</p>
             </a>
             <a href="equipment.html" class="card">
-                <div class="card-icon">🏋️</div>
+                <div class="card-icon"><img src="assets/dumbbells.png" alt="Equipment"></div>
                 <h2 data-i18n="nav_equip">BY EQUIPMENT</h2>
                 <p data-i18n="nav_equip_desc">Filter by available tools</p>
             </a>
             <a href="workouts.html?category=cardio" class="card">
-                <div class="card-icon">🏃</div>
+                <div class="card-icon"><img src="assets/runner.png" alt="Cardio"></div>
                 <h2 data-i18n="nav_cardio">CARDIO</h2>
                 <p data-i18n="nav_cardio_desc">Endurance & Heart Rate Training</p>
             </a>
         </section>
     </main>
-
     <footer data-i18n="footer">&copy; 2026 FORMIX. All Rights Reserved.</footer>
-
-    <!-- Scripts Wajib -->
-    <script src="js/db/muscles.js"></script>
-    <script src="js/db/upper.js"></script>
-    <script src="js/db/lower.js"></script>
-    <script src="js/db/cardio.js"></script>
-    <script src="js/lang.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/db/muscles.js"></script><script src="js/db/upper.js"></script><script src="js/db/lower.js"></script><script src="js/db/cardio.js"></script>
+    <script src="js/lang.js"></script><script src="js/auth.js"></script><script src="js/app.js"></script>
 </body>
 </html>

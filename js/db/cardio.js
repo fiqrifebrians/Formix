@@ -144,6 +144,22 @@ const cardioWorkouts = [
         ] 
     },
     { 
+        id: 77, name: "Walk Wave Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/06/Walk-Wave-Machine.gif", 
+        steps: [
+            "Mounting: Carefully step onto the foot pedals of the wave/arc machine.",
+            "The Motion: Begin shifting your weight from side to side in a smooth, wave-like trajectory.",
+            "Core Engagement: Keep your core tight to stabilize your body.",
+            "Pacing: Establish a rhythmic, continuous sweeping motion."
+        ],
+        steps_id: [
+            "Naiki perlengkapan tapak ombak pelan, raih pegangan agar tidak tergelincir lintasan melengkungnya.",
+            "Ayun Diagonal Miring: Operkan berat memindahkan pusat daya lentur mengayun memutar geser mendatar ke kiri kanan bagai seluncur es.",
+            "Tancap otot sabuk pinggang menahan getaran laju mesin yang melayang samping menguras keseimbangan.",
+            "Rapatkan dorongan kaki tempo tak putus menyapu gerakan bolak-balik tanpa jeda untuk stimulasi jantung prima."
+        ] 
+    },
+    { 
         id: 78, name: "Rowing Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Rowing-Machine.gif", 
         steps: [
@@ -157,6 +173,38 @@ const cardioWorkouts = [
             "Dorongan: Dorong pijakan kaki sekuat tenaga untuk meluncur mundur. Punggung dan lengan tetap lurus.",
             "Akhir Tarikan: Condongkan punggung sedikit ke belakang dan tarik tuas dengan kuat ke arah dada bawah.",
             "Pemulihan: Luruskan lengan kembali, bungkukkan badan, dan biarkan kursi meluncur perlahan ke posisi awal."
+        ] 
+    },
+    { 
+        id: 79, name: "Stair Climber Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Stair-Climber.gif", 
+        steps: [
+            "Setup: Step onto the revolving staircase. Set a moderate speed.",
+            "Posture Warning: Stand totally upright. Do not hunch over the console.",
+            "The Step: Place your entire foot onto each step.",
+            "Execution: Push firmly down through your heel to step up."
+        ],
+        steps_id: [
+            "Setup Mesin Tangga Putar Bising: Merapat menaiki mesin yang menyeret turun tanpa henti ini.",
+            "Larang Membungkuk Beban: Tegakkan kepala pundak, jangan membungkuk memeluk layar panel penyangga melainkan melangkahlah tegak murni.",
+            "Jejak Pijakan Melingkup Telapak: Jejak datar (bukan cuma jinjit ujung). Tapakkan pijak melangkah agar otot belakang ditarik sempurna.",
+            "Daki tanjakan ini berlarut-larut konstan stabil tahan siksaan ritme lurus sampai batas waktu detak jantung tercapai cepat letih."
+        ] 
+    },
+    { 
+        id: 80, name: "Elliptical Machine", category: "cardio", muscle: "cardio", equipment: "machine", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Elliptical-Machine.gif", 
+        steps: [
+            "Setup: Step onto the foot pedals and grab the moving handrails.",
+            "Posture: Stand tall, keeping your head up. Do not slouch.",
+            "The Motion: Begin pedaling in a smooth, forward, elliptical motion.",
+            "Total Body Sync: Push and pull the handrails in synchronized rhythm with your legs."
+        ],
+        steps_id: [
+            "Ambil Pijakan Alat Lari Lancar Mulus: Naikkan kaki di pedal lebar yang siap memandu lengkung oval sempurna. Cengkeram gagang tuas bergerak.",
+            "Tegakkan Tulang Lurus: Menatap depan membusung (core ditegangkan). Jangan membongkok lemas.",
+            "Putaran Lintas Elips: Gowes miring mendatar menekan telapak seutuhnya. Rangkaikan rima putar lari menggelinding melayang oval di hampa udara.",
+            "Sinergi Dorong Tarik Lengan Tuas Terpadu: Gempur padu tangan menarik/mendorong tongkat sejajar kaki menendang ayun konstan tak henti lurus keringat."
         ] 
     },
     { 
@@ -224,6 +272,22 @@ const cardioWorkouts = [
         ] 
     },
     { 
+        id: 85, name: "Plyo Jacks", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/05/Plyo-Jacks.gif", 
+        steps: [
+            "Begin standing tall with your feet together.",
+            "Quickly jump your feet out wide while dropping your hips deep into a squat.",
+            "Swing your arms straight up and overhead until your hands meet.",
+            "Explosively push through the floor to jump back up to the start."
+        ],
+        steps_id: [
+            "Berdiri lurus rapat kaki di landasan.",
+            "Jatuh Terjun Payung Meluncur Melebar Hantaman Lurus Tengkuk Drop Squat Wide Plyometric mengeper bawah mendarat renggang.",
+            "Ayun Menampar Angin Lurus Langit Puncak Tegang Merentang Overhead Swing sempurna menampar tapak tangan atas.",
+            "Sentak Tarikan Melayang Merapatkan Kembali Mengulangi Lontaran Siklus Membakar Lelah Kardio Brutal Letih Stamina Tuntas."
+        ] 
+    },
+    { 
         id: 86, name: "Jumping Jack", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
         media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/02/Jumping-jacks.gif", 
         steps: [
@@ -237,6 +301,22 @@ const cardioWorkouts = [
             "Melompat ringan sambil membuka kedua kaki lebih lebar dari bahu.",
             "Secara bersamaan, ayunkan tangan ke atas hingga saling bersentuhan di atas kepala.",
             "Lompat lagi untuk menutup kaki dan menurunkan lengan kembali ke posisi awal."
+        ] 
+    },
+    { 
+        id: 87, name: "High Knee Skips", category: "cardio", muscle: "cardio", equipment: "bodyweight", 
+        media_url: "https://fitnessprogramer.com/wp-content/uploads/2021/05/High-Knee-Skips.gif", 
+        steps: [
+            "Begin a skipping motion moving forward or in place.",
+            "Aggressively drive your lead knee straight up into the air.",
+            "Pump your opposite arm forward vigorously.",
+            "Land softly and immediately transition to the opposite leg."
+        ],
+        steps_id: [
+            "Awalan Jingkat Lenting Udara Murni: Mulai berjingkat bergantian di posisi statis atau berjalan maju depan terbang.",
+            "Tembakan Lutut Puncak Menancap Awan: Tarik melontarkan sendi lutut setajam-tajamnya meluruskan pinggang sejajar ke dada atas membeku murni meroket.",
+            "Piston Tangan Penyeimbang Gaya Gravitasi Ayunan Stabil Silang Maju Meredam Kaku Tegak Meluncur Lembut Hampa Udara Konsentrasi Daya Lontar Ayun.",
+            "Pendaratan Lentur Lentik Membal Elastis Gesit Tarik Cepat Sesaat Nyentuh Membakar Rima Napas Tahan Konstan Terus Cepat Ganti Menit Tak Henti Berdenyut Lelah Bugar."
         ] 
     }
 ];

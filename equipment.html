@@ -12,41 +12,25 @@
     <nav class="navbar">
         <a href="index.html" class="logo">FORMIX</a>
         <div class="nav-right">
-            <!-- Pilihan Bahasa Hover -->
             <div class="lang-dropdown">
-                <div class="lang-dropbtn"><span id="current-flag">🇺🇸</span> <span id="current-lang">EN</span> &#9662;</div>
+                <div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div>
                 <div class="lang-dropdown-content">
-                    <a href="javascript:void(0)" onclick="setLanguage('en')">🇺🇸 EN</a>
-                    <a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 ID</a>
+                    <a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a>
+                    <a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a>
                 </div>
             </div>
-            <!-- Auth Container -->
             <div id="auth-container"></div>
-            <a href="index.html" class="back-link" data-i18n="home_btn">&larr; Home</a>
         </div>
     </nav>
-    
     <header class="page-header">
+        <a href="javascript:history.back()" class="header-back-btn" data-i18n="btn_back">&larr; Back</a>
         <h1 data-i18n="page_equip_title">AVAILABLE EQUIPMENT</h1>
         <p data-i18n="page_equip_desc">What do you have access to?</p>
     </header>
-
-    <main>
-        <div id="equipment-list" class="grid-container fade-in"></div>
-    </main>
-
+    <main><div id="equipment-list" class="grid-container fade-in"></div></main>
     <footer data-i18n="footer">&copy; 2026 FORMIX. All Rights Reserved.</footer>
-
-    <!-- Scripts Wajib -->
-    <script src="js/db/muscles.js"></script>
-    <script src="js/db/upper.js"></script>
-    <script src="js/db/lower.js"></script>
-    <script src="js/db/cardio.js"></script>
-    <script src="js/lang.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/app.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", renderEquipmentList);
-    </script>
+    <script src="js/db/muscles.js"></script><script src="js/db/upper.js"></script><script src="js/db/lower.js"></script><script src="js/db/cardio.js"></script>
+    <script src="js/lang.js"></script><script src="js/auth.js"></script><script src="js/app.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", renderEquipmentList);</script>
 </body>
 </html>

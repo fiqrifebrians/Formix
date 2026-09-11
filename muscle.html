@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <title>Formix</title>
+    <link rel="icon" type="image/png" href="assets/mini-logo.png">
+    <title>Formix - Target Muscles</title>
 </head>
 <body>
     <nav class="navbar">
@@ -21,11 +23,13 @@
         </div>
     </nav>
     <header class="page-header">
+        <!-- TOMBOL BACK DI KIRI ATAS HEADER -->
         <a href="javascript:history.back()" class="header-back-btn" data-i18n="btn_back">&larr; Back</a>
         <h1 data-i18n="page_muscle_title">TARGET MUSCLES</h1>
         <p data-i18n="page_muscle_desc">Select a muscle group to focus on.</p>
     </header>
     <main><div id="muscle-list"></div></main>
+    <footer data-i18n="footer">&copy; 2026 FORMIX. All Rights Reserved.</footer>
     <script src="js/db/muscles.js"></script><script src="js/db/upper.js"></script><script src="js/db/lower.js"></script><script src="js/db/cardio.js"></script>
     <script src="js/lang.js"></script><script src="js/auth.js"></script><script src="js/app.js"></script>
     <script>document.addEventListener("DOMContentLoaded", renderMuscleList);</script>
