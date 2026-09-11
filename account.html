@@ -14,6 +14,7 @@
         <h1 data-i18n="acc_title">ACCOUNT SETTINGS</h1>
     </header>
     <main>
+        <!-- PROFILE EDIT -->
         <div class="account-container fade-in" style="margin-bottom:2rem;">
             <h3 data-i18n="acc_edit_prof" class="section-header" style="display:block; text-align:center; width:100%; border:none;">Edit Profile</h3>
             <form onsubmit="saveProfile(event)">
@@ -28,18 +29,40 @@
             <button onclick="deleteAccount()" class="btn-primary btn-danger" data-i18n="btn_delete" style="width:100%;">Delete Account</button>
         </div>
 
+        <!-- PASSWORD CHANGE -->
         <div class="account-container fade-in">
             <button id="toggle-pwd-btn" class="btn-primary" onclick="togglePasswordForm()" style="width:100%;" data-i18n="acc_change_pwd">Change Password</button>
             <div id="pwd-form-container" style="display:none; margin-top:2rem;">
                 <h3 data-i18n="acc_change_pwd" class="section-header" style="display:block; text-align:center; width:100%; border:none; margin-top:0;">Change Password</h3>
                 <form onsubmit="changePassword(event)">
-                    <div class="form-group"><label data-i18n="acc_old_pwd">Old Password</label><input type="password" id="old-pass" required></div>
+                    <div class="form-group">
+                        <label data-i18n="acc_old_pwd">Old Password</label>
+                        <div class="pwd-wrapper">
+                            <input type="password" id="old-pass" required>
+                            <button type="button" class="pwd-toggle" id="toggle-old-pass" onclick="togglePassword('old-pass', 'toggle-old-pass')">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                            </button>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label data-i18n="acc_new_pwd">New Password</label>
-                        <input type="password" id="new-pass" required oninput="document.getElementById('acc-pwd-hint').style.display='none'">
+                        <div class="pwd-wrapper">
+                            <input type="password" id="new-pass" required oninput="document.getElementById('acc-pwd-hint').style.display='none'">
+                            <button type="button" class="pwd-toggle" id="toggle-new-pass" onclick="togglePassword('new-pass', 'toggle-new-pass')">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                            </button>
+                        </div>
                         <small id="acc-pwd-hint" style="display:none; margin-top:5px; font-size:0.75rem; font-weight: 600;" data-i18n="pwd_hint">Min 9 chars, 1 uppercase, 1 lowercase, 1 number.</small>
                     </div>
-                    <div class="form-group"><label data-i18n="acc_conf_pwd">Confirm New Password</label><input type="password" id="conf-pass" required></div>
+                    <div class="form-group">
+                        <label data-i18n="acc_conf_pwd">Confirm New Password</label>
+                        <div class="pwd-wrapper">
+                            <input type="password" id="conf-pass" required>
+                            <button type="button" class="pwd-toggle" id="toggle-conf-pass" onclick="togglePassword('conf-pass', 'toggle-conf-pass')">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                            </button>
+                        </div>
+                    </div>
                     <button type="submit" class="btn-primary" data-i18n="btn_save" style="width:100%">Save Password</button>
                 </form>
             </div>
