@@ -1,4 +1,3 @@
-// Agregasi Data Latihan
 let workoutDB = [];
 if (typeof upperWorkouts !== 'undefined') workoutDB = workoutDB.concat(upperWorkouts);
 if (typeof lowerWorkouts !== 'undefined') workoutDB = workoutDB.concat(lowerWorkouts);
@@ -12,27 +11,15 @@ function renderMuscleList() {
     container.innerHTML = ""; 
 
     const currentLang = localStorage.getItem('formix_lang') || 'en';
-    const langDict = translations[currentLang];
-
-    // Upper Body
-    const upperSec = document.createElement("div"); upperSec.className = "muscle-section";
-    upperSec.innerHTML = `<h2 class="section-header">${langDict.cat_upper}</h2>`;
-    const upperGrid = document.createElement("div"); upperGrid.className = "grid-container fade-in";
-    muscles.filter(m => m.category === "upper").forEach(item => {
+    const grid = document.createElement("div"); 
+    grid.className = "grid-container fade-in";
+    
+    // Gabung seluruh otot (kecuali kardio) dalam satu list tanpa memecah Upper/Lower
+    muscles.filter(m => m.id !== "cardio").forEach(item => {
         const dName = currentLang === 'id' && item.name_id ? item.name_id : item.name;
-        upperGrid.innerHTML += `<a href="workouts.html?muscle=${item.id}" class="card"><h2>${dName}</h2><div class="card-arrow">&rarr;</div></a>`;
+        grid.innerHTML += `<a href="workouts.html?muscle=${item.id}" class="card"><h2>${dName}</h2><div class="card-arrow">&rarr;</div></a>`;
     });
-    upperSec.appendChild(upperGrid); container.appendChild(upperSec);
-
-    // Lower Body
-    const lowerSec = document.createElement("div"); lowerSec.className = "muscle-section";
-    lowerSec.innerHTML = `<h2 class="section-header">${langDict.cat_lower}</h2>`;
-    const lowerGrid = document.createElement("div"); lowerGrid.className = "grid-container fade-in";
-    muscles.filter(m => m.category === "lower").forEach(item => {
-        const dName = currentLang === 'id' && item.name_id ? item.name_id : item.name;
-        lowerGrid.innerHTML += `<a href="workouts.html?muscle=${item.id}" class="card"><h2>${dName}</h2><div class="card-arrow">&rarr;</div></a>`;
-    });
-    lowerSec.appendChild(lowerGrid); container.appendChild(lowerSec);
+    container.appendChild(grid);
 }
 
 function renderEquipmentList() {

@@ -1,6 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-    checkAuth();
-});
+document.addEventListener("DOMContentLoaded", () => { checkAuth(); });
 
 function checkAuth() {
     const userJson = localStorage.getItem('formix_currentUser');
@@ -22,9 +20,8 @@ function checkAuth() {
             </div>
         `;
     } else {
-        authContainer.innerHTML = `<a href="login.html" class="btn-primary" data-i18n="nav_login">Login / Sign Up</a>`;
+        authContainer.innerHTML = `<a href="signup.html" class="btn-primary" data-i18n="nav_login">Login / Sign Up</a>`;
     }
-    // Re-apply language to newly injected elements
     setLanguage(localStorage.getItem('formix_lang') || 'en');
 }
 
@@ -60,11 +57,11 @@ function handleSignup(e) {
 }
 
 function googleAuth() {
-    const dummyGoogleUser = { username: "GoogleUser_" + Math.floor(Math.random()*1000), password: "dmy", profilePic: "", customWorkouts: [] };
+    const dummyUser = { username: "GoogleUser_" + Math.floor(Math.random()*1000), password: "dmy", profilePic: "", customWorkouts: [] };
     const users = JSON.parse(localStorage.getItem('formix_users') || '{}');
-    users[dummyGoogleUser.username] = dummyGoogleUser;
+    users[dummyUser.username] = dummyUser;
     localStorage.setItem('formix_users', JSON.stringify(users));
-    localStorage.setItem('formix_currentUser', JSON.stringify(dummyGoogleUser));
+    localStorage.setItem('formix_currentUser', JSON.stringify(dummyUser));
     window.location.href = 'index.html';
 }
 
