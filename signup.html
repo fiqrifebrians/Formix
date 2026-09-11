@@ -8,7 +8,7 @@
     <title>Formix - Sign Up</title>
 </head>
 <body>
-    <nav class="navbar"><a href="index.html" class="logo">FORMIX</a><div class="nav-right"><div class="lang-dropdown"><div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div><div class="lang-dropdown-content"><a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a><a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a></div></div></div></nav>
+    <nav class="navbar"><a href="index.html" class="logo"><img src="assets/mini-logo.png"> FORMIX</a><div class="nav-right"><div class="lang-dropdown"><div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div><div class="lang-dropdown-content"><a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a><a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a></div></div></div></nav>
     <main style="display:flex; justify-content:center; align-items:center;">
         <div class="auth-container fade-in">
             <h2 data-i18n="auth_signup">SIGN UP</h2>
@@ -16,8 +16,8 @@
                 <div class="form-group"><label>Username</label><input type="text" id="sign-user" required></div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" id="sign-pass" required>
-                    <small style="color:var(--gray-text); display:block; margin-top:5px; font-size:0.75rem;" data-i18n="pwd_hint">Min 9 chars, 1 uppercase, 1 lowercase, 1 number.</small>
+                    <input type="password" id="sign-pass" required oninput="document.getElementById('sign-pwd-hint').style.display='none'">
+                    <small id="sign-pwd-hint" style="display:none; margin-top:5px; font-size:0.75rem; font-weight: 600;" data-i18n="pwd_hint">Min 9 chars, 1 uppercase, 1 lowercase, 1 number.</small>
                 </div>
                 <button type="submit" class="btn-primary" style="width:100%" data-i18n="auth_signup">SIGN UP</button>
             </form>

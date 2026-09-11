@@ -8,12 +8,13 @@
     <title>Formix - My Account</title>
 </head>
 <body>
-    <nav class="navbar"><a href="index.html" class="logo">FORMIX</a><div class="nav-right"><div class="lang-dropdown"><div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div><div class="lang-dropdown-content"><a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a><a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a></div></div><div id="auth-container"></div></div></nav>
+    <nav class="navbar"><a href="index.html" class="logo"><img src="assets/mini-logo.png"> FORMIX</a><div class="nav-right"><div class="lang-dropdown"><div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div><div class="lang-dropdown-content"><a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a><a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a></div></div><div id="auth-container"></div></div></nav>
     <header class="page-header">
         <a href="javascript:history.back()" class="header-back-btn" data-i18n="btn_back">&larr; Back</a>
         <h1 data-i18n="acc_title">ACCOUNT SETTINGS</h1>
     </header>
     <main>
+        <!-- PROFILE EDIT -->
         <div class="account-container fade-in" style="margin-bottom:2rem;">
             <h3 data-i18n="acc_edit_prof" class="section-header" style="display:block; text-align:center; width:100%; border:none;">Edit Profile</h3>
             <form onsubmit="saveProfile(event)">
@@ -28,6 +29,7 @@
             <button onclick="deleteAccount()" class="btn-primary btn-danger" data-i18n="btn_delete" style="width:100%;">Delete Account</button>
         </div>
 
+        <!-- PASSWORD CHANGE -->
         <div class="account-container fade-in">
             <button id="toggle-pwd-btn" class="btn-primary" onclick="togglePasswordForm()" style="width:100%;" data-i18n="acc_change_pwd">Change Password</button>
             <div id="pwd-form-container" style="display:none; margin-top:2rem;">
@@ -36,8 +38,8 @@
                     <div class="form-group"><label data-i18n="acc_old_pwd">Old Password</label><input type="password" id="old-pass" required></div>
                     <div class="form-group">
                         <label data-i18n="acc_new_pwd">New Password</label>
-                        <input type="password" id="new-pass" required>
-                        <small style="color:var(--gray-text); display:block; margin-top:5px; font-size:0.75rem;" data-i18n="pwd_hint">Min 9 chars, 1 uppercase, 1 lowercase, 1 number.</small>
+                        <input type="password" id="new-pass" required oninput="document.getElementById('acc-pwd-hint').style.display='none'">
+                        <small id="acc-pwd-hint" style="display:none; margin-top:5px; font-size:0.75rem; font-weight: 600;" data-i18n="pwd_hint">Min 9 chars, 1 uppercase, 1 lowercase, 1 number.</small>
                     </div>
                     <div class="form-group"><label data-i18n="acc_conf_pwd">Confirm New Password</label><input type="password" id="conf-pass" required></div>
                     <button type="submit" class="btn-primary" data-i18n="btn_save" style="width:100%">Save Password</button>
@@ -99,7 +101,10 @@
             const confP = document.getElementById('conf-pass').value;
             if(oldP !== u.password) return alert("Incorrect Old Password!");
             if(newP !== confP) return alert("New passwords do not match!");
-            if(!validatePasswordStrength(newP)) return;
+            
+            // Validasi dan Trigger Error Hint UI
+            if(!validatePasswordStrength(newP, 'acc-pwd-hint')) return;
+            
             u.password = newP;
             users[u.username] = u;
             localStorage.setItem('formix_users', JSON.stringify(users));

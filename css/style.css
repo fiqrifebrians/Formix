@@ -5,6 +5,7 @@ body { font-family: var(--font-main); background-color: var(--gray-light); color
 /* NAVBAR & DROPDOWNS */
 .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background-color: var(--white); border-bottom: 1px solid var(--gray-border); position: sticky; top: 0; z-index: 100; }
 .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -0.5px; text-decoration: none; color: var(--black); display: flex; align-items: center; gap: 0.5rem;}
+.logo img { width: 24px; height: 24px; }
 .nav-right { display: flex; align-items: center; gap: 1.5rem; }
 
 .lang-dropdown, .profile-dropdown { position: relative; display: inline-block; cursor: pointer; padding: 0.5rem 0; }
@@ -102,3 +103,18 @@ main { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; min-height: 50vh; 
 .fade-in { animation: fadeIn 0.5s ease forwards; opacity: 0; }
 @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 footer { text-align: center; padding: 3rem; background: var(--white); border-top: 1px solid var(--gray-border); color: var(--gray-text); font-weight: 600; }
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+    .page-header { padding-top: 5.5rem; }
+    .hero h1, .page-header h1 { font-size: 2rem; }
+    .header-back-btn {
+        top: 1.2rem;
+        right: 1.2rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+        box-shadow: 2px 2px 0px var(--black);
+    }
+    .header-back-btn:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0px var(--black); }
+    .workout-card { flex-direction: column; }
+}

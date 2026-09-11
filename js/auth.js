@@ -1,11 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => { checkAuth(); });
 
-function validatePasswordStrength(pwd) {
+function validatePasswordStrength(pwd, errorElementId) {
     const pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{9,}$/;
+    const errorEl = document.getElementById(errorElementId);
+    
     if (!pwdRegex.test(pwd)) {
-        alert("Password must be at least 9 characters long, contain at least 1 uppercase letter, 1 lowercase letter, and 1 number.");
+        if (errorEl) {
+            errorEl.style.display = 'block';
+            errorEl.style.color = '#dc2626'; // Warna merah agar terlihat sebagai error
+        }
         return false;
     }
+    
+    if (errorEl) errorEl.style.display = 'none';
     return true;
 }
 
@@ -29,7 +36,7 @@ function checkAuth() {
             </div>
         `;
     } else {
-        authContainer.innerHTML = `<a href="signup.html" class="btn-primary" data-i18n="nav_login">Login / Sign Up</a>`;
+        authContainer.innerHTML = `<a href="login.html" class="btn-primary" data-i18n="nav_login">Login</a>`;
     }
     setLanguage(localStorage.getItem('formix_lang') || 'en');
 }
@@ -51,7 +58,9 @@ function handleSignup(e) {
     e.preventDefault();
     const u = document.getElementById('sign-user').value;
     const p = document.getElementById('sign-pass').value;
-    if(!validatePasswordStrength(p)) return;
+    
+    if(!validatePasswordStrength(p, 'sign-pwd-hint')) return;
+    
     const users = JSON.parse(localStorage.getItem('formix_users') || '{}');
     if(users[u]) {
         alert('Username already exists!');
