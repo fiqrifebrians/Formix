@@ -11,25 +11,20 @@
 <body>
     <nav class="navbar">
         <a href="index.html" class="logo"><img src="assets/mini-logo.png"> FORMIX</a>
-        <!-- Custom Back Button Intercept -->
-        <a href="#" onclick="attemptExit(event)" class="header-back-btn" style="position:static; border:none; box-shadow:none; padding:0;">&larr; LEAVE SESSION</a>
+        <!-- INTERUPSI TOMBOL BACK NAVIGASI -->
+        <a href="#" onclick="attemptExit(event)" class="btn-primary btn-danger" style="margin:0; box-shadow:none;">&larr; LEAVE SESSION</a>
     </nav>
     
-    <!-- PROGRESS BAR -->
     <div style="padding: 0 2rem; max-width: 1000px; margin: 0 auto;">
-        <div class="progress-container">
-            <div class="progress-bar" id="progress-fill"></div>
-        </div>
-        <div style="text-align: right; font-weight: 900; color: var(--primary);" id="progress-text">0%</div>
+        <div class="progress-container"><div class="progress-bar" id="progress-fill"></div></div>
+        <div style="text-align: right; font-weight: 900; color: var(--black); font-size:1.2rem;" id="progress-text">0%</div>
     </div>
 
     <main style="padding-top: 1rem; display:flex; flex-direction:column; align-items:center;">
-        
         <div class="active-workout-display fade-in" style="width: 100%; max-width: 800px;">
             <div id="aw-media-container" style="margin-bottom: 2rem;">
-                <img id="aw-img" src="" style="width:100%; max-height:400px; object-fit:contain; border-radius:8px;">
+                <img id="aw-img" src="" style="width:100%; max-height:400px; object-fit:contain; border:2px solid var(--black);">
             </div>
-            
             <h2 id="aw-name" class="active-exercise-name">LOADING...</h2>
             <div id="aw-target" class="active-exercise-target">--</div>
             
@@ -38,16 +33,16 @@
                 <button class="btn-primary" id="btn-next" onclick="navExercise(1)">NEXT EXERCISE &rarr;</button>
             </div>
             
-            <button class="btn-primary btn-success" id="btn-finish" style="display:none; width:100%; margin-top:1rem; font-size:1.2rem; padding:1.2rem;" onclick="completeWorkout()">COMPLETE WORKOUT ✓</button>
+            <button class="btn-primary btn-success" id="btn-finish" style="display:none; width:100%; margin-top:1.5rem; font-size:1.2rem; padding:1.2rem;" onclick="completeWorkout()">COMPLETE WORKOUT ✓</button>
         </div>
-
     </main>
 
-    <!-- MODAL PERINGATAN KELUAR -->
+    <!-- MODAL PERINGATAN KELUAR (Incomplete Interruption) -->
     <div id="exitModal" class="modal">
         <div class="modal-content">
-            <h2>WAIT!</h2>
-            <p>You haven't finished your session. Are you sure you want to leave and save it as incomplete?</p>
+            <h2 style="color:var(--primary); border-bottom-color:var(--primary);">WAIT!</h2>
+            <p style="font-weight:800; font-size:1.2rem;">You haven't finished your session.</p>
+            <p>Are you sure you want to leave and save this workout as incomplete?</p>
             <div class="modal-actions">
                 <button class="btn-primary btn-danger" onclick="confirmExit()">YES, LEAVE</button>
                 <button class="btn-primary" onclick="closeExitModal()">CANCEL</button>
@@ -57,10 +52,10 @@
 
     <!-- MODAL FINISH -->
     <div id="finishModal" class="modal">
-        <div class="modal-content">
-            <h2 style="color:var(--success);">OUTSTANDING!</h2>
-            <p>You have successfully completed this routine.</p>
-            <button class="btn-primary btn-success" onclick="window.location.href='workout-log.html'" style="width:100%; margin-top:1rem;">SAVE & RETURN TO LOG</button>
+        <div class="modal-content text-center">
+            <h2 style="font-size:2.5rem; border-bottom:3px solid var(--success); color:var(--success);">OUTSTANDING!</h2>
+            <p style="font-size:1.1rem; color:var(--black); font-weight:800; margin-top:1.5rem;">You have successfully completed this routine.</p>
+            <button class="btn-primary btn-success" onclick="window.location.href='workout-log.html'" style="margin-top:2rem; width:100%; font-size:1.1rem;">SAVE & RETURN TO LOG</button>
         </div>
     </div>
 

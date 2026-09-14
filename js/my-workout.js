@@ -1,9 +1,11 @@
 let currentUser = JSON.parse(localStorage.getItem('formix_currentUser'));
 let tempExercises = [];
 let selectedExerciseData = null;
+let editModeId = null;
+const workoutDB = [...upperWorkouts, ...lowerWorkouts, ...cardioWorkouts];
 
 document.addEventListener("DOMContentLoaded", () => {
-    if(!currentUser) { window.location.href = 'signup.html'; return; }
+    if(!currentUser) { window.location.href = 'login.html'; return; }
     loadMyWorkouts();
     populateSelects();
 });
@@ -11,44 +13,55 @@ document.addEventListener("DOMContentLoaded", () => {
 function loadMyWorkouts() {
     const container = document.getElementById('my-workout-list');
     container.innerHTML = "";
-
     if (!currentUser.customWorkouts || currentUser.customWorkouts.length === 0) {
-        container.innerHTML = `<p style="text-align:center; color:var(--gray-text);">No custom workouts found. Create one!</p>`;
+        container.innerHTML = `<p style="text-align:center; color:var(--gray-text); font-weight:800; padding: 2rem; border: 2px dashed var(--gray-border);">No custom workouts found. Create your first program!</p>`;
         return;
     }
-
     currentUser.customWorkouts.forEach((cw, idx) => {
         container.innerHTML += `
             <div class="cw-item fade-in" style="animation-delay:${idx*0.1}s">
                 <div>
                     <h3>${cw.name}</h3>
-                    <div class="cw-details">${cw.exercises.length} Exercises</div>
+                    <div class="cw-details">${cw.exercises.length} Exercises Built</div>
                 </div>
                 <div style="display:flex; gap:10px;">
-                    <button class="btn-primary" onclick="window.location.href='active-workout.html?id=${cw.id}'">View</button>
-                    <button class="btn-primary btn-danger" onclick="deleteWorkout('${cw.id}')">X</button>
+                    <button class="btn-primary" onclick="openEditModal('${cw.id}')">Edit</button>
+                    <button class="btn-primary btn-danger" onclick="deleteWorkout('${cw.id}')">Delete</button>
                 </div>
             </div>
         `;
     });
 }
 
-function openCreateModal() { document.getElementById('createModal').style.display = 'flex'; filterModalExercises(); }
+function openCreateModal() { 
+    editModeId = null;
+    document.getElementById('modal-title').innerText = "CREATE WORKOUT";
+    document.getElementById('cw-name').value = "";
+    tempExercises = [];
+    renderTempExercises();
+    document.getElementById('createModal').style.display = 'flex'; 
+    filterModalExercises(); 
+}
+
+function openEditModal(id) {
+    const cw = currentUser.customWorkouts.find(w => w.id === id);
+    if(!cw) return;
+    editModeId = id;
+    document.getElementById('modal-title').innerText = "EDIT WORKOUT";
+    document.getElementById('cw-name').value = cw.name;
+    tempExercises = [...cw.exercises];
+    renderTempExercises();
+    document.getElementById('createModal').style.display = 'flex';
+    filterModalExercises();
+}
+
 function closeModal() { document.getElementById('createModal').style.display = 'none'; }
 
 function populateSelects() {
     const mSel = document.getElementById('filter-muscle');
     const eSel = document.getElementById('filter-equip');
-    const lang = localStorage.getItem('formix_lang') || 'en';
-    
-    muscles.forEach(m => {
-        let name = lang === 'id' && m.name_id ? m.name_id : m.name;
-        mSel.innerHTML += `<option value="${m.id}">${name}</option>`;
-    });
-    equipments.forEach(e => {
-        let name = lang === 'id' && e.name_id ? e.name_id : e.name;
-        eSel.innerHTML += `<option value="${e.id}">${name}</option>`;
-    });
+    muscles.forEach(m => { mSel.innerHTML += `<option value="${m.id}">${m.name}</option>`; });
+    equipments.forEach(e => { eSel.innerHTML += `<option value="${e.id}">${e.name}</option>`; });
 }
 
 function filterModalExercises() {
@@ -56,11 +69,9 @@ function filterModalExercises() {
     const mQ = document.getElementById('filter-muscle').value;
     const eQ = document.getElementById('filter-equip').value;
     const list = document.getElementById('modal-ex-list');
-    const lang = localStorage.getItem('formix_lang') || 'en';
 
     let filtered = workoutDB.filter(w => {
-        const wName = lang === 'id' && w.name_id ? w.name_id : w.name;
-        let passName = wName.toLowerCase().includes(nQ) || w.name.toLowerCase().includes(nQ);
+        let passName = w.name.toLowerCase().includes(nQ);
         let passMusc = mQ === "all" ? true : w.muscle === mQ;
         let passEquip = eQ === "all" ? true : w.equipment === eQ;
         return passName && passMusc && passEquip;
@@ -68,10 +79,9 @@ function filterModalExercises() {
 
     list.innerHTML = "";
     filtered.forEach(w => {
-        const wName = lang === 'id' && w.name_id ? w.name_id : w.name;
         const div = document.createElement("div");
         div.className = "ex-list-item";
-        div.innerText = wName;
+        div.innerText = w.name;
         div.onclick = () => selectExerciseForPlan(w);
         list.appendChild(div);
     });
@@ -79,10 +89,8 @@ function filterModalExercises() {
 
 function selectExerciseForPlan(wObj) {
     selectedExerciseData = wObj;
-    const lang = localStorage.getItem('formix_lang') || 'en';
-    const wName = lang === 'id' && wObj.name_id ? wObj.name_id : wObj.name;
     document.getElementById('ex-config').style.display = 'block';
-    document.getElementById('selected-ex-name').innerText = "Selected: " + wName;
+    document.getElementById('selected-ex-name').innerText = wObj.name;
 }
 
 function toggleExType() {
@@ -92,30 +100,28 @@ function toggleExType() {
 }
 
 function addExerciseToPlan() {
-    if(!selectedExerciseData) return alert("Select an exercise!");
+    if(!selectedExerciseData) return alert("Select an exercise first!");
     const t = document.getElementById('ex-type').value;
-    const lang = localStorage.getItem('formix_lang') || 'en';
-    const wName = lang === 'id' && selectedExerciseData.name_id ? selectedExerciseData.name_id : selectedExerciseData.name;
     
     let infoStr = "";
     if (t === "reps") {
-        const r = document.getElementById('ex-reps').value || 0;
-        const rnd = document.getElementById('ex-rounds').value || 0;
+        const r = document.getElementById('ex-reps').value || 1;
+        const rnd = document.getElementById('ex-rounds').value || 1;
         infoStr = `${r} Reps x ${rnd} Rounds`;
     } else {
-        const sec = document.getElementById('ex-timer').value || 0;
+        const sec = document.getElementById('ex-timer').value || 30;
         const laps = document.getElementById('ex-laps').value || 1;
         infoStr = `${sec}s x ${laps} Laps`;
     }
 
     tempExercises.push({ 
         baseId: selectedExerciseData.id, 
-        name: wName, 
+        name: selectedExerciseData.name, 
         type: t,
         reps: document.getElementById('ex-reps').value,
         rounds: document.getElementById('ex-rounds').value,
         timer: document.getElementById('ex-timer').value,
-        laps: document.getElementById('ex-laps') ? document.getElementById('ex-laps').value : 1,
+        laps: document.getElementById('ex-laps').value,
         info: infoStr
     });
     
@@ -124,33 +130,49 @@ function addExerciseToPlan() {
     selectedExerciseData = null;
 }
 
+function removeTempExercise(idx) {
+    tempExercises.splice(idx, 1);
+    renderTempExercises();
+}
+
 function renderTempExercises() {
-    document.getElementById('temp-exercises').innerHTML = tempExercises.map(e => `<li>${e.name} — <span style="color:var(--primary)">${e.info}</span></li>`).join('');
+    const listHtml = tempExercises.map((e, idx) => `
+        <li style="display:flex; justify-content:space-between; margin-bottom:0.5rem; align-items:center;">
+            <span>${e.name} — <span style="color:var(--gray-text)">${e.info}</span></span>
+            <button class="btn-icon" style="padding: 2px 6px; font-size:0.7rem;" onclick="removeTempExercise(${idx})">X</button>
+        </li>
+    `).join('');
+    document.getElementById('temp-exercises').innerHTML = listHtml;
 }
 
 function saveCustomWorkout() {
     const name = document.getElementById('cw-name').value;
-    if(!name || tempExercises.length === 0) return alert("Name and at least 1 exercise required.");
+    if(!name || tempExercises.length === 0) return alert("Please provide a name and add at least 1 exercise.");
 
-    const newWorkout = { id: 'cw_'+Date.now(), name: name, exercises: tempExercises };
-    currentUser.customWorkouts.push(newWorkout);
+    if (editModeId) {
+        let target = currentUser.customWorkouts.find(w => w.id === editModeId);
+        target.name = name;
+        target.exercises = [...tempExercises];
+    } else {
+        const newWorkout = { id: 'cw_'+Date.now(), name: name, exercises: tempExercises };
+        currentUser.customWorkouts.push(newWorkout);
+    }
     
     updateUserInDB();
     closeModal();
-    tempExercises = [];
-    document.getElementById('cw-name').value = '';
-    renderTempExercises();
     loadMyWorkouts();
 }
 
 function deleteWorkout(id) {
-    currentUser.customWorkouts = currentUser.customWorkouts.filter(cw => cw.id !== id);
-    updateUserInDB();
-    loadMyWorkouts();
+    if(confirm("Delete this workout program?")) {
+        currentUser.customWorkouts = currentUser.customWorkouts.filter(cw => cw.id !== id);
+        updateUserInDB();
+        loadMyWorkouts();
+    }
 }
 
 function updateUserInDB() {
-    const users = JSON.parse(localStorage.getItem('formix_users'));
+    const users = JSON.parse(localStorage.getItem('formix_users') || '{}');
     users[currentUser.username] = currentUser;
     localStorage.setItem('formix_users', JSON.stringify(users));
     localStorage.setItem('formix_currentUser', JSON.stringify(currentUser));

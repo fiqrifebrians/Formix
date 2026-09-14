@@ -3,35 +3,13 @@ let currentDisplayDate = new Date();
 let selectedDateStr = "";
 
 document.addEventListener("DOMContentLoaded", () => {
-    if(!currentUser) {
-        window.location.href = 'login.html';
-        return;
-    }
-    // Setup Dummy Data untuk keperluan demonstrasi jika user belum membuat custom workout
-    if (!currentUser.customWorkouts || currentUser.customWorkouts.length === 0) {
-        currentUser.customWorkouts = [{
-            id: "cw_dummy_1",
-            name: "Beginner Full Body",
-            exercises: [
-                { baseId: 2, name: "Push-Up", type: "reps", rounds: 3, info: "12 Reps x 3 Rounds" },
-                { baseId: 10, name: "Plank", type: "timer", laps: 2, timer: 60, info: "60s x 2 Laps" }
-            ]
-        }];
-        updateUserDB();
-    }
+    if(!currentUser) { window.location.href = 'login.html'; return; }
 
     const today = new Date();
     selectedDateStr = formatDateStr(today);
     renderCalendar();
     selectDate(today.getFullYear(), today.getMonth(), today.getDate());
 });
-
-function updateUserDB() {
-    const users = JSON.parse(localStorage.getItem('formix_users') || '{}');
-    users[currentUser.username] = currentUser;
-    localStorage.setItem('formix_users', JSON.stringify(users));
-    localStorage.setItem('formix_currentUser', JSON.stringify(currentUser));
-}
 
 function formatDateStr(dateObj) {
     const y = dateObj.getFullYear();
@@ -60,45 +38,37 @@ function renderCalendar() {
     
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    
     const grid = document.getElementById('calendar-grid');
     grid.innerHTML = "";
+    
     const userLogs = getLogs();
     const todayStr = formatDateStr(new Date());
 
-    // Empty slots before 1st day
-    for (let i = 0; i < firstDay; i++) {
-        grid.innerHTML += `<div class="cal-day empty"></div>`;
-    }
+    // Padding empty cells
+    for (let i = 0; i < firstDay; i++) { grid.innerHTML += `<div class="cal-day empty"></div>`; }
 
-    // Days
+    // Render Days
     for (let i = 1; i <= daysInMonth; i++) {
         const loopDateStr = formatDateStr(new Date(year, month, i));
         let classes = "cal-day fade-in";
         
-        // Highlight Today
         if (loopDateStr === todayStr) classes += " today";
         
-        // Visual Conditional Highlights for History
+        // INDIKATOR VISUAL ORANYE PENUH JIKA ADA LOG APAPUN
         if (userLogs[loopDateStr]) {
-            const dayLog = userLogs[loopDateStr];
-            if (dayLog.status === 'completed') {
-                classes += " log-completed";
-            } else if (dayLog.status === 'incomplete') {
-                classes += " log-incomplete";
-            }
+            classes += " has-log";
         }
 
         if (loopDateStr === selectedDateStr) classes += " selected";
 
-        const delay = (i * 0.02).toFixed(2);
+        const delay = (i * 0.01).toFixed(2);
         grid.innerHTML += `<div class="${classes}" style="animation-delay:${delay}s" onclick="selectDate(${year}, ${month}, ${i})">${i}</div>`;
     }
 }
 
 function selectDate(y, m, d) {
     selectedDateStr = formatDateStr(new Date(y, m, d));
-    renderCalendar(); // Re-render to move 'selected' class
+    renderCalendar(); // Memindahkan bingkai 'selected'
     
     const dateObj = new Date(y, m, d);
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -111,43 +81,38 @@ function selectDate(y, m, d) {
     const historyPanel = document.getElementById('history-log-status');
     const workoutPanel = document.getElementById('today-workout-list');
 
-    // Reset Panels
     historyPanel.style.display = "none";
     workoutPanel.style.display = "none";
-    document.getElementById('programs-container').innerHTML = "";
 
-    // 1. Cek Status Log (Jika Ada History)
+    // LABEL STATUS LOG (COMPLETED / INCOMPLETE)
     if (log) {
         historyPanel.style.display = "block";
         if (log.status === 'completed') {
-            historyPanel.innerHTML = `<div class="log-status-completed"><span>✓</span> COMPLETED RECOVERY</div>`;
+            historyPanel.innerHTML = `<div class="log-status-completed">✓ COMPLETED</div>`;
         } else {
-            historyPanel.innerHTML = `<div class="log-status-incomplete"><span>⚠</span> INCOMPLETE - ${log.progress}% DONE</div>`;
+            historyPanel.innerHTML = `<div class="log-status-incomplete">⚠ INCOMPLETE - ${log.progress}% COMPLETED</div>`;
         }
     } else if (selectedDateStr < todayStr) {
-        // Masa lalu tanpa log
         historyPanel.style.display = "block";
-        historyPanel.innerHTML = `<div style="color:var(--gray-text); font-weight:800;">REST DAY / NO LOG</div>`;
+        historyPanel.innerHTML = `<div style="color:var(--gray-text); font-weight:800; font-size:1.2rem;">REST DAY / NO LOG</div>`;
     }
 
-    // 2. Render Workout List HANYA jika tanggal yang diklik adalah HARI INI
+    // LIST START/CONTINUE WORKOUT (Hanya muncul jika yang diklik hari ini)
     if (selectedDateStr === todayStr) {
         workoutPanel.style.display = "flex";
         const pContainer = document.getElementById('programs-container');
+        pContainer.innerHTML = "";
         
-        if (currentUser.customWorkouts.length === 0) {
-            pContainer.innerHTML = `<p style="color:var(--gray-text); font-weight:600;">No programs created yet.</p>`;
+        if (!currentUser.customWorkouts || currentUser.customWorkouts.length === 0) {
+            pContainer.innerHTML = `<p style="color:var(--gray-text); font-weight:800;">No programs created yet. Create one in My Workouts.</p>`;
             return;
         }
 
         currentUser.customWorkouts.forEach(cw => {
-            // Cek apakah workout ini adalah yang sedang "Incomplete" hari ini
             let isCurrentIncomplete = (log && log.status === 'incomplete' && log.workoutId === cw.id);
             let btnText = isCurrentIncomplete ? "CONTINUE WORKOUT" : "START";
             let btnClass = isCurrentIncomplete ? "btn-warning" : "";
-            let link = isCurrentIncomplete ? 
-                `active-workout.html?id=${cw.id}&resume=true` : 
-                `active-workout.html?id=${cw.id}`;
+            let link = isCurrentIncomplete ? `active-workout.html?id=${cw.id}&resume=true` : `active-workout.html?id=${cw.id}`;
 
             pContainer.innerHTML += `
                 <div class="workout-list-item">

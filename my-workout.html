@@ -3,31 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="assets/mini-logo.png">
     <title>Formix - My Workouts</title>
 </head>
 <body>
-    <nav class="navbar"><a href="index.html" class="logo">FORMIX</a><div class="nav-right"><div class="lang-dropdown"><div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div><div class="lang-dropdown-content"><a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a><a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a></div></div><div id="auth-container"></div></div></nav>
-    <header class="page-header">
-        <a href="javascript:history.back()" class="header-back-btn" data-i18n="btn_back">&larr; Back</a>
-        <h1 data-i18n="wkt_title">MY WORKOUTS</h1>
-    </header>
-    <main>
-        <div class="cw-header">
-            <h3>Your Routine</h3>
-            <button class="btn-primary" onclick="openCreateModal()" data-i18n="btn_create">+ Create Workout</button>
+    <nav class="navbar">
+        <a href="index.html" class="logo"><img src="assets/mini-logo.png"> FORMIX</a>
+        <div class="nav-right">
+            <div id="auth-container"></div>
         </div>
-        <div id="my-workout-list"></div>
+    </nav>
+    <header class="page-header">
+        <a href="javascript:history.back()" class="header-back-btn">&larr; Back</a>
+        <h1>MY WORKOUTS</h1>
+        <p>Manage and customize your personal training programs.</p>
+    </header>
+    
+    <main style="padding: 0;">
+        <div class="dashboard-layout fade-in">
+            <!-- SIDEBAR NAVIGASI -->
+            <aside class="sidebar">
+                <a href="my-workout.html" class="active">My Workouts</a>
+                <a href="workout-log.html">Workout Log</a>
+            </aside>
+            
+            <!-- KONTEN MANAJEMEN -->
+            <div class="dashboard-content">
+                <div class="cw-header">
+                    <h2>YOUR ROUTINES</h2>
+                    <button class="btn-primary" onclick="openCreateModal()">+ Create Workout</button>
+                </div>
+                <div id="my-workout-list"></div>
+            </div>
+        </div>
     </main>
 
+    <!-- Modal Form CRUD -->
     <div id="createModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2>Create Custom Workout</h2>
+            <h2 id="modal-title">Create Workout</h2>
             <div class="form-group"><label>Workout Name</label><input type="text" id="cw-name"></div>
             
-            <div class="form-group" style="background:var(--gray-light); padding:1rem; border:1px solid var(--black);">
+            <div class="form-group" style="background:var(--gray-light); padding:1rem; border:2px solid var(--black);">
                 <label>Find & Add Exercise</label>
                 <div class="filter-row">
                     <input type="text" id="filter-name" placeholder="Search name..." oninput="filterModalExercises()">
@@ -36,11 +56,11 @@
                 </div>
                 <div id="modal-ex-list" class="ex-list-modal"></div>
                 
-                <div id="ex-config" style="display:none; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--gray-border);">
-                    <h4 id="selected-ex-name" style="margin:0 0 0.5rem; color:var(--primary);"></h4>
-                    <select id="ex-type" onchange="toggleExType()" style="margin-bottom:0.5rem;">
-                        <option value="reps">Repetitions</option>
-                        <option value="timer">Timer</option>
+                <div id="ex-config" style="display:none; margin-top:1rem; padding-top:1rem; border-top:2px dashed var(--gray-border);">
+                    <h4 id="selected-ex-name" style="margin:0 0 1rem; color:var(--black); font-weight:900; text-transform:uppercase;"></h4>
+                    <select id="ex-type" onchange="toggleExType()" style="margin-bottom:1rem;">
+                        <option value="reps">Repetitions (Reps x Rounds)</option>
+                        <option value="timer">Timer (Seconds x Laps)</option>
                     </select>
                     <div id="reps-config" style="display:flex; gap:0.5rem; align-items:center;">
                         <input type="number" id="ex-reps" placeholder="Reps"> x 
@@ -50,16 +70,19 @@
                         <input type="number" id="ex-timer" placeholder="Seconds"> x
                         <input type="number" id="ex-laps" placeholder="Laps">
                     </div>
-                    <button class="btn-primary" type="button" onclick="addExerciseToPlan()" style="margin-top:1rem; width:100%;">+ Add to Plan</button>
+                    <button class="btn-primary" type="button" onclick="addExerciseToPlan()" style="margin-top:1.5rem; width:100%;">+ Add to Plan</button>
                 </div>
             </div>
 
-            <ul id="temp-exercises" style="margin-bottom:2rem; font-weight:bold; list-style:square; padding-left:1.5rem;"></ul>
-            <button class="btn-primary" onclick="saveCustomWorkout()" data-i18n="btn_save" style="width:100%; background:var(--primary);">Save Workout Plan</button>
+            <ul id="temp-exercises" style="margin-bottom:2rem; font-weight:800; list-style:square; padding-left:1.5rem; text-align:left;"></ul>
+            <button class="btn-primary" onclick="saveCustomWorkout()" style="width:100%;">Save Program</button>
         </div>
     </div>
 
+    <footer>&copy; 2026 FORMIX. All Rights Reserved.</footer>
+
     <script src="js/db/muscles.js"></script><script src="js/db/upper.js"></script><script src="js/db/lower.js"></script><script src="js/db/cardio.js"></script>
-    <script src="js/lang.js"></script><script src="js/auth.js"></script><script src="js/app.js"></script><script src="js/my-workout.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/my-workout.js"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@ let currentUser = JSON.parse(localStorage.getItem('formix_currentUser'));
 let activeCW = null;
 let currentExerciseIndex = 0;
 let totalExercises = 0;
+let workoutFinished = false;
 const workoutDB = [...upperWorkouts, ...lowerWorkouts, ...cardioWorkouts];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     totalExercises = activeCW.exercises.length;
 
+    // Load state from Log if resuming
     if (isResume) {
-        // Ambil data savedIndex dari formix_workout_logs hari ini
         const todayStr = getTodayStr();
         const logs = JSON.parse(localStorage.getItem('formix_workout_logs') || '{}');
         if (logs[currentUser.username] && logs[currentUser.username][todayStr]) {
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Tangkap tombol back browser
+    // Intersepsi Tombol Back Asli Browser
     history.pushState(null, null, location.href);
     window.onpopstate = function () {
         handleNavigationInterruption();
@@ -47,7 +48,6 @@ function getTodayStr() {
 }
 
 function updateProgress() {
-    // Progress dihitung berdasarkan latihan yang SUDAH dilewati
     let percent = Math.round((currentExerciseIndex / totalExercises) * 100);
     if(percent > 100) percent = 100;
     
@@ -76,7 +76,7 @@ function renderCurrentExercise() {
     const fullExData = workoutDB.find(w => w.id == ex.baseId);
     
     document.getElementById('aw-name').innerText = ex.name;
-    document.getElementById('aw-target').innerText = ex.info; // "12 Reps x 3 Rounds"
+    document.getElementById('aw-target').innerText = ex.info;
     document.getElementById('aw-img').src = fullExData ? fullExData.media_url : 'assets/mini-logo.png';
 }
 
@@ -94,13 +94,15 @@ function attemptExit(e) {
 }
 
 function handleNavigationInterruption() {
-    if (currentExerciseIndex > 0) {
-        // Tahan state dan tampilkan modal
+    if (workoutFinished) {
+        window.location.href = 'workout-log.html';
+        return;
+    }
+    
+    // Tahan state dan tampilkan modal konfirmasi
+    if (currentExerciseIndex >= 0) {
         history.pushState(null, null, location.href); 
         document.getElementById('exitModal').style.display = 'flex';
-    } else {
-        // Jika masih di exercise pertama (0%), boleh langsung keluar tanpa menyimpan log
-        window.location.href = 'workout-log.html';
     }
 }
 
@@ -109,7 +111,7 @@ function closeExitModal() {
 }
 
 function confirmExit() {
-    // Simpan status Incomplete
+    // Hitung persentase dan simpan sebagai incomplete
     let percent = Math.round((currentExerciseIndex / totalExercises) * 100);
     saveLog('incomplete', percent, currentExerciseIndex);
     window.location.href = 'workout-log.html';
@@ -117,6 +119,7 @@ function confirmExit() {
 
 // === LOGIC SELESAI WORKOUT ===
 function completeWorkout() {
+    workoutFinished = true;
     document.getElementById('progress-fill').style.width = '100%';
     document.getElementById('progress-text').innerText = '100%';
     saveLog('completed', 100, totalExercises);
@@ -132,14 +135,19 @@ function saveLog(status, percent, savedIdx) {
         logs[currentUser.username] = {};
     }
 
-    logs[currentUser.username][todayStr] = {
-        workoutId: activeCW.id,
-        workoutName: activeCW.name,
-        status: status,
-        progress: percent,
-        savedIndex: savedIdx,
-        timestamp: new Date().getTime()
-    };
+    // Jika sebelumnya sudah selesai di hari ini, jangan di-override oleh status incomplete jika user memainkan workout lain
+    if (logs[currentUser.username][todayStr] && logs[currentUser.username][todayStr].status === 'completed' && status === 'incomplete') {
+        // Jangan turun kasta di kalender
+    } else {
+        logs[currentUser.username][todayStr] = {
+            workoutId: activeCW.id,
+            workoutName: activeCW.name,
+            status: status,
+            progress: percent,
+            savedIndex: savedIdx,
+            timestamp: new Date().getTime()
+        };
+    }
 
     localStorage.setItem('formix_workout_logs', JSON.stringify(logs));
 }
