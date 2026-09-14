@@ -1,6 +1,6 @@
 let currentUser = JSON.parse(localStorage.getItem('formix_currentUser'));
 let activeCW = null;
-let currentLogId = null; // Menyimpan ID log jika melakukan Continue Workout
+let currentLogId = null; 
 let currentExerciseIndex = 0;
 let totalExercises = 0;
 let workoutFinished = false;
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const params = new URLSearchParams(window.location.search);
     const cwId = params.get('id');
-    currentLogId = params.get('logId'); // Bisa null jika sesi baru
+    currentLogId = params.get('logId'); 
     
     const baseCW = currentUser.customWorkouts.find(w => w.id === cwId);
     if(!baseCW || baseCW.exercises.length === 0) {
@@ -22,12 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // Deep clone agar tidak merusak cetak biru (blueprint) program aslinya
+    // CLONE SNAPSHOT DATA UTUH SAAT INISIALISASI
     activeCW = JSON.parse(JSON.stringify(baseCW));
     totalExercises = activeCW.exercises.length;
 
     if (currentLogId) {
-        // RESUME MODE: Muat data dari log array localStorage
         const todayStr = getTodayStr();
         const logs = JSON.parse(localStorage.getItem('formix_workout_logs') || '{}');
         if (logs[currentUser.username] && logs[currentUser.username][todayStr]) {
@@ -35,22 +34,16 @@ document.addEventListener("DOMContentLoaded", () => {
             if (savedLog) {
                 currentExerciseIndex = savedLog.savedIndex || 0;
                 if(savedLog.savedProgressObj) progress = savedLog.savedProgressObj;
-                // Gunakan snapshot jika ingin persis 100% sama dengan saat itu
                 if(savedLog.snapshot) activeCW.exercises = savedLog.snapshot; 
             }
         }
     } else {
-        // NEW SESSION MODE: init progress 0
         activeCW.exercises.forEach((ex, idx) => { progress[idx] = 0; });
-        // Buat ID log unik untuk sesi ini
         currentLogId = Date.now(); 
     }
 
-    // Intersepsi Tombol Back Asli Browser
     history.pushState(null, null, location.href);
-    window.onpopstate = function () {
-        handleNavigationInterruption();
-    };
+    window.onpopstate = function () { handleNavigationInterruption(); };
 
     renderCurrentExercise();
 });
@@ -103,23 +96,10 @@ function renderCurrentExercise() {
         btnNext.disabled = !isDone; 
     }
 
-    // Visual Penguncian Tombol Next
-    if(!isDone) {
-        btnNext.style.opacity = '0.5';
-        btnNext.style.cursor = 'not-allowed';
-        btnFinish.style.opacity = '0.5';
-        btnFinish.style.cursor = 'not-allowed';
-    } else {
-        btnNext.style.opacity = '1';
-        btnNext.style.cursor = 'pointer';
-        btnFinish.style.opacity = '1';
-        btnFinish.style.cursor = 'pointer';
-    }
-
     renderControls(ex, isDone);
 }
 
-// LOGIKA RENDER KOLOM INPUT & TIMER
+// LOGIKA DUAL SISTEM: MANUAL RONDE / AUTO TIMER
 function renderControls(ex, isDone) {
     const container = document.getElementById('active-controls');
     let trackUI = '';
@@ -133,7 +113,7 @@ function renderControls(ex, isDone) {
                 <span><input type="number" value="${progress[idx]}" onchange="manualUpdateRound(${idx}, this.value)" style="width:70px; text-align:center; font-size:1.5rem; font-weight:900; border:2px solid var(--black); padding:0.2rem;" ${isDone?'disabled':''}> / ${totalRounds} Rnd</span>
                 <button class="btn-icon" onclick="updateRound(${idx}, 1)" ${isDone?'disabled':''}>+</button>
             </div>
-            ${isDone ? `<div style="color:var(--success); font-weight:900; margin-top:10px;">✓ TARGET MET</div>` : ''}
+            ${isDone ? `<div style="color:var(--success); font-weight:900; margin-top:1rem; font-size:1.2rem;">✓ TARGET MET</div>` : ''}
         `;
     } else {
         const totalLaps = parseInt(ex.laps) || 1;
@@ -145,8 +125,8 @@ function renderControls(ex, isDone) {
             const currentLap = progress[idx] + 1;
             trackUI = `
                 <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
-                    <span style="font-size:3.5rem; font-weight:900; font-variant-numeric: tabular-nums; color:var(--primary);" id="time-disp-${idx}">${displayTime}s</span>
-                    <span style="font-weight:800; color:var(--black); font-size:1.2rem;">Lap ${currentLap} of ${totalLaps}</span>
+                    <span style="font-size:3.5rem; font-weight:900; font-variant-numeric: tabular-nums; color:var(--black);" id="time-disp-${idx}">${displayTime}s</span>
+                    <span style="font-weight:800; color:var(--gray-text); font-size:1.2rem; text-transform:uppercase;">Lap ${currentLap} of ${totalLaps}</span>
                     <button class="btn-primary" id="btn-time-${idx}" onclick="startCountdown(${idx}, ${parseInt(ex.timer)})" ${isRunning?'disabled':''} style="margin-top:10px; width:200px;">
                         ${isRunning ? 'RUNNING...' : 'START TIMER'}
                     </button>
@@ -190,7 +170,7 @@ function startCountdown(idx, totalSec) {
             clearInterval(runningTimers[idx].interval);
             delete runningTimers[idx];
             progress[idx]++; 
-            renderCurrentExercise(); // Re-render unlocks next button if complete
+            renderCurrentExercise(); // Unlock tombol next
         }
     }, 1000);
 }
@@ -202,7 +182,7 @@ function navExercise(dir) {
     renderCurrentExercise();
 }
 
-// === LOGIC INTERUPSI & SAVE PUSH ARRAY MULTI-SESSION ===
+// LOGIKA INTERUPSI & SNAPSHOT RIWAYAT
 function attemptExit(e) {
     if(e) e.preventDefault();
     handleNavigationInterruption();
@@ -213,7 +193,6 @@ function handleNavigationInterruption() {
         window.location.href = 'workout-log.html';
         return;
     }
-    // Jika belum finish, munculkan modal peringatan interupsi
     history.pushState(null, null, location.href); 
     document.getElementById('exitModal').style.display = 'flex';
 }
@@ -236,7 +215,6 @@ function completeWorkout() {
     document.getElementById('finishModal').style.display = 'flex';
 }
 
-// ARRAY PUSH UNTUK MULTI SESSION & SNAPSHOT
 function saveLog(status, percent, savedIdx) {
     const todayStr = getTodayStr();
     let logs = JSON.parse(localStorage.getItem('formix_workout_logs') || '{}');
@@ -244,17 +222,12 @@ function saveLog(status, percent, savedIdx) {
     if (!logs[currentUser.username]) logs[currentUser.username] = {};
     if (!logs[currentUser.username][todayStr]) logs[currentUser.username][todayStr] = [];
 
-    // Kloning penuh (Snapshot Data Object)
     const snapshotData = JSON.parse(JSON.stringify(activeCW.exercises));
-
-    // Cek apakah ini resume log yang sudah ada
     let existingLogIndex = logs[currentUser.username][todayStr].findIndex(l => l.logId == currentLogId);
 
     if (existingLogIndex !== -1) {
-        // Update Log yang sedang di-resume
-        // Proteksi: Jangan turun kasta ke incomplete jika sebelumnya sudah completed
         if (logs[currentUser.username][todayStr][existingLogIndex].status === 'completed' && status === 'incomplete') {
-            // Abaikan
+            // Abaikan jika sudah pernah complete
         } else {
             logs[currentUser.username][todayStr][existingLogIndex].status = status;
             logs[currentUser.username][todayStr][existingLogIndex].progress = percent;
@@ -263,7 +236,6 @@ function saveLog(status, percent, savedIdx) {
             logs[currentUser.username][todayStr][existingLogIndex].snapshot = snapshotData;
         }
     } else {
-        // Buat Log Baru dalam array (Multi-Session Logging)
         logs[currentUser.username][todayStr].push({
             logId: currentLogId,
             workoutId: activeCW.id,

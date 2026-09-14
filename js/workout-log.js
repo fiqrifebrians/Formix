@@ -52,7 +52,6 @@ function renderCalendar() {
         
         if (loopDateStr === todayStr) classes += " today";
         
-        // INDIKATOR VISUAL JIKA ARRAY LOG MEMILIKI ISI
         if (userLogs[loopDateStr] && userLogs[loopDateStr].length > 0) {
             classes += " has-log";
         }
@@ -68,10 +67,6 @@ function selectDate(y, m, d) {
     selectedDateStr = formatDateStr(new Date(y, m, d));
     renderCalendar(); 
     
-    const dateObj = new Date(y, m, d);
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    document.getElementById('selected-date-title').innerText = dateObj.toLocaleDateString('en-US', options).toUpperCase();
-
     const userLogs = getLogs();
     const dayLogs = userLogs[selectedDateStr] || [];
     const todayStr = formatDateStr(new Date());
@@ -80,7 +75,6 @@ function selectDate(y, m, d) {
     const workoutPanel = document.getElementById('today-workout-list');
 
     historyPanel.style.display = "none";
-    workoutPanel.style.display = "none";
     historyPanel.innerHTML = "";
 
     // 1. RENDER MULTI-SESSION LOGS
@@ -92,15 +86,14 @@ function selectDate(y, m, d) {
             
             if (log.status === 'completed') {
                 statusHtml = `<div class="log-status-completed" style="flex:1; padding:0.8rem; font-size:0.9rem;"><span>✓</span> ${log.workoutName}</div>`;
-                btnAction = `<button class="btn-primary" onclick="viewSnapshot(${log.logId}, '${selectedDateStr}')" style="font-size:0.7rem; padding:0.5rem;">VIEW DETAILS</button>`;
+                btnAction = `<button class="btn-primary" onclick="viewSnapshot(${log.logId}, '${selectedDateStr}')" style="font-size:0.7rem; padding:0.5rem; box-shadow:none;">VIEW DETAILS</button>`;
             } else {
                 statusHtml = `<div class="log-status-incomplete" style="flex:1; padding:0.8rem; font-size:0.9rem;"><span>⚠</span> ${log.workoutName} (${log.progress}%)</div>`;
                 if (selectedDateStr === todayStr) {
-                    btnAction = `<button class="btn-primary btn-warning" onclick="window.location.href='active-workout.html?id=${log.workoutId}&logId=${log.logId}'" style="font-size:0.7rem; padding:0.5rem; color:white; border-color:white;">CONTINUE</button>`;
+                    btnAction = `<button class="btn-primary" onclick="window.location.href='active-workout.html?id=${log.workoutId}&logId=${log.logId}'" style="font-size:0.7rem; padding:0.5rem; background:var(--warning); border-color:var(--warning); box-shadow:none;">CONTINUE</button>`;
                 }
             }
             
-            // Render Baris Log dengan Icon Trash (Delete Log)
             historyPanel.innerHTML += `
                 <div style="display:flex; align-items:center; gap:10px; border:2px solid var(--black); background:var(--white); box-shadow:3px 3px 0px var(--black);">
                     ${statusHtml}
@@ -111,38 +104,33 @@ function selectDate(y, m, d) {
                 </div>
             `;
         });
-    } else if (selectedDateStr < todayStr) {
-        historyPanel.style.display = "block";
-        historyPanel.innerHTML = `<div style="color:var(--gray-text); font-weight:800; font-size:1.2rem;">REST DAY / NO LOGS</div>`;
     }
 
-    // 2. RENDER MENU LAUNCH HANYA UNTUK HARI INI
-    if (selectedDateStr === todayStr) {
-        workoutPanel.style.display = "flex";
-        const pContainer = document.getElementById('programs-container');
-        pContainer.innerHTML = "";
+    // 2. SELALU RENDER MENU LAUNCH WORKOUT (Sesuai Poin 2)
+    workoutPanel.style.display = "flex";
+    const pContainer = document.getElementById('programs-container');
+    pContainer.innerHTML = "";
+    
+    if (!currentUser.customWorkouts || currentUser.customWorkouts.length === 0) {
+        pContainer.innerHTML = `<p style="color:var(--gray-text); font-weight:800;">No programs created yet. Create one in My Workouts.</p>`;
+        return;
+    }
+
+    currentUser.customWorkouts.forEach(cw => {
+        let isToday = (selectedDateStr === todayStr);
+        let incompleteLog = [...dayLogs].reverse().find(l => l.workoutId === cw.id && l.status === 'incomplete');
         
-        if (!currentUser.customWorkouts || currentUser.customWorkouts.length === 0) {
-            pContainer.innerHTML = `<p style="color:var(--gray-text); font-weight:800;">No programs created yet. Create one in My Workouts.</p>`;
-            return;
-        }
+        let btnText = (incompleteLog && isToday) ? "CONTINUE WORKOUT" : "START";
+        let btnStyle = (incompleteLog && isToday) ? "background:var(--warning); border-color:var(--warning);" : "";
+        let link = (incompleteLog && isToday) ? `active-workout.html?id=${cw.id}&logId=${incompleteLog.logId}` : `active-workout.html?id=${cw.id}`;
 
-        currentUser.customWorkouts.forEach(cw => {
-            // Karena satu program bisa punya banyak log, kita cari log incomplete terakhir untuk program ini
-            let incompleteLog = [...dayLogs].reverse().find(l => l.workoutId === cw.id && l.status === 'incomplete');
-            
-            let btnText = incompleteLog ? "CONTINUE WORKOUT" : "START NEW SESSION";
-            let btnClass = incompleteLog ? "btn-warning" : "btn-success";
-            let link = incompleteLog ? `active-workout.html?id=${cw.id}&logId=${incompleteLog.logId}` : `active-workout.html?id=${cw.id}`;
-
-            pContainer.innerHTML += `
-                <div class="workout-list-item">
-                    <h4>${cw.name}</h4>
-                    <button class="btn-primary ${btnClass}" onclick="window.location.href='${link}'">${btnText}</button>
-                </div>
-            `;
-        });
-    }
+        pContainer.innerHTML += `
+            <div class="workout-list-item">
+                <h4>${cw.name}</h4>
+                <button class="btn-primary" style="${btnStyle}" onclick="window.location.href='${link}'">${btnText}</button>
+            </div>
+        `;
+    });
 }
 
 // LOGIC VIEW SNAPSHOT HISTORY
@@ -157,9 +145,9 @@ function viewSnapshot(logId, dateStr) {
     
     log.snapshot.forEach(ex => {
         list.innerHTML += `
-            <li style="margin-bottom:10px; padding:15px; border:2px solid var(--black); background:var(--gray-light); box-shadow:3px 3px 0px var(--black);">
-                <div style="font-size:1.1rem;">${ex.name}</div>
-                <div style="color:var(--primary); font-size:0.9rem;">${ex.info}</div>
+            <li style="margin-bottom:10px; padding:15px; border:2px solid var(--black); background:var(--white); box-shadow:3px 3px 0px var(--black);">
+                <div style="font-size:1.1rem; color:var(--black); text-transform:uppercase;">${ex.name}</div>
+                <div style="color:var(--gray-text); font-size:0.9rem;">${ex.info}</div>
             </li>`;
     });
     
@@ -173,7 +161,6 @@ function deleteLog(dateStr, logId) {
     if(logs[currentUser.username] && logs[currentUser.username][dateStr]) {
         logs[currentUser.username][dateStr] = logs[currentUser.username][dateStr].filter(l => l.logId !== logId);
         
-        // Hapus array jika sudah kosong
         if(logs[currentUser.username][dateStr].length === 0) {
             delete logs[currentUser.username][dateStr];
         }

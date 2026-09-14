@@ -11,7 +11,6 @@
 <body>
     <nav class="navbar">
         <a href="index.html" class="logo">FORMIX</a>
-        <!-- INTERUPSI TOMBOL BACK -->
         <a href="#" onclick="attemptExit(event)" class="btn-primary btn-danger" style="margin:0; box-shadow:none;">&larr; LEAVE SESSION</a>
     </nav>
     
@@ -25,21 +24,19 @@
 
     <main style="padding-top: 1rem; display:flex; flex-direction:column; align-items:center;">
         
-        <!-- SATU KARTU SLIDER UTAMA -->
         <div class="active-workout-display fade-in" style="width: 100%; max-width: 800px;">
             <div id="aw-media-container" style="margin-bottom: 2rem;">
-                <img id="aw-img" src="" style="width:100%; max-height:400px; object-fit:contain; border:2px solid var(--black); border-radius: 8px;">
+                <img id="aw-img" src="" style="width:100%; max-height:400px; object-fit:contain; border:2px solid var(--black); border-radius: 0; box-shadow: 4px 4px 0px var(--black);">
             </div>
             <h2 id="aw-name" class="active-exercise-name">LOADING...</h2>
-            <div id="aw-target" class="active-exercise-target">--</div>
+            <div id="aw-target" class="active-exercise-target" style="border-radius:0;">--</div>
             
-            <!-- PANEL KONTROL DINAMIS (Manual Rounds / Timer Lock) -->
             <div id="active-controls" class="active-controls-panel">
                 <!-- Injeksi JS -->
             </div>
             
             <div style="display:flex; justify-content:center; gap: 1rem; margin-top:2rem;">
-                <button class="btn-primary" id="btn-prev" onclick="navExercise(-1)" disabled style="background:var(--gray-text); border-color:var(--gray-text);">&larr; PREVIOUS</button>
+                <button class="btn-primary" id="btn-prev" onclick="navExercise(-1)" disabled>&larr; PREVIOUS</button>
                 <button class="btn-primary" id="btn-next" onclick="navExercise(1)">NEXT EXERCISE &rarr;</button>
                 <button class="btn-primary btn-success" id="btn-finish" style="display:none; width:100%; font-size:1.2rem; padding:1.2rem;" onclick="completeWorkout()">COMPLETE WORKOUT ✓</button>
             </div>
@@ -50,7 +47,7 @@
     <!-- MODAL PERINGATAN KELUAR -->
     <div id="exitModal" class="modal">
         <div class="modal-content text-center">
-            <h2 style="color:var(--primary); border-bottom-color:var(--primary);">WAIT!</h2>
+            <h2 style="border-bottom:2px solid var(--black);">WAIT!</h2>
             <p style="font-weight:800; font-size:1.2rem;">You haven't finished your session.</p>
             <p>Are you sure you want to leave and save this workout as incomplete in your history log?</p>
             <div class="modal-actions">
@@ -63,7 +60,7 @@
     <!-- MODAL FINISH -->
     <div id="finishModal" class="modal">
         <div class="modal-content text-center">
-            <h2 style="font-size:2.5rem; border-bottom:3px solid var(--success); color:var(--success);">OUTSTANDING!</h2>
+            <h2 style="font-size:2.5rem; border-bottom:3px solid var(--black);">OUTSTANDING!</h2>
             <p style="font-size:1.1rem; color:var(--black); font-weight:800; margin-top:1.5rem;">You have successfully conquered all exercises in this routine.</p>
             <button class="btn-primary btn-success" onclick="window.location.href='workout-log.html'" style="margin-top:2rem; width:100%; font-size:1.1rem;">SAVE & RETURN TO LOG</button>
         </div>

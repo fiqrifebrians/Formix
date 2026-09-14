@@ -14,7 +14,7 @@ function loadMyWorkouts() {
     const container = document.getElementById('my-workout-list');
     container.innerHTML = "";
     if (!currentUser.customWorkouts || currentUser.customWorkouts.length === 0) {
-        container.innerHTML = `<p style="text-align:center; color:var(--gray-text); font-weight:800; padding: 2rem; border: 2px dashed var(--gray-border);">No custom workouts found. Create your first program!</p>`;
+        container.innerHTML = `<p style="text-align:center; color:var(--gray-text); font-weight:800; padding: 2rem; border: 2px solid var(--black);">No custom workouts found. Create your first program!</p>`;
         return;
     }
     currentUser.customWorkouts.forEach((cw, idx) => {
@@ -49,7 +49,7 @@ function openEditModal(id) {
     editModeId = id;
     document.getElementById('modal-title').innerText = "EDIT WORKOUT";
     document.getElementById('cw-name').value = cw.name;
-    tempExercises = JSON.parse(JSON.stringify(cw.exercises)); // clone
+    tempExercises = JSON.parse(JSON.stringify(cw.exercises)); // clone utuh
     renderTempExercises();
     document.getElementById('createModal').style.display = 'flex';
     filterModalExercises();
@@ -60,7 +60,14 @@ function closeModal() { document.getElementById('createModal').style.display = '
 function populateSelects() {
     const mSel = document.getElementById('filter-muscle');
     const eSel = document.getElementById('filter-equip');
+    
+    mSel.innerHTML = '<option value="all">All Muscles</option>';
+    eSel.innerHTML = '<option value="all">All Equipments</option>';
+    
     muscles.forEach(m => { mSel.innerHTML += `<option value="${m.id}">${m.name}</option>`; });
+    // SPEC 3: Tambahkan filter Cardio secara eksplisit
+    mSel.innerHTML += `<option value="cardio">Cardio</option>`;
+    
     equipments.forEach(e => { eSel.innerHTML += `<option value="${e.id}">${e.name}</option>`; });
 }
 
@@ -72,7 +79,9 @@ function filterModalExercises() {
 
     let filtered = workoutDB.filter(w => {
         let passName = w.name.toLowerCase().includes(nQ);
-        let passMusc = mQ === "all" ? true : w.muscle === mQ;
+        // Tangani "Cardio" logic muscle fallback
+        let muscleData = w.muscle || w.category; 
+        let passMusc = mQ === "all" ? true : muscleData === mQ;
         let passEquip = eQ === "all" ? true : w.equipment === eQ;
         return passName && passMusc && passEquip;
     });
@@ -135,7 +144,7 @@ function removeTempExercise(idx) {
     renderTempExercises();
 }
 
-// === HTML5 DRAG AND DROP REORDER LOGIC ===
+// DRAG AND DROP REORDER LOGIC HTML5
 let dragStartIndex;
 
 window.dragStart = function(e, index) {
@@ -143,19 +152,13 @@ window.dragStart = function(e, index) {
     e.dataTransfer.effectAllowed = "move";
     e.target.closest('.draggable-item').classList.add("dragging");
 };
-window.dragOver = function(e) {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = "move";
-};
+window.dragOver = function(e) { e.preventDefault(); e.dataTransfer.dropEffect = "move"; };
 window.drop = function(e, index) {
     e.preventDefault();
-    const dragEndIndex = index;
-    swapItems(dragStartIndex, dragEndIndex);
+    swapItems(dragStartIndex, index);
     e.target.closest('.draggable-item').classList.remove("dragging");
 };
-window.dragEnd = function(e) {
-    e.target.closest('.draggable-item').classList.remove("dragging");
-};
+window.dragEnd = function(e) { e.target.closest('.draggable-item').classList.remove("dragging"); };
 
 function swapItems(fromIndex, toIndex) {
     const itemToMove = tempExercises.splice(fromIndex, 1)[0];
@@ -168,9 +171,9 @@ function renderTempExercises() {
         <li class="draggable-item" draggable="true" ondragstart="dragStart(event, ${idx})" ondragover="dragOver(event)" ondrop="drop(event, ${idx})" ondragend="dragEnd(event)">
             <div style="display:flex; align-items:center;">
                 <span class="drag-handle">☰</span>
-                <span>${e.name} — <span style="color:var(--primary)">${e.info}</span></span>
+                <span>${e.name} — <span style="color:var(--gray-text)">${e.info}</span></span>
             </div>
-            <button type="button" class="btn-icon" style="padding: 2px 8px; font-size:0.8rem; border-color:var(--primary); color:var(--primary);" onclick="removeTempExercise(${idx})">X</button>
+            <button type="button" class="btn-icon" style="padding: 2px 8px; font-size:0.8rem; border:none; box-shadow:none;" onclick="removeTempExercise(${idx})">X</button>
         </li>
     `).join('');
     document.getElementById('temp-exercises').innerHTML = listHtml;
