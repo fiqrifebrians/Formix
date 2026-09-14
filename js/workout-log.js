@@ -75,6 +75,7 @@ function selectDate(y, m, d) {
     const workoutPanel = document.getElementById('today-workout-list');
 
     historyPanel.style.display = "none";
+    workoutPanel.style.display = "none";
     historyPanel.innerHTML = "";
 
     // 1. RENDER MULTI-SESSION LOGS
@@ -90,7 +91,7 @@ function selectDate(y, m, d) {
             } else {
                 statusHtml = `<div class="log-status-incomplete" style="flex:1; padding:0.8rem; font-size:0.9rem;"><span>⚠</span> ${log.workoutName} (${log.progress}%)</div>`;
                 if (selectedDateStr === todayStr) {
-                    btnAction = `<button class="btn-primary" onclick="window.location.href='active-workout.html?id=${log.workoutId}&logId=${log.logId}'" style="font-size:0.7rem; padding:0.5rem; background:var(--warning); border-color:var(--warning); box-shadow:none;">CONTINUE</button>`;
+                    btnAction = `<button class="btn-primary btn-warning" onclick="window.location.href='active-workout.html?id=${log.workoutId}&logId=${log.logId}&resume=true'" style="font-size:0.7rem; padding:0.5rem; box-shadow:none;">CONTINUE</button>`;
                 }
             }
             
@@ -99,41 +100,46 @@ function selectDate(y, m, d) {
                     ${statusHtml}
                     ${btnAction}
                     <button class="btn-trash" onclick="deleteLog('${selectedDateStr}', ${log.logId})" title="Delete History">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2 2v2"></path></svg>
                     </button>
                 </div>
             `;
         });
+    } else if (selectedDateStr < todayStr) {
+        historyPanel.style.display = "block";
+        historyPanel.innerHTML = `<div style="color:var(--gray-text); font-weight:800; font-size:1.2rem;">REST DAY / NO LOGS</div>`;
     }
 
-    // 2. SELALU RENDER MENU LAUNCH WORKOUT (Sesuai Poin 2)
-    workoutPanel.style.display = "flex";
-    const pContainer = document.getElementById('programs-container');
-    pContainer.innerHTML = "";
-    
-    if (!currentUser.customWorkouts || currentUser.customWorkouts.length === 0) {
-        pContainer.innerHTML = `<p style="color:var(--gray-text); font-weight:800;">No programs created yet. Create one in My Workouts.</p>`;
-        return;
-    }
-
-    currentUser.customWorkouts.forEach(cw => {
-        let isToday = (selectedDateStr === todayStr);
-        let incompleteLog = [...dayLogs].reverse().find(l => l.workoutId === cw.id && l.status === 'incomplete');
+    // 2. SELALU RENDER MENU LAUNCH HANYA UNTUK HARI INI
+    if (selectedDateStr === todayStr) {
+        workoutPanel.style.display = "flex";
+        const pContainer = document.getElementById('programs-container');
+        pContainer.innerHTML = "";
         
-        let btnText = (incompleteLog && isToday) ? "CONTINUE WORKOUT" : "START";
-        let btnStyle = (incompleteLog && isToday) ? "background:var(--warning); border-color:var(--warning);" : "";
-        let link = (incompleteLog && isToday) ? `active-workout.html?id=${cw.id}&logId=${incompleteLog.logId}` : `active-workout.html?id=${cw.id}`;
+        if (!currentUser.customWorkouts || currentUser.customWorkouts.length === 0) {
+            pContainer.innerHTML = `<p style="color:var(--gray-text); font-weight:800;">No programs created yet. Go to My Workouts to build one.</p>`;
+            return;
+        }
 
-        pContainer.innerHTML += `
-            <div class="workout-list-item">
-                <h4>${cw.name}</h4>
-                <button class="btn-primary" style="${btnStyle}" onclick="window.location.href='${link}'">${btnText}</button>
-            </div>
-        `;
-    });
+        currentUser.customWorkouts.forEach(cw => {
+            // Cari apakah program ini punya status incomplete hari ini
+            let incompleteLog = [...dayLogs].reverse().find(l => l.workoutId === cw.id && l.status === 'incomplete');
+            
+            let btnText = incompleteLog ? "CONTINUE WORKOUT" : "START NEW SESSION";
+            let btnClass = incompleteLog ? "btn-warning" : "btn-success";
+            let link = incompleteLog ? `active-workout.html?id=${cw.id}&logId=${incompleteLog.logId}&resume=true` : `active-workout.html?id=${cw.id}`;
+
+            pContainer.innerHTML += `
+                <div class="workout-list-item">
+                    <h4>${cw.name}</h4>
+                    <button class="btn-primary ${btnClass}" onclick="window.location.href='${link}'">${btnText}</button>
+                </div>
+            `;
+        });
+    }
 }
 
-// LOGIC VIEW SNAPSHOT HISTORY
+// VIEW SNAPSHOT DETAILS
 function viewSnapshot(logId, dateStr) {
     const logs = getLogs();
     const dayLogs = logs[dateStr];
@@ -145,7 +151,7 @@ function viewSnapshot(logId, dateStr) {
     
     log.snapshot.forEach(ex => {
         list.innerHTML += `
-            <li style="margin-bottom:10px; padding:15px; border:2px solid var(--black); background:var(--white); box-shadow:3px 3px 0px var(--black);">
+            <li style="margin-bottom:10px; padding:15px; border:2px solid var(--black); background:var(--gray-light); box-shadow:3px 3px 0px var(--black);">
                 <div style="font-size:1.1rem; color:var(--black); text-transform:uppercase;">${ex.name}</div>
                 <div style="color:var(--gray-text); font-size:0.9rem;">${ex.info}</div>
             </li>`;
@@ -154,7 +160,6 @@ function viewSnapshot(logId, dateStr) {
     document.getElementById('snapshotModal').style.display = "flex";
 }
 
-// LOGIC DELETE HISTORY
 function deleteLog(dateStr, logId) {
     if(!confirm("Are you sure you want to permanently delete this workout history?")) return;
     const logs = JSON.parse(localStorage.getItem('formix_workout_logs') || '{}');

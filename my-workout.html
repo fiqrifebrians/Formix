@@ -43,8 +43,7 @@
             <h2 id="modal-title">Create Workout</h2>
             <div class="form-group"><label>Workout Name</label><input type="text" id="cw-name"></div>
             
-            <div class="form-group" style="background:var(--white); padding:1.5rem; border:2px solid var(--black); box-shadow:4px 4px 0px var(--black);">
-                <label>Find & Add Exercise</label>
+            <div class="form-group" style="background:var(--gray-light); padding:1rem; border:2px solid var(--black);">
                 <div class="filter-row">
                     <input type="text" id="filter-name" placeholder="Search name..." oninput="filterModalExercises()">
                     <select id="filter-muscle" onchange="filterModalExercises()"><option value="all">All Muscles</option></select>
@@ -52,7 +51,7 @@
                 </div>
                 <div id="modal-ex-list" class="ex-list-modal"></div>
                 
-                <div id="ex-config" style="display:none; margin-top:1rem; padding-top:1rem; border-top:2px solid var(--black);">
+                <div id="ex-config" style="display:none; margin-top:1rem; padding-top:1rem; border-top:2px dashed var(--gray-border);">
                     <h4 id="selected-ex-name" style="margin:0 0 1rem; color:var(--black); font-weight:900; text-transform:uppercase;"></h4>
                     <select id="ex-type" onchange="toggleExType()" style="margin-bottom:1rem;">
                         <option value="reps">Repetitions (Reps x Rounds)</option>
@@ -71,9 +70,7 @@
             </div>
 
             <!-- Teks Label telah dibersihkan -->
-            <label style="font-weight:900; text-transform:uppercase; font-size:0.9rem; margin-bottom:0.5rem; display:block; text-align:left;">Workout Sequence</label>
             <ul id="temp-exercises" style="margin-bottom:2rem; padding-left:0; list-style:none;"></ul>
-            
             <button class="btn-primary" onclick="saveCustomWorkout()" style="width:100%;">Save Program</button>
         </div>
     </div>

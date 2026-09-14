@@ -14,7 +14,7 @@ function loadMyWorkouts() {
     const container = document.getElementById('my-workout-list');
     container.innerHTML = "";
     if (!currentUser.customWorkouts || currentUser.customWorkouts.length === 0) {
-        container.innerHTML = `<p style="text-align:center; color:var(--gray-text); font-weight:800; padding: 2rem; border: 2px solid var(--black);">No custom workouts found. Create your first program!</p>`;
+        container.innerHTML = `<p style="text-align:center; color:var(--gray-text); font-weight:800; padding: 2rem; border: 2px dashed var(--gray-border);">No custom workouts found. Create your first program!</p>`;
         return;
     }
     currentUser.customWorkouts.forEach((cw, idx) => {
@@ -49,7 +49,7 @@ function openEditModal(id) {
     editModeId = id;
     document.getElementById('modal-title').innerText = "EDIT WORKOUT";
     document.getElementById('cw-name').value = cw.name;
-    tempExercises = JSON.parse(JSON.stringify(cw.exercises)); // clone utuh
+    tempExercises = JSON.parse(JSON.stringify(cw.exercises));
     renderTempExercises();
     document.getElementById('createModal').style.display = 'flex';
     filterModalExercises();
@@ -79,7 +79,6 @@ function filterModalExercises() {
 
     let filtered = workoutDB.filter(w => {
         let passName = w.name.toLowerCase().includes(nQ);
-        // Tangani "Cardio" logic muscle fallback
         let muscleData = w.muscle || w.category; 
         let passMusc = mQ === "all" ? true : muscleData === mQ;
         let passEquip = eQ === "all" ? true : w.equipment === eQ;
@@ -144,7 +143,6 @@ function removeTempExercise(idx) {
     renderTempExercises();
 }
 
-// DRAG AND DROP REORDER LOGIC HTML5
 let dragStartIndex;
 
 window.dragStart = function(e, index) {

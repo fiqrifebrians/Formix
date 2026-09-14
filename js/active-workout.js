@@ -6,6 +6,7 @@ let totalExercises = 0;
 let workoutFinished = false;
 let progress = {}; 
 let runningTimers = {};
+let totalTargetProgress = 0; // Total seluruh rounds/laps
 const workoutDB = [...upperWorkouts, ...lowerWorkouts, ...cardioWorkouts];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,9 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // CLONE SNAPSHOT DATA UTUH SAAT INISIALISASI
     activeCW = JSON.parse(JSON.stringify(baseCW));
     totalExercises = activeCW.exercises.length;
+
+    // Kalkulasi Total Target Progress
+    activeCW.exercises.forEach(ex => {
+        if(ex.type === 'reps') totalTargetProgress += (parseInt(ex.rounds) || 1);
+        if(ex.type === 'timer') totalTargetProgress += (parseInt(ex.laps) || 1);
+    });
 
     if (currentLogId) {
         const todayStr = getTodayStr();
@@ -42,8 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
         currentLogId = Date.now(); 
     }
 
+    // Hindari back button browser default
     history.pushState(null, null, location.href);
-    window.onpopstate = function () { handleNavigationInterruption(); };
+    window.onpopstate = attemptExit;
 
     renderCurrentExercise();
 });
@@ -54,11 +61,20 @@ function getTodayStr() {
 }
 
 function updateProgress() {
-    let percent = Math.round((currentExerciseIndex / totalExercises) * 100);
+    let currentCompletedProgress = 0;
+    activeCW.exercises.forEach((ex, idx) => {
+        currentCompletedProgress += (progress[idx] || 0);
+    });
+
+    let percent = 0;
+    if(totalTargetProgress > 0) {
+        percent = Math.round((currentCompletedProgress / totalTargetProgress) * 100);
+    }
     if(percent > 100) percent = 100;
     
     document.getElementById('progress-fill').style.width = percent + '%';
     document.getElementById('progress-text').innerText = percent + '%';
+    return percent; // Kembalikan nilai untuk dipakai saat saving
 }
 
 function checkExerciseComplete(idx) {
@@ -96,10 +112,17 @@ function renderCurrentExercise() {
         btnNext.disabled = !isDone; 
     }
 
+    if(!isDone) {
+        btnNext.style.opacity = '0.5'; btnNext.style.cursor = 'not-allowed';
+        btnFinish.style.opacity = '0.5'; btnFinish.style.cursor = 'not-allowed';
+    } else {
+        btnNext.style.opacity = '1'; btnNext.style.cursor = 'pointer';
+        btnFinish.style.opacity = '1'; btnFinish.style.cursor = 'pointer';
+    }
+
     renderControls(ex, isDone);
 }
 
-// LOGIKA DUAL SISTEM: MANUAL RONDE / AUTO TIMER
 function renderControls(ex, isDone) {
     const container = document.getElementById('active-controls');
     let trackUI = '';
@@ -170,7 +193,7 @@ function startCountdown(idx, totalSec) {
             clearInterval(runningTimers[idx].interval);
             delete runningTimers[idx];
             progress[idx]++; 
-            renderCurrentExercise(); // Unlock tombol next
+            renderCurrentExercise(); 
         }
     }, 1000);
 }
@@ -182,19 +205,17 @@ function navExercise(dir) {
     renderCurrentExercise();
 }
 
-// LOGIKA INTERUPSI & SNAPSHOT RIWAYAT
 function attemptExit(e) {
     if(e) e.preventDefault();
-    handleNavigationInterruption();
-}
-
-function handleNavigationInterruption() {
-    if (workoutFinished) {
+    if(workoutFinished) { window.location.href = 'workout-log.html'; return; }
+    
+    let currentPercent = updateProgress();
+    if (currentPercent > 0) {
+        history.pushState(null, null, location.href); 
+        document.getElementById('exitModal').style.display = 'flex';
+    } else {
         window.location.href = 'workout-log.html';
-        return;
     }
-    history.pushState(null, null, location.href); 
-    document.getElementById('exitModal').style.display = 'flex';
 }
 
 function closeExitModal() {
@@ -202,7 +223,7 @@ function closeExitModal() {
 }
 
 function confirmExit() {
-    let percent = Math.round((currentExerciseIndex / totalExercises) * 100);
+    let percent = updateProgress();
     saveLog('incomplete', percent, currentExerciseIndex);
     window.location.href = 'workout-log.html';
 }
@@ -227,7 +248,7 @@ function saveLog(status, percent, savedIdx) {
 
     if (existingLogIndex !== -1) {
         if (logs[currentUser.username][todayStr][existingLogIndex].status === 'completed' && status === 'incomplete') {
-            // Abaikan jika sudah pernah complete
+            // Do not downgrade a completed workout to incomplete
         } else {
             logs[currentUser.username][todayStr][existingLogIndex].status = status;
             logs[currentUser.username][todayStr][existingLogIndex].progress = percent;
