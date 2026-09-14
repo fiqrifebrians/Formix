@@ -1,8 +1,11 @@
 let currentUser = JSON.parse(localStorage.getItem('formix_currentUser'));
 let activeCW = null;
+let currentLogId = null; // Menyimpan ID log jika melakukan Continue Workout
 let currentExerciseIndex = 0;
 let totalExercises = 0;
 let workoutFinished = false;
+let progress = {}; 
+let runningTimers = {};
 const workoutDB = [...upperWorkouts, ...lowerWorkouts, ...cardioWorkouts];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,27 +13,37 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const params = new URLSearchParams(window.location.search);
     const cwId = params.get('id');
-    const isResume = params.get('resume') === 'true';
+    currentLogId = params.get('logId'); // Bisa null jika sesi baru
     
-    activeCW = currentUser.customWorkouts.find(w => w.id === cwId);
-    if(!activeCW || activeCW.exercises.length === 0) {
-        alert("Workout invalid or empty.");
+    const baseCW = currentUser.customWorkouts.find(w => w.id === cwId);
+    if(!baseCW || baseCW.exercises.length === 0) {
+        alert("Workout program is invalid or empty.");
         window.location.href = 'workout-log.html';
         return;
     }
 
+    // Deep clone agar tidak merusak cetak biru (blueprint) program aslinya
+    activeCW = JSON.parse(JSON.stringify(baseCW));
     totalExercises = activeCW.exercises.length;
 
-    // Load state from Log if resuming
-    if (isResume) {
+    if (currentLogId) {
+        // RESUME MODE: Muat data dari log array localStorage
         const todayStr = getTodayStr();
         const logs = JSON.parse(localStorage.getItem('formix_workout_logs') || '{}');
         if (logs[currentUser.username] && logs[currentUser.username][todayStr]) {
-            let savedLog = logs[currentUser.username][todayStr];
-            if (savedLog.workoutId === cwId && savedLog.savedIndex !== undefined) {
-                currentExerciseIndex = savedLog.savedIndex;
+            let savedLog = logs[currentUser.username][todayStr].find(l => l.logId == currentLogId);
+            if (savedLog) {
+                currentExerciseIndex = savedLog.savedIndex || 0;
+                if(savedLog.savedProgressObj) progress = savedLog.savedProgressObj;
+                // Gunakan snapshot jika ingin persis 100% sama dengan saat itu
+                if(savedLog.snapshot) activeCW.exercises = savedLog.snapshot; 
             }
         }
+    } else {
+        // NEW SESSION MODE: init progress 0
+        activeCW.exercises.forEach((ex, idx) => { progress[idx] = 0; });
+        // Buat ID log unik untuk sesi ini
+        currentLogId = Date.now(); 
     }
 
     // Intersepsi Tombol Back Asli Browser
@@ -55,6 +68,13 @@ function updateProgress() {
     document.getElementById('progress-text').innerText = percent + '%';
 }
 
+function checkExerciseComplete(idx) {
+    const ex = activeCW.exercises[idx];
+    if (ex.type === "reps") return progress[idx] >= parseInt(ex.rounds);
+    if (ex.type === "timer") return progress[idx] >= parseInt(ex.laps);
+    return false;
+}
+
 function renderCurrentExercise() {
     updateProgress();
     
@@ -62,22 +82,117 @@ function renderCurrentExercise() {
     const btnNext = document.getElementById('btn-next');
     const btnFinish = document.getElementById('btn-finish');
     
-    btnPrev.disabled = (currentExerciseIndex === 0);
-    
-    if (currentExerciseIndex >= totalExercises - 1) {
-        btnNext.style.display = 'none';
-        btnFinish.style.display = 'inline-block';
-    } else {
-        btnNext.style.display = 'inline-block';
-        btnFinish.style.display = 'none';
-    }
-
     const ex = activeCW.exercises[currentExerciseIndex];
     const fullExData = workoutDB.find(w => w.id == ex.baseId);
     
     document.getElementById('aw-name').innerText = ex.name;
     document.getElementById('aw-target').innerText = ex.info;
     document.getElementById('aw-img').src = fullExData ? fullExData.media_url : 'assets/mini-logo.png';
+
+    btnPrev.disabled = (currentExerciseIndex === 0);
+    
+    const isDone = checkExerciseComplete(currentExerciseIndex);
+    
+    if (currentExerciseIndex >= totalExercises - 1) {
+        btnNext.style.display = 'none';
+        btnFinish.style.display = 'inline-block';
+        btnFinish.disabled = !isDone;
+    } else {
+        btnNext.style.display = 'inline-block';
+        btnFinish.style.display = 'none';
+        btnNext.disabled = !isDone; 
+    }
+
+    // Visual Penguncian Tombol Next
+    if(!isDone) {
+        btnNext.style.opacity = '0.5';
+        btnNext.style.cursor = 'not-allowed';
+        btnFinish.style.opacity = '0.5';
+        btnFinish.style.cursor = 'not-allowed';
+    } else {
+        btnNext.style.opacity = '1';
+        btnNext.style.cursor = 'pointer';
+        btnFinish.style.opacity = '1';
+        btnFinish.style.cursor = 'pointer';
+    }
+
+    renderControls(ex, isDone);
+}
+
+// LOGIKA RENDER KOLOM INPUT & TIMER
+function renderControls(ex, isDone) {
+    const container = document.getElementById('active-controls');
+    let trackUI = '';
+    let idx = currentExerciseIndex;
+
+    if (ex.type === "reps") {
+        const totalRounds = parseInt(ex.rounds) || 0;
+        trackUI = `
+            <div class="tracker-row">
+                <button class="btn-icon" onclick="updateRound(${idx}, -1)" ${isDone?'disabled':''}>-</button>
+                <span><input type="number" value="${progress[idx]}" onchange="manualUpdateRound(${idx}, this.value)" style="width:70px; text-align:center; font-size:1.5rem; font-weight:900; border:2px solid var(--black); padding:0.2rem;" ${isDone?'disabled':''}> / ${totalRounds} Rnd</span>
+                <button class="btn-icon" onclick="updateRound(${idx}, 1)" ${isDone?'disabled':''}>+</button>
+            </div>
+            ${isDone ? `<div style="color:var(--success); font-weight:900; margin-top:10px;">✓ TARGET MET</div>` : ''}
+        `;
+    } else {
+        const totalLaps = parseInt(ex.laps) || 1;
+        if (isDone) {
+            trackUI = `<div style="font-weight:900; font-size:2rem; color:var(--success);">✓ COMPLETED</div>`;
+        } else {
+            const isRunning = runningTimers[idx] !== undefined;
+            const displayTime = isRunning ? runningTimers[idx].timeLeft : parseInt(ex.timer);
+            const currentLap = progress[idx] + 1;
+            trackUI = `
+                <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
+                    <span style="font-size:3.5rem; font-weight:900; font-variant-numeric: tabular-nums; color:var(--primary);" id="time-disp-${idx}">${displayTime}s</span>
+                    <span style="font-weight:800; color:var(--black); font-size:1.2rem;">Lap ${currentLap} of ${totalLaps}</span>
+                    <button class="btn-primary" id="btn-time-${idx}" onclick="startCountdown(${idx}, ${parseInt(ex.timer)})" ${isRunning?'disabled':''} style="margin-top:10px; width:200px;">
+                        ${isRunning ? 'RUNNING...' : 'START TIMER'}
+                    </button>
+                </div>
+            `;
+        }
+    }
+    container.innerHTML = trackUI;
+}
+
+window.manualUpdateRound = function(idx, val) {
+    let v = parseInt(val) || 0;
+    const totalRounds = parseInt(activeCW.exercises[idx].rounds) || 0;
+    if(v < 0) v = 0;
+    if(v > totalRounds) v = totalRounds;
+    progress[idx] = v;
+    renderCurrentExercise();
+}
+
+function updateRound(idx, val) {
+    const totalRounds = parseInt(activeCW.exercises[idx].rounds) || 0;
+    progress[idx] += val;
+    if (progress[idx] < 0) progress[idx] = 0;
+    if (progress[idx] > totalRounds) progress[idx] = totalRounds;
+    renderCurrentExercise();
+}
+
+function startCountdown(idx, totalSec) {
+    if(runningTimers[idx]) return;
+    
+    runningTimers[idx] = { timeLeft: totalSec };
+    const btn = document.getElementById(`btn-time-${idx}`);
+    if(btn) { btn.innerText = "RUNNING..."; btn.disabled = true; }
+    
+    runningTimers[idx].interval = setInterval(() => {
+        runningTimers[idx].timeLeft--;
+        const disp = document.getElementById(`time-disp-${idx}`);
+        if(disp) disp.innerText = runningTimers[idx].timeLeft + "s";
+        
+        if (runningTimers[idx].timeLeft <= 0) {
+            clearInterval(runningTimers[idx].interval);
+            delete runningTimers[idx];
+            progress[idx]++; 
+            renderCurrentExercise(); // Re-render unlocks next button if complete
+        }
+    }, 1000);
 }
 
 function navExercise(dir) {
@@ -87,7 +202,7 @@ function navExercise(dir) {
     renderCurrentExercise();
 }
 
-// === LOGIC INTERUPSI (KEMBALI / BACK) ===
+// === LOGIC INTERUPSI & SAVE PUSH ARRAY MULTI-SESSION ===
 function attemptExit(e) {
     if(e) e.preventDefault();
     handleNavigationInterruption();
@@ -98,12 +213,9 @@ function handleNavigationInterruption() {
         window.location.href = 'workout-log.html';
         return;
     }
-    
-    // Tahan state dan tampilkan modal konfirmasi
-    if (currentExerciseIndex >= 0) {
-        history.pushState(null, null, location.href); 
-        document.getElementById('exitModal').style.display = 'flex';
-    }
+    // Jika belum finish, munculkan modal peringatan interupsi
+    history.pushState(null, null, location.href); 
+    document.getElementById('exitModal').style.display = 'flex';
 }
 
 function closeExitModal() {
@@ -111,13 +223,11 @@ function closeExitModal() {
 }
 
 function confirmExit() {
-    // Hitung persentase dan simpan sebagai incomplete
     let percent = Math.round((currentExerciseIndex / totalExercises) * 100);
     saveLog('incomplete', percent, currentExerciseIndex);
     window.location.href = 'workout-log.html';
 }
 
-// === LOGIC SELESAI WORKOUT ===
 function completeWorkout() {
     workoutFinished = true;
     document.getElementById('progress-fill').style.width = '100%';
@@ -126,27 +236,45 @@ function completeWorkout() {
     document.getElementById('finishModal').style.display = 'flex';
 }
 
-// === SAVE TO LOCALSTORAGE ===
+// ARRAY PUSH UNTUK MULTI SESSION & SNAPSHOT
 function saveLog(status, percent, savedIdx) {
     const todayStr = getTodayStr();
     let logs = JSON.parse(localStorage.getItem('formix_workout_logs') || '{}');
     
-    if (!logs[currentUser.username]) {
-        logs[currentUser.username] = {};
-    }
+    if (!logs[currentUser.username]) logs[currentUser.username] = {};
+    if (!logs[currentUser.username][todayStr]) logs[currentUser.username][todayStr] = [];
 
-    // Jika sebelumnya sudah selesai di hari ini, jangan di-override oleh status incomplete jika user memainkan workout lain
-    if (logs[currentUser.username][todayStr] && logs[currentUser.username][todayStr].status === 'completed' && status === 'incomplete') {
-        // Jangan turun kasta di kalender
+    // Kloning penuh (Snapshot Data Object)
+    const snapshotData = JSON.parse(JSON.stringify(activeCW.exercises));
+
+    // Cek apakah ini resume log yang sudah ada
+    let existingLogIndex = logs[currentUser.username][todayStr].findIndex(l => l.logId == currentLogId);
+
+    if (existingLogIndex !== -1) {
+        // Update Log yang sedang di-resume
+        // Proteksi: Jangan turun kasta ke incomplete jika sebelumnya sudah completed
+        if (logs[currentUser.username][todayStr][existingLogIndex].status === 'completed' && status === 'incomplete') {
+            // Abaikan
+        } else {
+            logs[currentUser.username][todayStr][existingLogIndex].status = status;
+            logs[currentUser.username][todayStr][existingLogIndex].progress = percent;
+            logs[currentUser.username][todayStr][existingLogIndex].savedIndex = savedIdx;
+            logs[currentUser.username][todayStr][existingLogIndex].savedProgressObj = progress;
+            logs[currentUser.username][todayStr][existingLogIndex].snapshot = snapshotData;
+        }
     } else {
-        logs[currentUser.username][todayStr] = {
+        // Buat Log Baru dalam array (Multi-Session Logging)
+        logs[currentUser.username][todayStr].push({
+            logId: currentLogId,
             workoutId: activeCW.id,
             workoutName: activeCW.name,
             status: status,
             progress: percent,
             savedIndex: savedIdx,
+            savedProgressObj: progress,
+            snapshot: snapshotData,
             timestamp: new Date().getTime()
-        };
+        });
     }
 
     localStorage.setItem('formix_workout_logs', JSON.stringify(logs));

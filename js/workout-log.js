@@ -44,18 +44,16 @@ function renderCalendar() {
     const userLogs = getLogs();
     const todayStr = formatDateStr(new Date());
 
-    // Padding empty cells
     for (let i = 0; i < firstDay; i++) { grid.innerHTML += `<div class="cal-day empty"></div>`; }
 
-    // Render Days
     for (let i = 1; i <= daysInMonth; i++) {
         const loopDateStr = formatDateStr(new Date(year, month, i));
         let classes = "cal-day fade-in";
         
         if (loopDateStr === todayStr) classes += " today";
         
-        // INDIKATOR VISUAL ORANYE PENUH JIKA ADA LOG APAPUN
-        if (userLogs[loopDateStr]) {
+        // INDIKATOR VISUAL JIKA ARRAY LOG MEMILIKI ISI
+        if (userLogs[loopDateStr] && userLogs[loopDateStr].length > 0) {
             classes += " has-log";
         }
 
@@ -68,14 +66,14 @@ function renderCalendar() {
 
 function selectDate(y, m, d) {
     selectedDateStr = formatDateStr(new Date(y, m, d));
-    renderCalendar(); // Memindahkan bingkai 'selected'
+    renderCalendar(); 
     
     const dateObj = new Date(y, m, d);
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('selected-date-title').innerText = dateObj.toLocaleDateString('en-US', options).toUpperCase();
 
     const userLogs = getLogs();
-    const log = userLogs[selectedDateStr];
+    const dayLogs = userLogs[selectedDateStr] || [];
     const todayStr = formatDateStr(new Date());
     
     const historyPanel = document.getElementById('history-log-status');
@@ -83,21 +81,42 @@ function selectDate(y, m, d) {
 
     historyPanel.style.display = "none";
     workoutPanel.style.display = "none";
+    historyPanel.innerHTML = "";
 
-    // LABEL STATUS LOG (COMPLETED / INCOMPLETE)
-    if (log) {
-        historyPanel.style.display = "block";
-        if (log.status === 'completed') {
-            historyPanel.innerHTML = `<div class="log-status-completed">✓ COMPLETED</div>`;
-        } else {
-            historyPanel.innerHTML = `<div class="log-status-incomplete">⚠ INCOMPLETE - ${log.progress}% COMPLETED</div>`;
-        }
+    // 1. RENDER MULTI-SESSION LOGS
+    if (dayLogs.length > 0) {
+        historyPanel.style.display = "flex";
+        dayLogs.forEach(log => {
+            let btnAction = '';
+            let statusHtml = '';
+            
+            if (log.status === 'completed') {
+                statusHtml = `<div class="log-status-completed" style="flex:1; padding:0.8rem; font-size:0.9rem;"><span>✓</span> ${log.workoutName}</div>`;
+                btnAction = `<button class="btn-primary" onclick="viewSnapshot(${log.logId}, '${selectedDateStr}')" style="font-size:0.7rem; padding:0.5rem;">VIEW DETAILS</button>`;
+            } else {
+                statusHtml = `<div class="log-status-incomplete" style="flex:1; padding:0.8rem; font-size:0.9rem;"><span>⚠</span> ${log.workoutName} (${log.progress}%)</div>`;
+                if (selectedDateStr === todayStr) {
+                    btnAction = `<button class="btn-primary btn-warning" onclick="window.location.href='active-workout.html?id=${log.workoutId}&logId=${log.logId}'" style="font-size:0.7rem; padding:0.5rem; color:white; border-color:white;">CONTINUE</button>`;
+                }
+            }
+            
+            // Render Baris Log dengan Icon Trash (Delete Log)
+            historyPanel.innerHTML += `
+                <div style="display:flex; align-items:center; gap:10px; border:2px solid var(--black); background:var(--white); box-shadow:3px 3px 0px var(--black);">
+                    ${statusHtml}
+                    ${btnAction}
+                    <button class="btn-trash" onclick="deleteLog('${selectedDateStr}', ${log.logId})" title="Delete History">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    </button>
+                </div>
+            `;
+        });
     } else if (selectedDateStr < todayStr) {
         historyPanel.style.display = "block";
-        historyPanel.innerHTML = `<div style="color:var(--gray-text); font-weight:800; font-size:1.2rem;">REST DAY / NO LOG</div>`;
+        historyPanel.innerHTML = `<div style="color:var(--gray-text); font-weight:800; font-size:1.2rem;">REST DAY / NO LOGS</div>`;
     }
 
-    // LIST START/CONTINUE WORKOUT (Hanya muncul jika yang diklik hari ini)
+    // 2. RENDER MENU LAUNCH HANYA UNTUK HARI INI
     if (selectedDateStr === todayStr) {
         workoutPanel.style.display = "flex";
         const pContainer = document.getElementById('programs-container');
@@ -109,10 +128,12 @@ function selectDate(y, m, d) {
         }
 
         currentUser.customWorkouts.forEach(cw => {
-            let isCurrentIncomplete = (log && log.status === 'incomplete' && log.workoutId === cw.id);
-            let btnText = isCurrentIncomplete ? "CONTINUE WORKOUT" : "START";
-            let btnClass = isCurrentIncomplete ? "btn-warning" : "";
-            let link = isCurrentIncomplete ? `active-workout.html?id=${cw.id}&resume=true` : `active-workout.html?id=${cw.id}`;
+            // Karena satu program bisa punya banyak log, kita cari log incomplete terakhir untuk program ini
+            let incompleteLog = [...dayLogs].reverse().find(l => l.workoutId === cw.id && l.status === 'incomplete');
+            
+            let btnText = incompleteLog ? "CONTINUE WORKOUT" : "START NEW SESSION";
+            let btnClass = incompleteLog ? "btn-warning" : "btn-success";
+            let link = incompleteLog ? `active-workout.html?id=${cw.id}&logId=${incompleteLog.logId}` : `active-workout.html?id=${cw.id}`;
 
             pContainer.innerHTML += `
                 <div class="workout-list-item">
@@ -121,5 +142,45 @@ function selectDate(y, m, d) {
                 </div>
             `;
         });
+    }
+}
+
+// LOGIC VIEW SNAPSHOT HISTORY
+function viewSnapshot(logId, dateStr) {
+    const logs = getLogs();
+    const dayLogs = logs[dateStr];
+    const log = dayLogs.find(l => l.logId === logId);
+    
+    document.getElementById('snapshot-title').innerText = log.workoutName;
+    const list = document.getElementById('snapshot-list');
+    list.innerHTML = "";
+    
+    log.snapshot.forEach(ex => {
+        list.innerHTML += `
+            <li style="margin-bottom:10px; padding:15px; border:2px solid var(--black); background:var(--gray-light); box-shadow:3px 3px 0px var(--black);">
+                <div style="font-size:1.1rem;">${ex.name}</div>
+                <div style="color:var(--primary); font-size:0.9rem;">${ex.info}</div>
+            </li>`;
+    });
+    
+    document.getElementById('snapshotModal').style.display = "flex";
+}
+
+// LOGIC DELETE HISTORY
+function deleteLog(dateStr, logId) {
+    if(!confirm("Are you sure you want to permanently delete this workout history?")) return;
+    const logs = JSON.parse(localStorage.getItem('formix_workout_logs') || '{}');
+    if(logs[currentUser.username] && logs[currentUser.username][dateStr]) {
+        logs[currentUser.username][dateStr] = logs[currentUser.username][dateStr].filter(l => l.logId !== logId);
+        
+        // Hapus array jika sudah kosong
+        if(logs[currentUser.username][dateStr].length === 0) {
+            delete logs[currentUser.username][dateStr];
+        }
+        
+        localStorage.setItem('formix_workout_logs', JSON.stringify(logs));
+        renderCalendar();
+        const d = new Date(dateStr);
+        selectDate(d.getFullYear(), d.getMonth(), d.getDate());
     }
 }

@@ -49,7 +49,7 @@ function openEditModal(id) {
     editModeId = id;
     document.getElementById('modal-title').innerText = "EDIT WORKOUT";
     document.getElementById('cw-name').value = cw.name;
-    tempExercises = [...cw.exercises];
+    tempExercises = JSON.parse(JSON.stringify(cw.exercises)); // clone
     renderTempExercises();
     document.getElementById('createModal').style.display = 'flex';
     filterModalExercises();
@@ -118,10 +118,10 @@ function addExerciseToPlan() {
         baseId: selectedExerciseData.id, 
         name: selectedExerciseData.name, 
         type: t,
-        reps: document.getElementById('ex-reps').value,
-        rounds: document.getElementById('ex-rounds').value,
-        timer: document.getElementById('ex-timer').value,
-        laps: document.getElementById('ex-laps').value,
+        reps: document.getElementById('ex-reps').value || 1,
+        rounds: document.getElementById('ex-rounds').value || 1,
+        timer: document.getElementById('ex-timer').value || 30,
+        laps: document.getElementById('ex-laps').value || 1,
         info: infoStr
     });
     
@@ -135,11 +135,42 @@ function removeTempExercise(idx) {
     renderTempExercises();
 }
 
+// === HTML5 DRAG AND DROP REORDER LOGIC ===
+let dragStartIndex;
+
+window.dragStart = function(e, index) {
+    dragStartIndex = index;
+    e.dataTransfer.effectAllowed = "move";
+    e.target.closest('.draggable-item').classList.add("dragging");
+};
+window.dragOver = function(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+};
+window.drop = function(e, index) {
+    e.preventDefault();
+    const dragEndIndex = index;
+    swapItems(dragStartIndex, dragEndIndex);
+    e.target.closest('.draggable-item').classList.remove("dragging");
+};
+window.dragEnd = function(e) {
+    e.target.closest('.draggable-item').classList.remove("dragging");
+};
+
+function swapItems(fromIndex, toIndex) {
+    const itemToMove = tempExercises.splice(fromIndex, 1)[0];
+    tempExercises.splice(toIndex, 0, itemToMove);
+    renderTempExercises();
+}
+
 function renderTempExercises() {
     const listHtml = tempExercises.map((e, idx) => `
-        <li style="display:flex; justify-content:space-between; margin-bottom:0.5rem; align-items:center;">
-            <span>${e.name} — <span style="color:var(--gray-text)">${e.info}</span></span>
-            <button class="btn-icon" style="padding: 2px 6px; font-size:0.7rem;" onclick="removeTempExercise(${idx})">X</button>
+        <li class="draggable-item" draggable="true" ondragstart="dragStart(event, ${idx})" ondragover="dragOver(event)" ondrop="drop(event, ${idx})" ondragend="dragEnd(event)">
+            <div style="display:flex; align-items:center;">
+                <span class="drag-handle">☰</span>
+                <span>${e.name} — <span style="color:var(--primary)">${e.info}</span></span>
+            </div>
+            <button type="button" class="btn-icon" style="padding: 2px 8px; font-size:0.8rem; border-color:var(--primary); color:var(--primary);" onclick="removeTempExercise(${idx})">X</button>
         </li>
     `).join('');
     document.getElementById('temp-exercises').innerHTML = listHtml;
