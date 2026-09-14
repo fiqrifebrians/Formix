@@ -1,5 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => { checkAuth(); });
 
+function validatePasswordStrength(pwd, errorElementId) {
+    const pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{9,}$/;
+    const errorEl = document.getElementById(errorElementId);
+    
+    if (!pwdRegex.test(pwd)) {
+        if (errorEl) {
+            errorEl.style.display = 'block';
+            errorEl.style.color = '#dc2626';
+        }
+        return false;
+    }
+    
+    if (errorEl) errorEl.style.display = 'none';
+    return true;
+}
+
 // Fitur Eye Icon Toggle
 function togglePassword(inputId, btnId) {
     const input = document.getElementById(inputId);
@@ -19,22 +35,6 @@ function togglePassword(inputId, btnId) {
     }
 }
 
-function validatePasswordStrength(pwd, errorElementId) {
-    const pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{9,}$/;
-    const errorEl = document.getElementById(errorElementId);
-    
-    if (!pwdRegex.test(pwd)) {
-        if (errorEl) {
-            errorEl.style.display = 'block';
-            errorEl.style.color = '#dc2626';
-        }
-        return false;
-    }
-    
-    if (errorEl) errorEl.style.display = 'none';
-    return true;
-}
-
 function checkAuth() {
     const userJson = localStorage.getItem('formix_currentUser');
     const authContainer = document.getElementById('auth-container');
@@ -49,6 +49,7 @@ function checkAuth() {
                 <div class="profile-dropdown-content">
                     <a href="account.html" data-i18n="nav_account">My Account</a>
                     <a href="my-workout.html" data-i18n="nav_my_workout">My Workout</a>
+                    <a href="workout-log.html" data-i18n="nav_workout_log">Workout Log</a>
                     <a href="login.html" data-i18n="nav_add_account">Add Another Account</a>
                     <a href="javascript:void(0)" onclick="logout()" data-i18n="nav_signout">Sign Out</a>
                 </div>
@@ -80,7 +81,7 @@ function handleSignup(e) {
     const pConf = document.getElementById('sign-pass-confirm').value;
     
     if (p !== pConf) return alert("Passwords do not match!");
-    if (!validatePasswordStrength(p, 'sign-pwd-hint')) return;
+    if(!validatePasswordStrength(p, 'sign-pwd-hint')) return;
     
     const users = JSON.parse(localStorage.getItem('formix_users') || '{}');
     if(users[u]) {
