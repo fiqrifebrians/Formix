@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/mini-logo.png">
+    <title>Formix - Workout Log</title>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo"><img src="assets/mini-logo.png"> FORMIX</a>
+        <div class="nav-right">
+            <div id="auth-container"></div>
+        </div>
+    </nav>
+    <header class="page-header">
+        <a href="javascript:history.back()" class="header-back-btn">&larr; Back</a>
+        <h1>WORKOUT LOG</h1>
+        <p>Track your consistency and review your past performances.</p>
+    </header>
+    
+    <main>
+        <div class="log-layout fade-in">
+            <!-- KALENDER KIRI -->
+            <div class="calendar-container">
+                <div class="cal-header">
+                    <button onclick="changeMonth(-1)">&lt;</button>
+                    <span id="month-year-display">JANUARY 2026</span>
+                    <button onclick="changeMonth(1)">&gt;</button>
+                </div>
+                <div class="cal-weekdays">
+                    <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
+                </div>
+                <div class="cal-grid" id="calendar-grid">
+                    <!-- Javascript will populate days here -->
+                </div>
+                
+                <div style="margin-top: 2rem; display: flex; gap: 1rem; font-size: 0.85rem; font-weight: 800; color: var(--gray-text); justify-content: center;">
+                    <div style="display:flex; align-items:center; gap:5px;"><span style="display:inline-block; width:15px; height:15px; background:var(--success); border-radius:4px;"></span> Completed</div>
+                    <div style="display:flex; align-items:center; gap:5px;"><span style="display:inline-block; width:15px; height:15px; background:var(--warning); border-radius:4px;"></span> Incomplete</div>
+                </div>
+            </div>
+
+            <!-- PANEL KANAN (DETAIL LOG & DAFTAR WORKOUT) -->
+            <div class="log-details-panel">
+                <h3 id="selected-date-title">SELECT A DATE</h3>
+                
+                <!-- Status Log Historis -->
+                <div id="history-log-status" style="margin-bottom: 2rem; display:none;">
+                    <!-- Diinjeksi oleh JS -->
+                </div>
+
+                <!-- Daftar Workout untuk Hari Ini -->
+                <div id="today-workout-list" style="display:none; flex-direction: column; flex-grow: 1;">
+                    <h4 style="color:var(--gray-text); font-weight:800; border-bottom:1px solid var(--gray-border); padding-bottom:0.5rem; margin-bottom:1rem;">YOUR WORKOUT PROGRAMS</h4>
+                    <div id="programs-container" style="overflow-y:auto; flex-grow:1; max-height: 400px; padding-right:5px;">
+                        <!-- Diinjeksi oleh JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>&copy; 2026 FORMIX. All Rights Reserved.</footer>
+
+    <script src="js/db/muscles.js"></script><script src="js/db/upper.js"></script><script src="js/db/lower.js"></script><script src="js/db/cardio.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/workout-log.js"></script>
+</body>
+</html>

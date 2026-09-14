@@ -3,68 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="assets/mini-logo.png">
-    <title>Formix - Active Workout</title>
+    <title>Formix - Active Session</title>
 </head>
 <body>
-    <nav class="navbar"><a href="index.html" class="logo">FORMIX</a><div class="nav-right"><div class="lang-dropdown"><div class="lang-dropbtn"><span id="current-flag">🇬🇧</span> <span id="current-lang">EN</span> &#9662;</div><div class="lang-dropdown-content"><a href="javascript:void(0)" onclick="setLanguage('en')">🇬🇧 English</a><a href="javascript:void(0)" onclick="setLanguage('id')">🇮🇩 Indonesia</a></div></div><div id="auth-container"></div></div></nav>
-    <header class="page-header">
-        <a href="javascript:history.back()" class="header-back-btn" data-i18n="btn_back">&larr; Back</a>
-        <h1 id="active-title">LOADING...</h1>
-    </header>
-    <main>
-        <div class="active-header-actions">
-            <button id="btn-start-workout" class="btn-primary" style="background:#16a34a; padding: 1rem 2rem; font-size:1.2rem;" onclick="startWorkout()">START WORKOUT</button>
-            <button id="btn-edit-workout" class="btn-primary" style="padding: 1rem 2rem; font-size:1.2rem;" onclick="toggleEditMode()">EDIT WORKOUT</button>
+    <nav class="navbar">
+        <a href="index.html" class="logo"><img src="assets/mini-logo.png"> FORMIX</a>
+        <!-- Custom Back Button Intercept -->
+        <a href="#" onclick="attemptExit(event)" class="header-back-btn" style="position:static; border:none; box-shadow:none; padding:0;">&larr; LEAVE SESSION</a>
+    </nav>
+    
+    <!-- PROGRESS BAR -->
+    <div style="padding: 0 2rem; max-width: 1000px; margin: 0 auto;">
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-fill"></div>
         </div>
-        <div id="active-list" class="workout-container"></div>
-        <div style="text-align:center; margin-top:2rem;">
-            <button id="btn-add-ex" class="btn-primary" style="display:none; font-size:1.2rem;" onclick="openAddModal()">+ ADD EXERCISE</button>
+        <div style="text-align: right; font-weight: 900; color: var(--primary);" id="progress-text">0%</div>
+    </div>
+
+    <main style="padding-top: 1rem; display:flex; flex-direction:column; align-items:center;">
+        
+        <div class="active-workout-display fade-in" style="width: 100%; max-width: 800px;">
+            <div id="aw-media-container" style="margin-bottom: 2rem;">
+                <img id="aw-img" src="" style="width:100%; max-height:400px; object-fit:contain; border-radius:8px;">
+            </div>
+            
+            <h2 id="aw-name" class="active-exercise-name">LOADING...</h2>
+            <div id="aw-target" class="active-exercise-target">--</div>
+            
+            <div style="display:flex; justify-content:center; gap: 1rem; margin-top:2rem;">
+                <button class="btn-primary btn-danger" id="btn-prev" onclick="navExercise(-1)" disabled>&larr; PREVIOUS</button>
+                <button class="btn-primary" id="btn-next" onclick="navExercise(1)">NEXT EXERCISE &rarr;</button>
+            </div>
+            
+            <button class="btn-primary btn-success" id="btn-finish" style="display:none; width:100%; margin-top:1rem; font-size:1.2rem; padding:1.2rem;" onclick="completeWorkout()">COMPLETE WORKOUT ✓</button>
         </div>
+
     </main>
 
-    <div id="addModal" class="modal">
+    <!-- MODAL PERINGATAN KELUAR -->
+    <div id="exitModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeAddModal()">&times;</span>
-            <h2>Add Exercise</h2>
-            <div class="form-group" style="background:var(--gray-light); padding:1rem; border:1px solid var(--black);">
-                <div class="filter-row">
-                    <input type="text" id="filter-name-act" placeholder="Search name..." oninput="filterModalExercisesAct()">
-                    <select id="filter-muscle-act" onchange="filterModalExercisesAct()"><option value="all">All Muscles</option></select>
-                    <select id="filter-equip-act" onchange="filterModalExercisesAct()"><option value="all">All Equipments</option></select>
-                </div>
-                <div id="modal-ex-list-act" class="ex-list-modal"></div>
-                
-                <div id="ex-config-act" style="display:none; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--gray-border);">
-                    <h4 id="selected-ex-name-act" style="margin:0 0 0.5rem; color:var(--primary);"></h4>
-                    <select id="ex-type-act" onchange="toggleExTypeAct()" style="margin-bottom:0.5rem;">
-                        <option value="reps">Repetitions</option>
-                        <option value="timer">Timer</option>
-                    </select>
-                    <div id="reps-config-act" style="display:flex; gap:0.5rem; align-items:center;">
-                        <input type="number" id="ex-reps-act" placeholder="Reps"> x 
-                        <input type="number" id="ex-rounds-act" placeholder="Rounds">
-                    </div>
-                    <div id="timer-config-act" style="display:none; gap:0.5rem; align-items:center;">
-                        <input type="number" id="ex-timer-act" placeholder="Seconds"> x
-                        <input type="number" id="ex-laps-act" placeholder="Laps">
-                    </div>
-                    <button class="btn-primary" type="button" onclick="addExerciseToActivePlan()" style="margin-top:1rem; width:100%;">+ Add to Routine</button>
-                </div>
+            <h2>WAIT!</h2>
+            <p>You haven't finished your session. Are you sure you want to leave and save it as incomplete?</p>
+            <div class="modal-actions">
+                <button class="btn-primary btn-danger" onclick="confirmExit()">YES, LEAVE</button>
+                <button class="btn-primary" onclick="closeExitModal()">CANCEL</button>
             </div>
         </div>
     </div>
 
+    <!-- MODAL FINISH -->
     <div id="finishModal" class="modal">
-        <div class="modal-content text-center">
-            <h2 style="font-size:2.5rem; border-bottom:3px solid var(--black); padding-bottom:1rem;">WORKOUT COMPLETED</h2>
-            <p style="font-size:1.1rem; color:var(--gray-text); margin-top:1.5rem;">Outstanding effort. You have successfully conquered all exercises in this routine.</p>
-            <button class="btn-primary" onclick="window.location.href='my-workout.html'" style="margin-top:2rem; width:100%; font-size:1.1rem;">RETURN TO DASHBOARD</button>
+        <div class="modal-content">
+            <h2 style="color:var(--success);">OUTSTANDING!</h2>
+            <p>You have successfully completed this routine.</p>
+            <button class="btn-primary btn-success" onclick="window.location.href='workout-log.html'" style="width:100%; margin-top:1rem;">SAVE & RETURN TO LOG</button>
         </div>
     </div>
 
     <script src="js/db/muscles.js"></script><script src="js/db/upper.js"></script><script src="js/db/lower.js"></script><script src="js/db/cardio.js"></script>
-    <script src="js/lang.js"></script><script src="js/auth.js"></script><script src="js/app.js"></script><script src="js/active-workout.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/active-workout.js"></script>
 </body>
 </html>
