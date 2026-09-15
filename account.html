@@ -122,7 +122,9 @@
             const confP = document.getElementById('conf-pass').value;
             if(oldP !== u.password) return alert("Incorrect Old Password!");
             if(newP !== confP) return alert("New passwords do not match!");
+            
             if(!validatePasswordStrength(newP, 'acc-pwd-hint')) return;
+            
             u.password = newP;
             users[u.username] = u;
             localStorage.setItem('formix_users', JSON.stringify(users));
