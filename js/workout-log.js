@@ -78,7 +78,7 @@ function selectDate(y, m, d) {
     workoutPanel.style.display = "none";
     historyPanel.innerHTML = "";
 
-    // 1. RENDER MULTI-SESSION LOGS DENGAN FLEX ALIGNMENT SEMPURNA
+    // 1. RENDER MULTI-SESSION LOGS DENGAN GRID PRESISI
     if (dayLogs.length > 0) {
         historyPanel.style.display = "flex";
         dayLogs.forEach(log => {
@@ -86,23 +86,23 @@ function selectDate(y, m, d) {
             let statusHtml = '';
             
             if (log.status === 'completed') {
-                statusHtml = `<div class="log-status-completed" style="flex:1;"><span>✓</span> ${log.workoutName}</div>`;
+                statusHtml = `<div class="status-box completed"><span>✓</span> ${log.workoutName}</div>`;
                 btnAction = `<button class="btn-primary btn-sm" onclick="viewSnapshot(${log.logId}, '${selectedDateStr}')" style="box-shadow:none;">VIEW DETAILS</button>`;
             } else {
-                statusHtml = `<div class="log-status-incomplete" style="flex:1;"><span>⚠</span> ${log.workoutName} (${log.progress}%)</div>`;
+                statusHtml = `<div class="status-box incomplete"><span>⚠</span> ${log.workoutName} (${log.progress}%)</div>`;
                 if (selectedDateStr === todayStr) {
-                    btnAction = `<button class="btn-primary btn-sm btn-warning" onclick="window.location.href='active-workout.html?id=${log.workoutId}&logId=${log.logId}&resume=true'" style="color:white; border-color:white; box-shadow:none;">CONTINUE</button>`;
+                    btnAction = `<button class="btn-primary btn-sm btn-warning" onclick="window.location.href='active-workout.html?id=${log.workoutId}&logId=${log.logId}&resume=true'" style="box-shadow:none;">CONTINUE</button>`;
                 }
             }
             
-            // Stuktur Flexbox Presisi Lebar Sama (Left flex:1, Right flex-shrink:0 width:180px)
+            // Struktur Grid Dinamis untuk menjaga blok warna sama panjangnya
             historyPanel.innerHTML += `
-                <div style="display:flex; align-items:stretch; border:2px solid var(--black); background:var(--white); box-shadow:3px 3px 0px var(--black);">
+                <div class="history-log-item fade-in">
                     ${statusHtml}
-                    <div style="display:flex; align-items:center; gap:10px; padding:0 1rem; width:180px; justify-content:flex-end; flex-shrink:0;">
+                    <div class="action-box">
                         ${btnAction}
                         <button class="btn-trash" onclick="deleteLog('${selectedDateStr}', ${log.logId})" title="Delete History">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2 2v2"></path></svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                         </button>
                     </div>
                 </div>
