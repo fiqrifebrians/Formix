@@ -78,7 +78,7 @@ function selectDate(y, m, d) {
     workoutPanel.style.display = "none";
     historyPanel.innerHTML = "";
 
-    // 1. RENDER MULTI-SESSION LOGS
+    // 1. RENDER MULTI-SESSION LOGS DENGAN FLEX ALIGNMENT SEMPURNA
     if (dayLogs.length > 0) {
         historyPanel.style.display = "flex";
         dayLogs.forEach(log => {
@@ -86,22 +86,25 @@ function selectDate(y, m, d) {
             let statusHtml = '';
             
             if (log.status === 'completed') {
-                statusHtml = `<div class="log-status-completed" style="flex:1; padding:0.8rem; font-size:0.9rem;"><span>✓</span> ${log.workoutName}</div>`;
-                btnAction = `<button class="btn-primary" onclick="viewSnapshot(${log.logId}, '${selectedDateStr}')" style="font-size:0.7rem; padding:0.5rem; box-shadow:none;">VIEW DETAILS</button>`;
+                statusHtml = `<div class="log-status-completed" style="flex:1;"><span>✓</span> ${log.workoutName}</div>`;
+                btnAction = `<button class="btn-primary btn-sm" onclick="viewSnapshot(${log.logId}, '${selectedDateStr}')" style="box-shadow:none;">VIEW DETAILS</button>`;
             } else {
-                statusHtml = `<div class="log-status-incomplete" style="flex:1; padding:0.8rem; font-size:0.9rem;"><span>⚠</span> ${log.workoutName} (${log.progress}%)</div>`;
+                statusHtml = `<div class="log-status-incomplete" style="flex:1;"><span>⚠</span> ${log.workoutName} (${log.progress}%)</div>`;
                 if (selectedDateStr === todayStr) {
-                    btnAction = `<button class="btn-primary btn-warning" onclick="window.location.href='active-workout.html?id=${log.workoutId}&logId=${log.logId}&resume=true'" style="font-size:0.7rem; padding:0.5rem; box-shadow:none;">CONTINUE</button>`;
+                    btnAction = `<button class="btn-primary btn-sm btn-warning" onclick="window.location.href='active-workout.html?id=${log.workoutId}&logId=${log.logId}&resume=true'" style="color:white; border-color:white; box-shadow:none;">CONTINUE</button>`;
                 }
             }
             
+            // Stuktur Flexbox Presisi Lebar Sama (Left flex:1, Right flex-shrink:0 width:180px)
             historyPanel.innerHTML += `
-                <div style="display:flex; align-items:center; gap:10px; border:2px solid var(--black); background:var(--white); box-shadow:3px 3px 0px var(--black);">
+                <div style="display:flex; align-items:stretch; border:2px solid var(--black); background:var(--white); box-shadow:3px 3px 0px var(--black);">
                     ${statusHtml}
-                    ${btnAction}
-                    <button class="btn-trash" onclick="deleteLog('${selectedDateStr}', ${log.logId})" title="Delete History">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2 2v2"></path></svg>
-                    </button>
+                    <div style="display:flex; align-items:center; gap:10px; padding:0 1rem; width:180px; justify-content:flex-end; flex-shrink:0;">
+                        ${btnAction}
+                        <button class="btn-trash" onclick="deleteLog('${selectedDateStr}', ${log.logId})" title="Delete History">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
                 </div>
             `;
         });
@@ -122,7 +125,6 @@ function selectDate(y, m, d) {
         }
 
         currentUser.customWorkouts.forEach(cw => {
-            // Cari apakah program ini punya status incomplete hari ini
             let incompleteLog = [...dayLogs].reverse().find(l => l.workoutId === cw.id && l.status === 'incomplete');
             
             let btnText = incompleteLog ? "CONTINUE WORKOUT" : "START NEW SESSION";
@@ -132,14 +134,13 @@ function selectDate(y, m, d) {
             pContainer.innerHTML += `
                 <div class="workout-list-item">
                     <h4>${cw.name}</h4>
-                    <button class="btn-primary ${btnClass}" onclick="window.location.href='${link}'">${btnText}</button>
+                    <button class="btn-primary btn-sm ${btnClass}" onclick="window.location.href='${link}'">${btnText}</button>
                 </div>
             `;
         });
     }
 }
 
-// VIEW SNAPSHOT DETAILS
 function viewSnapshot(logId, dateStr) {
     const logs = getLogs();
     const dayLogs = logs[dateStr];
@@ -151,7 +152,7 @@ function viewSnapshot(logId, dateStr) {
     
     log.snapshot.forEach(ex => {
         list.innerHTML += `
-            <li style="margin-bottom:10px; padding:15px; border:2px solid var(--black); background:var(--gray-light); box-shadow:3px 3px 0px var(--black);">
+            <li style="margin-bottom:10px; padding:15px; border:2px solid var(--black); background:var(--white); box-shadow:3px 3px 0px var(--black);">
                 <div style="font-size:1.1rem; color:var(--black); text-transform:uppercase;">${ex.name}</div>
                 <div style="color:var(--gray-text); font-size:0.9rem;">${ex.info}</div>
             </li>`;
